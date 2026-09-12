@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" fill="#0a1d37" stroke="#f5b301" stroke-width="2"/>
+  <!-- TV screen on wall -->
+  <rect x="20" y="16" width="24" height="15" rx="1.5" fill="#1e293b" stroke="#ffffff" stroke-width="1.8"/>
+  <rect x="22" y="18" width="20" height="11" fill="#0a1d37"/>
+  <!-- Low console cabinet underneath -->
+  <rect x="15" y="36" width="34" height="11" rx="2" fill="#f5b301" stroke="#ffffff" stroke-width="1.5"/>
+  <line x1="26" y1="36" x2="26" y2="47" stroke="#0a1d37" stroke-width="1.2"/>
+  <line x1="38" y1="36" x2="38" y2="47" stroke="#0a1d37" stroke-width="1.2"/>
+  <!-- Console legs -->
+  <line x1="18" y1="47" x2="18" y2="50" stroke="#f5b301" stroke-width="2" stroke-linecap="round"/>
+  <line x1="46" y1="47" x2="46" y2="50" stroke="#f5b301" stroke-width="2" stroke-linecap="round"/>
+</svg>

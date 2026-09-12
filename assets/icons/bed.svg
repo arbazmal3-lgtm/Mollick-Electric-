@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" fill="#0a1d37" stroke="#f5b301" stroke-width="2"/>
+  <!-- Headboard -->
+  <rect x="15" y="19" width="34" height="15" rx="3" fill="#f5b301" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Pillows -->
+  <rect x="18" y="27" width="12" height="6" rx="2" fill="#ffffff"/>
+  <rect x="34" y="27" width="12" height="6" rx="2" fill="#ffffff"/>
+  <!-- Bed Base and mattress -->
+  <path d="M14 34H50V43C50 44 49 45 48 45H16C15 45 14 44 14 43V34Z" fill="#1e293b" stroke="#ffffff" stroke-width="1.5"/>
+  <!-- Legs -->
+  <line x1="16" y1="45" x2="16" y2="49" stroke="#f5b301" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="48" y1="45" x2="48" y2="49" stroke="#f5b301" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

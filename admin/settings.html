@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Settings &amp; Brand Customizer | Mollick Admin</title>
+  <meta name="description" content="Manage brand identity, logo name, contractor credentials, and website configuration.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo-icon">⚡</div>
+        <div class="brand-text">
+          <span class="brand-title">Mollick Electric</span>
+          <span class="brand-subtitle">Admin Management</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">⚡</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link active">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" id="adminAvatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name" id="adminName">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Website Settings &amp; Brand Customizer</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../index.html" target="_blank" class="topbar-btn topbar-btn-website" title="Open Public Website">
+            <span>🌐 View Public Site</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Logo, Brand &amp; Website Identity</h2>
+            <p class="page-subtitle">Customize company name, logo mark, master contractor credentials, contact details, hero messaging, and security settings.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          
+          <!-- BRAND & LOGO CUSTOMIZER CARD -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="card-title">🎨 Logo &amp; Brand Visual Identity</h3>
+                <p class="card-subtitle">Change company name, wordmark text, tagline, and emblem. Updates the header, footer, staff badges, and public website in real time.</p>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <form id="brandSettingsForm">
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setLogoText" class="form-label">Primary Logo Name (Wordmark) <span class="required">*</span></label>
+                    <input type="text" id="setLogoText" class="form-control" placeholder="e.g. MOLLICK" required>
+                    <div class="form-hint">Displayed boldly in the site header, mobile menu, and footer logo.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="setLogoTagline" class="form-label">Logo Tagline / Subtitle <span class="required">*</span></label>
+                    <input type="text" id="setLogoTagline" class="form-control" placeholder="e.g. ELECTRIC & INTERIOR" required>
+                    <div class="form-hint">Secondary brand descriptor displayed below the primary logo name.</div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setWebsiteName" class="form-label">Full Business / Legal Trade Name <span class="required">*</span></label>
+                    <input type="text" id="setWebsiteName" class="form-control" placeholder="e.g. Mollick Electric & Interior" required>
+                    <div class="form-hint">Appears in copyright lines, page titles, and tender specifications.</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="setLogoIcon" class="form-label">Brand Emblem / Symbol (Fallback)</label>
+                    <div style="display: flex; gap: 10px;">
+                      <select id="setLogoIcon" class="form-control" style="flex: 2;">
+                        <option value="⚡">⚡ Electric Bolt &amp; Power</option>
+                        <option value="🏛️">🏛️ Architectural Crown</option>
+                        <option value="✨">✨ Craftsmanship Spark</option>
+                        <option value="🛠️">🛠️ Master Engineering Tools</option>
+                        <option value="🏢">🏢 Modern Skyline</option>
+                        <option value="🔥">🔥 High Performance</option>
+                      </select>
+                      <input type="text" id="setCustomIcon" class="form-control" style="flex: 1;" placeholder="Or type emoji" maxlength="4">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Dedicated Logo Photo Upload Option -->
+                <div class="form-group" style="margin-top: 6px; padding: 16px; background: #f8fafc; border: 1.5px dashed var(--admin-border); border-radius: var(--admin-radius);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <label class="form-label" style="margin-bottom: 0; font-weight: 700; color: var(--admin-navy);">
+                      📸 Official Logo Photo / Graphic Upload
+                    </label>
+                    <span class="badge badge-info" id="logoUploadStatusBadge">No custom logo photo (using icon)</span>
+                  </div>
+                  <p class="form-hint" style="margin-bottom: 12px;">
+                    Upload your official company logo file (PNG transparent, SVG, JPG, or WEBP). It will be displayed on the website header, mobile menu, footer, admin sidebar, and staff ID cards.
+                  </p>
+
+                  <input type="file" id="setLogoPhotoInput" accept="image/*" style="display: none;">
+                  <input type="hidden" id="setLogoImageUrl">
+
+                  <!-- Upload Dropzone (when empty) -->
+                  <div class="photo-upload-dropzone" id="logoPhotoDropzone" style="background: #ffffff;">
+                    <div class="photo-upload-icon">🏷️</div>
+                    <div class="photo-upload-title">Click to Upload or Drag &amp; Drop Logo File</div>
+                    <div class="photo-upload-hint">Supports PNG (transparent recommended), SVG, JPG, WEBP. Optimized automatically.</div>
+                  </div>
+
+                  <!-- Logo Uploaded Preview & Change Controls -->
+                  <div id="logoPhotoActiveCard" style="display: none; flex-direction: column; gap: 12px; margin-top: 8px;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 8px;">
+                      <div style="display: flex; align-items: center; gap: 14px;">
+                        <div style="width: 56px; height: 56px; border-radius: 8px; background: #071529; padding: 6px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--admin-gold); flex-shrink: 0;">
+                          <img id="logoPhotoActiveImg" src="" alt="Active Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                        <div>
+                          <div style="font-weight: 700; color: var(--admin-navy); font-size: 0.92rem;">Custom Logo Photo Active</div>
+                          <div style="font-size: 0.78rem; color: var(--admin-text-muted);">Successfully loaded into system storage</div>
+                        </div>
+                      </div>
+                      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button type="button" class="btn btn-secondary btn-sm" id="btnChangeLogoPhoto">
+                          🔄 Change Logo Photo
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" id="btnRemoveLogoPhoto">
+                          ✕ Remove / Reset
+                        </button>
+                      </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 14px; background: #f1f5f9; padding: 10px 14px; border-radius: 6px;">
+                      <label style="font-size: 0.82rem; font-weight: 700; color: #334155; margin: 0;">Display Layout Mode:</label>
+                      <label style="font-size: 0.82rem; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="radio" name="logoDisplayMode" value="emblem" checked id="modeEmblem">
+                        <span>Logo Photo + Company Name Text</span>
+                      </label>
+                      <label style="font-size: 0.82rem; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="radio" name="logoDisplayMode" value="standalone" id="modeStandalone">
+                        <span>Full Logo Graphic Banner Only</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setPrimaryColor" class="form-label">Primary Theme Color (Industrial Dark)</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <input type="color" id="setPrimaryColor" value="#0b1320" style="width: 44px; height: 38px; border-radius: 6px; border: 1px solid var(--admin-border); cursor: pointer;">
+                      <input type="text" id="setPrimaryColorHex" class="form-control" value="#0b1320" style="font-family: monospace;">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="setAccentColor" class="form-label">Accent Theme Color (Havells Electric Red)</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                      <input type="color" id="setAccentColor" value="#e11d24" style="width: 44px; height: 38px; border-radius: 6px; border: 1px solid var(--admin-border); cursor: pointer;">
+                      <input type="text" id="setAccentColorHex" class="form-control" value="#e11d24" style="font-family: monospace;">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live Interactive Logo Preview -->
+                <div style="margin-top: 14px;">
+                  <span style="font-size: 0.85rem; font-weight: 700; color: var(--admin-navy);">
+                    👁️ Real-Time Brand Logo Preview
+                  </span>
+                  
+                  <div class="brand-preview-container">
+                    <!-- Light Header Preview -->
+                    <div class="preview-screen preview-light">
+                      <div class="preview-label">Header Preview (Light Background)</div>
+                      <div class="preview-logo-display">
+                        <div class="preview-logo-emblem" id="previewEmblemLight">⚡</div>
+                        <div class="preview-logo-text">
+                          <span class="preview-brand-main" id="previewMainLight">MOLLICK</span>
+                          <span class="preview-brand-sub" id="previewSubLight">ELECTRIC &amp; INTERIOR</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Dark Footer Preview -->
+                    <div class="preview-screen preview-dark">
+                      <div class="preview-label">Footer Preview (Dark Navy Background)</div>
+                      <div class="preview-logo-display">
+                        <div class="preview-logo-emblem" id="previewEmblemDark">⚡</div>
+                        <div class="preview-logo-text">
+                          <span class="preview-brand-main" id="previewMainDark">MOLLICK</span>
+                          <span class="preview-brand-sub" id="previewSubDark">ELECTRIC &amp; INTERIOR</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div style="text-align: right; margin-top: 18px;">
+                  <button type="submit" class="btn btn-primary">
+                    <span>💾 Save Logo &amp; Brand Settings</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- MASTER CONTRACTOR & CREDENTIALS CARD -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="card-title">👤 Master Contractor Profile &amp; Credentials</h3>
+                <p class="card-subtitle">Founder identity, government licenses, and certified warranties displayed on trust badges and staff ID cards.</p>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <form id="contractorForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setContractorName" class="form-label">Contractor Full Name <span class="required">*</span></label>
+                    <input type="text" id="setContractorName" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="setContractorRole" class="form-label">Official Designation <span class="required">*</span></label>
+                    <input type="text" id="setContractorRole" class="form-control" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setContractorLicense" class="form-label">Govt. Contractor License / Registration Details</label>
+                    <input type="text" id="setContractorLicense" class="form-control" placeholder="Govt. Electrical Contractor Lic #WB/KOL/2014-9982">
+                  </div>
+                  <div class="form-group">
+                    <label for="setWarranty" class="form-label">Workmanship Guarantee Badge</label>
+                    <input type="text" id="setWarranty" class="form-control" placeholder="5-Year Workmanship Warranty">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setExpYears" class="form-label">Years of Field Experience</label>
+                    <input type="text" id="setExpYears" class="form-control" placeholder="12+">
+                  </div>
+                  <div class="form-group">
+                    <label for="setProjectsDone" class="form-label">Projects Completed Counter</label>
+                    <input type="text" id="setProjectsDone" class="form-control" placeholder="850+">
+                  </div>
+                </div>
+
+                <div style="text-align: right; margin-top: 14px;">
+                  <button type="submit" class="btn btn-primary">
+                    <span>💾 Save Contractor Profile</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- CONTACT & WORKSHOP CHANNELS CARD -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="card-title">📞 Direct Contact Channels &amp; Operating Hours</h3>
+                <p class="card-subtitle">Phone numbers, WhatsApp click-to-chat links, email, workshop address, and service coverage.</p>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <form id="contactSettingsForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setPhone" class="form-label">Primary Phone (Direct Call) <span class="required">*</span></label>
+                    <input type="tel" id="setPhone" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="setAltPhone" class="form-label">Secondary / Alternate Phone</label>
+                    <input type="tel" id="setAltPhone" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="setWhatsapp" class="form-label">WhatsApp Number (with country code)</label>
+                    <input type="tel" id="setWhatsapp" class="form-control" placeholder="916290858744">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setEmail" class="form-label">Official Email Address</label>
+                    <input type="email" id="setEmail" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="setWorkingHours" class="form-label">Operating / Service Hours</label>
+                    <input type="text" id="setWorkingHours" class="form-control" placeholder="Monday – Sunday: 8:00 AM – 9:00 PM">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="setAddress" class="form-label">Physical Office / Workshop Address <span class="required">*</span></label>
+                  <input type="text" id="setAddress" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="setServiceAreas" class="form-label">Service Coverage Neighborhoods (Kolkata)</label>
+                  <input type="text" id="setServiceAreas" class="form-control">
+                  <div class="form-hint">e.g. New Town, Salt Lake, Rajarhat, EM Bypass, Lake Town, Behala, Kolkata</div>
+                </div>
+
+                <div style="text-align: right; margin-top: 14px;">
+                  <button type="submit" class="btn btn-primary">
+                    <span>💾 Save Contact Details</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- HERO BANNER & HEADLINES CARD -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="card-title">🌟 Hero Banner, Headlines &amp; Call to Action</h3>
+                <p class="card-subtitle">Control the homepage hero title, sub-headline, and call-to-action buttons.</p>
+              </div>
+            </div>
+            <div class="admin-card-body">
+              <form id="heroSettingsForm">
+                <div class="form-group">
+                  <label for="setHeroTitle" class="form-label">Homepage Main Headline</label>
+                  <input type="text" id="setHeroTitle" class="form-control" placeholder="Powering Spaces, Defining Lifestyles">
+                </div>
+
+                <div class="form-group">
+                  <label for="setHeroDesc" class="form-label">Homepage Sub-headline / Trust Statement</label>
+                  <textarea id="setHeroDesc" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setCtaText" class="form-label">Primary CTA Button Text</label>
+                    <input type="text" id="setCtaText" class="form-control" placeholder="Get Free Site Inspection">
+                  </div>
+                  <div class="form-group">
+                    <label for="setEmergencyText" class="form-label">Emergency Hotline Text</label>
+                    <input type="text" id="setEmergencyText" class="form-control" placeholder="24/7 Rapid Emergency Response: 6290858744">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setFacebook" class="form-label">Facebook Page URL</label>
+                    <input type="url" id="setFacebook" class="form-control" placeholder="https://facebook.com">
+                  </div>
+                  <div class="form-group">
+                    <label for="setInstagram" class="form-label">Instagram Page URL</label>
+                    <input type="url" id="setInstagram" class="form-control" placeholder="https://instagram.com">
+                  </div>
+                </div>
+
+                <div style="text-align: right; margin-top: 14px;">
+                  <button type="submit" class="btn btn-primary">
+                    <span>💾 Save Hero &amp; Headlines</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- SECURITY & CLOUD OPTIONS -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+            
+            <!-- Admin Password Card -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div>
+                  <h3 class="card-title">🔐 Admin Password Security</h3>
+                  <p class="card-subtitle">Change administrative login credentials</p>
+                </div>
+              </div>
+              <div class="admin-card-body">
+                <form id="changePasswordForm">
+                  <div class="form-group">
+                    <label for="currentPassword" class="form-label">Current Password <span class="required">*</span></label>
+                    <input type="password" id="currentPassword" class="form-control" placeholder="••••••••" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newPassword" class="form-label">New Password <span class="required">*</span></label>
+                    <input type="password" id="newPassword" class="form-control" placeholder="Minimum 6 characters" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="confirmNewPassword" class="form-label">Confirm New Password <span class="required">*</span></label>
+                    <input type="password" id="confirmNewPassword" class="form-control" placeholder="••••••••" required>
+                  </div>
+
+                  <div style="text-align: right; margin-top: 14px;">
+                    <button type="submit" class="btn btn-secondary">
+                      <span>Update Password</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Cloud Database Connection Card -->
+            <div class="admin-card">
+              <div class="admin-card-header">
+                <div>
+                  <h3 class="card-title">☁️ Firebase Cloud Sync</h3>
+                  <p class="card-subtitle">Connect Firebase Firestore for remote multi-device cloud synchronization</p>
+                </div>
+              </div>
+              <div class="admin-card-body">
+                <p style="font-size: 0.85rem; color: var(--admin-text-muted); margin-bottom: 14px; line-height: 1.5;">
+                  By default, Mollick Electric uses a high-performance, real-time shared local database engine. To enable remote cloud synchronization, paste your Firebase web config JSON below:
+                </p>
+                
+                <div class="form-group">
+                  <label for="firebaseConfigJson" class="form-label">Firebase Config JSON</label>
+                  <textarea id="firebaseConfigJson" class="form-control" rows="3" style="font-family: monospace; font-size: 0.82rem;" placeholder='{"apiKey": "...", "projectId": "..."}'></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                  <span class="badge badge-success">✓ Native Local Engine Active</span>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnSaveFirebaseConfig">
+                    Save Cloud Config
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, handleImageUpload } from './js/admin.js';
+
+    // Auth Guard
+    AdminAuth.checkAuth(true);
+
+    // Layout Shell
+    initAdminShell();
+
+    // Elements - Brand
+    const brandForm = document.querySelector('#brandSettingsForm');
+    const setLogoText = document.querySelector('#setLogoText');
+    const setLogoTagline = document.querySelector('#setLogoTagline');
+    const setWebsiteName = document.querySelector('#setWebsiteName');
+    const setLogoIcon = document.querySelector('#setLogoIcon');
+    const setCustomIcon = document.querySelector('#setCustomIcon');
+    const setPrimaryColor = document.querySelector('#setPrimaryColor');
+    const setPrimaryColorHex = document.querySelector('#setPrimaryColorHex');
+    const setAccentColor = document.querySelector('#setAccentColor');
+    const setAccentColorHex = document.querySelector('#setAccentColorHex');
+
+    // Elements - Logo Photo Upload
+    const setLogoPhotoInput = document.querySelector('#setLogoPhotoInput');
+    const setLogoImageUrl = document.querySelector('#setLogoImageUrl');
+    const logoPhotoDropzone = document.querySelector('#logoPhotoDropzone');
+    const logoPhotoActiveCard = document.querySelector('#logoPhotoActiveCard');
+    const logoPhotoActiveImg = document.querySelector('#logoPhotoActiveImg');
+    const logoUploadStatusBadge = document.querySelector('#logoUploadStatusBadge');
+    const btnChangeLogoPhoto = document.querySelector('#btnChangeLogoPhoto');
+    const btnRemoveLogoPhoto = document.querySelector('#btnRemoveLogoPhoto');
+    const modeEmblem = document.querySelector('#modeEmblem');
+    const modeStandalone = document.querySelector('#modeStandalone');
+
+    // Live Preview elements
+    const previewEmblemLight = document.querySelector('#previewEmblemLight');
+    const previewMainLight = document.querySelector('#previewMainLight');
+    const previewSubLight = document.querySelector('#previewSubLight');
+    const previewEmblemDark = document.querySelector('#previewEmblemDark');
+    const previewMainDark = document.querySelector('#previewMainDark');
+    const previewSubDark = document.querySelector('#previewSubDark');
+
+    // Elements - Contractor
+    const contractorForm = document.querySelector('#contractorForm');
+    const setContractorName = document.querySelector('#setContractorName');
+    const setContractorRole = document.querySelector('#setContractorRole');
+    const setContractorLicense = document.querySelector('#setContractorLicense');
+    const setWarranty = document.querySelector('#setWarranty');
+    const setExpYears = document.querySelector('#setExpYears');
+    const setProjectsDone = document.querySelector('#setProjectsDone');
+
+    // Elements - Contact
+    const contactForm = document.querySelector('#contactSettingsForm');
+    const setPhone = document.querySelector('#setPhone');
+    const setAltPhone = document.querySelector('#setAltPhone');
+    const setWhatsapp = document.querySelector('#setWhatsapp');
+    const setEmail = document.querySelector('#setEmail');
+    const setWorkingHours = document.querySelector('#setWorkingHours');
+    const setAddress = document.querySelector('#setAddress');
+    const setServiceAreas = document.querySelector('#setServiceAreas');
+
+    // Elements - Hero
+    const heroForm = document.querySelector('#heroSettingsForm');
+    const setHeroTitle = document.querySelector('#setHeroTitle');
+    const setHeroDesc = document.querySelector('#setHeroDesc');
+    const setCtaText = document.querySelector('#setCtaText');
+    const setEmergencyText = document.querySelector('#setEmergencyText');
+    const setFacebook = document.querySelector('#setFacebook');
+    const setInstagram = document.querySelector('#setInstagram');
+
+    // Update Live Brand Preview in Real-time
+    function updateLivePreview() {
+      const icon = setCustomIcon.value.trim() || setLogoIcon.value || '⚡';
+      const main = setLogoText.value.trim() || 'MOLLICK';
+      const sub = setLogoTagline.value.trim() || 'ELECTRIC & INTERIOR';
+      const logoImg = setLogoImageUrl.value;
+      const isStandalone = modeStandalone.checked && !!logoImg;
+      const accent = setAccentColor.value;
+
+      const lightContainer = document.querySelector('.preview-light .preview-logo-display');
+      const darkContainer = document.querySelector('.preview-dark .preview-logo-display');
+
+      if (isStandalone) {
+        if (lightContainer) {
+          lightContainer.innerHTML = `
+            <div style="display:inline-flex; align-items:center;">
+              <img src="${logoImg}" alt="Logo" style="max-height:44px; max-width:220px; object-fit:contain;">
+            </div>
+          `;
+        }
+        if (darkContainer) {
+          darkContainer.innerHTML = `
+            <div style="display:inline-flex; align-items:center;">
+              <img src="${logoImg}" alt="Logo" style="max-height:44px; max-width:220px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+            </div>
+          `;
+        }
+      } else {
+        const emblemLightContent = logoImg 
+          ? `<img src="${logoImg}" alt="Logo" style="width:100%; height:100%; object-fit:contain; border-radius:6px;">`
+          : icon;
+        const emblemDarkContent = logoImg 
+          ? `<img src="${logoImg}" alt="Logo" style="width:100%; height:100%; object-fit:contain; border-radius:6px;">`
+          : icon;
+
+        if (lightContainer) {
+          lightContainer.innerHTML = `
+            <div class="preview-logo-emblem" id="previewEmblemLight" style="border-color:${accent}; padding:2px; overflow:hidden;">${emblemLightContent}</div>
+            <div class="preview-logo-text">
+              <span class="preview-brand-main" id="previewMainLight">${main}</span>
+              <span class="preview-brand-sub" id="previewSubLight" style="color:${accent};">${sub}</span>
+            </div>
+          `;
+        }
+        if (darkContainer) {
+          darkContainer.innerHTML = `
+            <div class="preview-logo-emblem" id="previewEmblemDark" style="padding:2px; overflow:hidden;">${emblemDarkContent}</div>
+            <div class="preview-logo-text">
+              <span class="preview-brand-main" id="previewMainDark">${main}</span>
+              <span class="preview-brand-sub" id="previewSubDark" style="color:${accent};">${sub}</span>
+            </div>
+          `;
+        }
+      }
+    }
+
+    // Photo Upload Event Handlers
+    function setLogoPhoto(dataUrl) {
+      setLogoImageUrl.value = dataUrl || '';
+      if (dataUrl) {
+        logoPhotoActiveImg.src = dataUrl;
+        logoPhotoActiveCard.style.display = 'flex';
+        logoPhotoDropzone.style.display = 'none';
+        logoUploadStatusBadge.textContent = 'Custom Logo Photo Active';
+        logoUploadStatusBadge.className = 'badge badge-success';
+      } else {
+        logoPhotoActiveImg.src = '';
+        logoPhotoActiveCard.style.display = 'none';
+        logoPhotoDropzone.style.display = 'block';
+        logoUploadStatusBadge.textContent = 'No custom logo photo (using icon)';
+        logoUploadStatusBadge.className = 'badge badge-info';
+      }
+      updateLivePreview();
+    }
+
+    async function processLogoFile(file) {
+      if (!file) return;
+      try {
+        const dataUrl = await handleImageUpload(file, 800, 400, 0.9);
+        setLogoPhoto(dataUrl);
+        showToast('✓ Logo image uploaded! Click "Save Logo & Brand Settings" to apply.', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to upload logo image.', 'error');
+      }
+    }
+
+    logoPhotoDropzone.addEventListener('click', () => setLogoPhotoInput.click());
+    btnChangeLogoPhoto.addEventListener('click', () => setLogoPhotoInput.click());
+
+    btnRemoveLogoPhoto.addEventListener('click', () => {
+      setLogoPhotoInput.value = '';
+      setLogoPhoto('');
+      showToast('Logo photo removed. Restored to default brand symbol.', 'info');
+    });
+
+    setLogoPhotoInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        processLogoFile(e.target.files[0]);
+      }
+    });
+
+    // Dropzone drag & drop
+    ['dragenter', 'dragover'].forEach(eventName => {
+      logoPhotoDropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        logoPhotoDropzone.style.borderColor = 'var(--admin-gold)';
+        logoPhotoDropzone.style.background = '#fefce8';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      logoPhotoDropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        logoPhotoDropzone.style.borderColor = '';
+        logoPhotoDropzone.style.background = '#ffffff';
+      });
+    });
+
+    logoPhotoDropzone.addEventListener('drop', (e) => {
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processLogoFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    // Display mode change
+    modeEmblem.addEventListener('change', updateLivePreview);
+    modeStandalone.addEventListener('change', updateLivePreview);
+
+    // Load initial settings
+    function loadAllSettings() {
+      const s = MollickDB.getSettings();
+
+      // Brand
+      setLogoText.value = s.logoText || 'MOLLICK';
+      setLogoTagline.value = s.logoTagline || 'ELECTRIC & INTERIOR';
+      setWebsiteName.value = s.websiteName || 'Mollick Electric & Interior';
+      setLogoIcon.value = s.logoIcon || '⚡';
+      setPrimaryColor.value = s.primaryColor || '#0b1320';
+      setPrimaryColorHex.value = s.primaryColor || '#0b1320';
+      setAccentColor.value = s.accentColor || '#e11d24';
+      setAccentColorHex.value = s.accentColor || '#e11d24';
+
+      // Logo Image
+      if (s.logoImageUrl) {
+        setLogoPhoto(s.logoImageUrl);
+      } else {
+        setLogoPhoto('');
+      }
+
+      if (s.logoDisplayMode === 'standalone') {
+        modeStandalone.checked = true;
+      } else {
+        modeEmblem.checked = true;
+      }
+
+      // Contractor
+      setContractorName.value = s.contractorName || 'Nasim Mollick';
+      setContractorRole.value = s.contractorRole || 'Founder & Licensed Master Contractor';
+      setContractorLicense.value = s.contractorLicense || 'Govt. Electrical Contractor Lic #WB/KOL/2014-9982';
+      setWarranty.value = s.guaranteeYears || '5-Year Workmanship Warranty';
+      setExpYears.value = s.experienceYears || '12+';
+      setProjectsDone.value = s.completedProjects || '850+';
+
+      // Contact
+      setPhone.value = s.phone || '6290858744';
+      setAltPhone.value = s.altPhone || '8777688287';
+      setWhatsapp.value = s.whatsappNumber || '916290858744';
+      setEmail.value = s.email || 'mollicknasim810@gmail.com';
+      setWorkingHours.value = s.workingHours || 'Monday – Sunday: 8:00 AM – 9:00 PM';
+      setAddress.value = s.address || 'Rajarhat Main Road, Near Chinar Park, Kolkata, West Bengal 700136';
+      setServiceAreas.value = s.serviceAreas || 'New Town, Salt Lake, Rajarhat, EM Bypass, Lake Town, Behala, Kolkata';
+
+      // Hero
+      setHeroTitle.value = s.heroTitle || 'Powering Spaces, Defining Lifestyles';
+      setHeroDesc.value = s.heroDescription || '';
+      setCtaText.value = s.ctaText || 'Get Free Site Inspection';
+      setEmergencyText.value = s.emergencyText || '24/7 Rapid Emergency Response: 6290858744';
+      setFacebook.value = s.facebookUrl || '';
+      setInstagram.value = s.instagramUrl || '';
+
+      const fbInput = document.querySelector('#firebaseConfigJson');
+      if (fbInput && s.firebaseConfig) {
+        fbInput.value = s.firebaseConfig;
+      }
+
+      updateLivePreview();
+    }
+
+    loadAllSettings();
+
+    // Event listeners for real-time live preview
+    setLogoText.addEventListener('input', updateLivePreview);
+    setLogoTagline.addEventListener('input', updateLivePreview);
+    setLogoIcon.addEventListener('change', () => {
+      setCustomIcon.value = '';
+      updateLivePreview();
+    });
+    setCustomIcon.addEventListener('input', updateLivePreview);
+    setAccentColor.addEventListener('input', () => {
+      setAccentColorHex.value = setAccentColor.value;
+      updateLivePreview();
+    });
+    setAccentColorHex.addEventListener('input', () => {
+      if (/^#[0-9A-F]{6}$/i.test(setAccentColorHex.value)) {
+        setAccentColor.value = setAccentColorHex.value;
+        updateLivePreview();
+      }
+    });
+    setPrimaryColor.addEventListener('input', () => {
+      setPrimaryColorHex.value = setPrimaryColor.value;
+    });
+
+    // 1. Save Brand Form
+    brandForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const updated = {
+        logoText: setLogoText.value.trim().toUpperCase(),
+        logoTagline: setLogoTagline.value.trim().toUpperCase(),
+        websiteName: setWebsiteName.value.trim(),
+        logoIcon: setCustomIcon.value.trim() || setLogoIcon.value,
+        logoImageUrl: setLogoImageUrl.value || '',
+        logoDisplayMode: modeStandalone.checked ? 'standalone' : 'emblem',
+        primaryColor: setPrimaryColor.value,
+        accentColor: setAccentColor.value
+      };
+      MollickDB.saveSettings(updated);
+      showToast('✓ Logo photo, brand identity & settings saved! Public website updated.', 'success');
+    });
+
+    // 2. Save Contractor Profile
+    contractorForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const updated = {
+        contractorName: setContractorName.value.trim(),
+        contractorRole: setContractorRole.value.trim(),
+        contractorLicense: setContractorLicense.value.trim(),
+        guaranteeYears: setWarranty.value.trim(),
+        experienceYears: setExpYears.value.trim(),
+        completedProjects: setProjectsDone.value.trim()
+      };
+      MollickDB.saveSettings(updated);
+      showToast('✓ Contractor credentials & warranties saved!', 'success');
+    });
+
+    // 3. Save Contact Details
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const updated = {
+        phone: setPhone.value.trim(),
+        altPhone: setAltPhone.value.trim(),
+        whatsappNumber: setWhatsapp.value.trim(),
+        email: setEmail.value.trim(),
+        workingHours: setWorkingHours.value.trim(),
+        address: setAddress.value.trim(),
+        serviceAreas: setServiceAreas.value.trim()
+      };
+      MollickDB.saveSettings(updated);
+      showToast('✓ Contact channels & workshop location saved!', 'success');
+    });
+
+    // 4. Save Hero & Headlines
+    heroForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const updated = {
+        heroTitle: setHeroTitle.value.trim(),
+        heroDescription: setHeroDesc.value.trim(),
+        ctaText: setCtaText.value.trim(),
+        emergencyText: setEmergencyText.value.trim(),
+        facebookUrl: setFacebook.value.trim(),
+        instagramUrl: setInstagram.value.trim()
+      };
+      MollickDB.saveSettings(updated);
+      showToast('✓ Homepage hero banner and call-to-action saved!', 'success');
+    });
+
+    // 5. Password Change
+    const pwdForm = document.querySelector('#changePasswordForm');
+    pwdForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const oldPwd = document.querySelector('#currentPassword').value;
+      const newPwd = document.querySelector('#newPassword').value;
+      const confirmPwd = document.querySelector('#confirmNewPassword').value;
+
+      if (newPwd !== confirmPwd) {
+        showToast('New passwords do not match.', 'error');
+        return;
+      }
+
+      const res = await AdminAuth.changePassword(oldPwd, newPwd);
+      if (res.success) {
+        showToast('✓ Admin password successfully updated!', 'success');
+        pwdForm.reset();
+      } else {
+        showToast(res.message, 'error');
+      }
+    });
+
+    // 6. Firebase Config
+    document.querySelector('#btnSaveFirebaseConfig').addEventListener('click', () => {
+      const fbVal = document.querySelector('#firebaseConfigJson').value.trim();
+      MollickDB.saveSettings({ firebaseConfig: fbVal });
+      showToast(fbVal ? '✓ Firebase cloud config saved!' : 'Cloud config reset to local sync.', 'info');
+    });
+  </script>
+</body>
+</html>

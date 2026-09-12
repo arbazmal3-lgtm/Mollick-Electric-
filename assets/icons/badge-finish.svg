@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" fill="none">
+  <rect x="1" y="1" width="158" height="48" rx="8" fill="#0c1e38" stroke="#f5b301" stroke-width="1.5"/>
+  <g transform="translate(10, 8)">
+    <circle cx="17" cy="17" r="14" fill="#f5b301"/>
+    <path d="M17 6L20 13H27L21 18L23 25L17 21L11 25L13 18L7 13H14L17 6Z" fill="#0c1e38"/>
+  </g>
+  <text x="50" y="24" font-family="'Montserrat', sans-serif" font-weight="900" font-size="12" fill="#ffffff" letter-spacing="1">PERFECT FINISH</text>
+  <text x="50" y="36" font-family="'Segoe UI', sans-serif" font-weight="600" font-size="9" fill="#f5b301" letter-spacing="0.5">Premium Quality</text>
+</svg>

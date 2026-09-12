@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Mollick Electric &amp; Interior Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link active">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" id="adminAvatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name" id="adminName">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Dashboard Overview</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../index.html" target="_blank" class="topbar-btn topbar-btn-website" title="Open Public Website">
+            <span>🌐 View Public Site</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Welcome back, Nasim Bhai</h2>
+            <p class="page-subtitle">Here is what's happening across Mollick Electric &amp; Interior operations today.</p>
+          </div>
+          <div class="page-actions">
+            <a href="projects.html" class="btn btn-primary btn-sm">
+              <span>+ Add Project</span>
+            </a>
+            <a href="services.html" class="btn btn-secondary btn-sm">
+              <span>+ Add Service</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="stats-cards-grid">
+          
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Services</div>
+              <div class="stat-val" id="statServices">0</div>
+              <div class="stat-note" id="statActiveServices">0 active on public website</div>
+            </div>
+            <div class="stat-icon-wrap icon-amber">🛠️</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Total Projects</div>
+              <div class="stat-val" id="statProjects">0</div>
+              <div class="stat-note">Concealed wiring, ceilings &amp; woodwork</div>
+            </div>
+            <div class="stat-icon-wrap icon-blue">📁</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Gallery Showcase</div>
+              <div class="stat-val" id="statGallery">0</div>
+              <div class="stat-note">HD finish photographs</div>
+            </div>
+            <div class="stat-icon-wrap icon-emerald">🖼️</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Client Inquiries</div>
+              <div class="stat-val" id="statMessages">0</div>
+              <div class="stat-note" style="color: var(--admin-danger); font-weight: 600;" id="statUnread">0 unread inquiries</div>
+            </div>
+            <div class="stat-icon-wrap icon-rose">💬</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Workforce &amp; Staff</div>
+              <div class="stat-val" id="statStaff">0</div>
+              <div class="stat-note" id="statActiveStaff">0 active with verified ID</div>
+            </div>
+            <div class="stat-icon-wrap icon-amber">🪪</div>
+          </div>
+
+        </div>
+
+        <!-- Quick Action Shortcuts -->
+        <div class="admin-card" style="margin-bottom: 28px;">
+          <div class="admin-card-header">
+            <h3 class="card-title">⚡ Quick Management Shortcuts</h3>
+          </div>
+          <div class="admin-card-body" style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="staff.html" class="btn btn-primary btn-sm">🪪 Print Staff ID Badges</a>
+            <a href="projects.html" class="btn btn-secondary btn-sm">📁 Manage All Projects</a>
+            <a href="services.html" class="btn btn-secondary btn-sm">🛠️ Manage Rate Card &amp; Services</a>
+            <a href="gallery.html" class="btn btn-secondary btn-sm">🖼️ Upload Gallery Photos</a>
+            <a href="messages.html" class="btn btn-secondary btn-sm">💬 Check Customer Leads</a>
+            <a href="settings.html" class="btn btn-secondary btn-sm">⚙️ Change Logo Name &amp; Phone</a>
+          </div>
+        </div>
+
+        <!-- Two Column Grid for Recents -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 24px;">
+          
+          <!-- Recent Projects Table Card -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="card-title">Recent Project Handovers</h3>
+                <p class="card-subtitle">Latest installations across Kolkata sites</p>
+              </div>
+              <a href="projects.html" class="btn btn-secondary btn-sm">View All &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                  </tr>
+                </thead>
+                <tbody id="recentProjectsBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Client Messages Card -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <h3 class="card-title">Recent Form Leads &amp; Inquiries</h3>
+                <p class="card-subtitle">Contact messages received from website visitors</p>
+              </div>
+              <a href="messages.html" class="btn btn-secondary btn-sm">View All &rarr;</a>
+            </div>
+            <div class="table-responsive">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Client</th>
+                    <th>Subject</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recentMessagesBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, escapeHtml } from './js/admin.js';
+
+    // Auth Guard
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    // Render Stats
+    function renderDashboard() {
+      const stats = MollickDB.getStats();
+
+      document.querySelector('#statServices').textContent = stats.totalServices;
+      document.querySelector('#statActiveServices').textContent = `${stats.activeServices} active on public website`;
+      document.querySelector('#statProjects').textContent = stats.totalProjects;
+      document.querySelector('#statGallery').textContent = stats.totalGallery;
+      document.querySelector('#statMessages').textContent = stats.totalMessages;
+      document.querySelector('#statUnread').textContent = `${stats.unreadMessages} unread inquiries`;
+      if (document.querySelector('#statStaff')) {
+        document.querySelector('#statStaff').textContent = stats.totalStaff || 0;
+      }
+      if (document.querySelector('#statActiveStaff')) {
+        document.querySelector('#statActiveStaff').textContent = `${stats.activeStaff || 0} active with verified ID`;
+      }
+
+      // Render Recent Projects
+      const prjBody = document.querySelector('#recentProjectsBody');
+      if (stats.recentProjects.length === 0) {
+        prjBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--admin-text-muted);">No projects recorded yet.</td></tr>`;
+      } else {
+        prjBody.innerHTML = stats.recentProjects.map(p => `
+          <tr>
+            <td>
+              <div style="font-weight: 600; color: var(--admin-navy);">${escapeHtml(p.title)}</div>
+              <div style="font-size: 0.78rem; color: var(--admin-text-muted);">${escapeHtml(p.completionDate || '')}</div>
+            </td>
+            <td><span class="badge badge-info">${escapeHtml(p.category)}</span></td>
+            <td style="font-size: 0.85rem; color: var(--admin-text-muted);">📍 ${escapeHtml(p.location)}</td>
+          </tr>
+        `).join('');
+      }
+
+      // Render Recent Messages
+      const msgBody = document.querySelector('#recentMessagesBody');
+      if (stats.recentMessages.length === 0) {
+        msgBody.innerHTML = `<tr><td colspan="3" style="text-align:center; color:var(--admin-text-muted);">No messages received yet.</td></tr>`;
+      } else {
+        msgBody.innerHTML = stats.recentMessages.map(m => `
+          <tr>
+            <td>
+              <div style="font-weight: 600;">${escapeHtml(m.name)}</div>
+              <div style="font-size: 0.78rem; color: var(--admin-text-muted);">${escapeHtml(m.phone)}</div>
+            </td>
+            <td style="max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${escapeHtml(m.subject || m.message)}
+            </td>
+            <td>
+              <span class="badge ${m.status === 'unread' ? 'badge-danger' : 'badge-success'}">
+                ${m.status === 'unread' ? 'Unread' : 'Read'}
+              </span>
+            </td>
+          </tr>
+        `).join('');
+      }
+    }
+
+    renderDashboard();
+    window.addEventListener('mollick_db_updated', renderDashboard);
+  </script>
+</body>
+</html>

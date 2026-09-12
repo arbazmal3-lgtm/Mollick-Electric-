@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff ID Cards &amp; Workforce Registry | Mollick Admin</title>
+  <meta name="description" content="Generate and print official contractor workforce ID cards for electricians, carpenters, and technicians.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo-icon">⚡</div>
+        <div class="brand-text">
+          <span class="brand-title">Mollick Electric</span>
+          <span class="brand-subtitle">Admin Management</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+
+        <div class="nav-category">Management</div>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">⚡</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link active">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar" id="adminAvatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name" id="adminName">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Staff ID Cards &amp; Workforce Registry</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../index.html" target="_blank" class="topbar-btn topbar-btn-website" title="Open Public Website">
+            <span>🌐 View Public Site</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Workforce ID Badges</h2>
+            <p class="page-subtitle">Manage contractor technicians, electricians, carpenters, and generate official printable 2-sided PVC identity cards.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-secondary" id="btnBatchPrint">
+              <span>🖨️ Batch Print Badges</span>
+            </button>
+            <button type="button" class="btn btn-primary" id="btnOpenAddStaff">
+              <span>+ Add Staff Member</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Staff Stat Counters -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 24px;">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-gold">🪪</div>
+            <div class="stat-meta">
+              <span class="stat-value" id="statTotalStaff">0</span>
+              <span class="stat-label">Total Registered Staff</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-navy">⚡</div>
+            <div class="stat-meta">
+              <span class="stat-value" id="statActiveStaff">0</span>
+              <span class="stat-label">Active On-Site Staff</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-blue">🛡️</div>
+            <div class="stat-meta">
+              <span class="stat-value">100%</span>
+              <span class="stat-label">Govt. Skill Vetted</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="table-filter-bar" style="margin-bottom: 24px;">
+          <div class="search-input-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="staffSearchInput" class="search-input" placeholder="Search by name, ID (e.g. MEI-0101), or mobile...">
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <select id="staffDeptFilter" class="form-control" style="width: auto; min-width: 180px;">
+              <option value="all">All Departments</option>
+              <option value="Electrical">Electrical Works</option>
+              <option value="False Ceiling">False Ceiling &amp; Gypsum</option>
+              <option value="Modular Kitchen">Modular &amp; Woodwork</option>
+              <option value="Security">Security &amp; Automation</option>
+              <option value="Management">Turnkey Management</option>
+            </select>
+
+            <select id="staffStatusFilter" class="form-control" style="width: auto;">
+              <option value="all">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Staff Cards Grid -->
+        <div class="staff-grid" id="staffContainer">
+          <!-- Populated dynamically -->
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Interactive 2-Sided Staff ID Card Preview Modal -->
+  <div class="modal-overlay" id="staffIdCardModal">
+    <div class="modal-dialog" style="max-width: 440px;">
+      <div class="modal-header no-print">
+        <h4 class="modal-title">Official Staff ID Badge</h4>
+        <button type="button" class="modal-close-btn" id="closeIdCardModal">&times;</button>
+      </div>
+      
+      <div class="modal-body" style="padding: 10px 20px;">
+        
+        <div style="text-align: center; margin-bottom: 12px;" class="no-print">
+          <span style="font-size: 0.85rem; color: var(--admin-text-muted);">
+            Click <strong>Flip Badge</strong> or click directly on the card to inspect Front / Back.
+          </span>
+        </div>
+
+        <!-- Print-friendly ID Card Container -->
+        <div class="id-card-print-container" id="idCardPrintArea">
+          
+          <div class="id-card-flipper-wrap">
+            <div class="id-card-flipper" id="cardFlipper">
+              
+              <!-- FRONT OF BADGE -->
+              <div class="id-badge-face id-badge-front">
+                <div class="lanyard-hole"></div>
+                <div class="badge-header">
+                  <div class="badge-brand-group">
+                    <span class="badge-brand-icon" id="badgeBrandIcon">⚡</span>
+                    <span class="badge-company-name" id="badgeCompanyName">MOLLICK ELECTRIC &amp; INTERIOR</span>
+                  </div>
+                  <div class="badge-category-tag">OFFICIAL WORKFORCE IDENTITY BADGE</div>
+                </div>
+
+                <div class="badge-body">
+                  <div class="badge-avatar-container">
+                    <span id="badgeAvatarIcon">⚡</span>
+                    <span class="badge-verified-check" title="Verified Workforce">✓</span>
+                  </div>
+
+                  <div class="badge-name" id="badgeStaffName">Nasim Mollick</div>
+                  <div class="badge-designation" id="badgeStaffRole">Master Contractor &amp; Chief Engineer</div>
+
+                  <div class="badge-id-box">
+                    <span>ID: </span><span id="badgeStaffId">MEI-0101</span>
+                  </div>
+
+                  <div class="badge-spec-table">
+                    <div class="badge-spec-row">
+                      <span style="color: #64748b;">Department:</span>
+                      <span style="font-weight: 600;" id="badgeStaffDept">Electrical Works</span>
+                    </div>
+                    <div class="badge-spec-row">
+                      <span style="color: #64748b;">Phone:</span>
+                      <span style="font-weight: 600;" id="badgeStaffPhone">+91 6290858744</span>
+                    </div>
+                    <div class="badge-spec-row">
+                      <span style="color: #64748b;">Blood Group:</span>
+                      <span class="blood-badge" id="badgeStaffBlood">B+</span>
+                    </div>
+                    <div class="badge-spec-row">
+                      <span style="color: #64748b;">Valid Thru:</span>
+                      <span style="font-weight: 600;" id="badgeStaffValid">2028-12-31</span>
+                    </div>
+                  </div>
+
+                  <div class="badge-footer-security">
+                    <div class="badge-seal-graphic">
+                      <span class="badge-seal-icon">🛡️</span>
+                      <span>GOVT. LICENSED CONTRACTOR</span>
+                    </div>
+                    <span class="badge badge-success" style="font-size: 0.65rem;">ACTIVE VERIFIED</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BACK OF BADGE -->
+              <div class="id-badge-face id-badge-back">
+                <div class="lanyard-hole"></div>
+                <div class="badge-header" style="background: #0f172a;">
+                  <div class="badge-company-name" style="font-size: 0.8rem;" id="badgeBackCompanyName">MOLLICK ELECTRIC &amp; INTERIOR</div>
+                  <div style="font-size: 0.62rem; color: #94a3b8;">HEAD OFFICE &amp; VERIFICATION DESK</div>
+                </div>
+
+                <div class="badge-back-body">
+                  <div style="font-size: 0.72rem; color: #1e293b; margin-bottom: 8px;">
+                    <strong>Office Address:</strong><br>
+                    <span id="badgeBackAddress">Rajarhat Main Rd, Near Chinar Park, Kolkata, WB 700136</span>
+                  </div>
+
+                  <div style="font-size: 0.72rem; color: #1e293b; margin-bottom: 8px;">
+                    <strong>Emergency Helpline:</strong> <span id="badgeBackEmergency">8777688287 (Head Office)</span><br>
+                    <strong>Assigned Zone:</strong> <span id="badgeBackZone">New Town &amp; Kolkata</span>
+                  </div>
+
+                  <div class="badge-back-rules">
+                    This certified cardholder is authorized to conduct concealed 3-phase wiring, false ceiling installations, and modular interior works under safety protocols. If found, please return to the registered office or call 6290858744.
+                  </div>
+
+                  <div class="badge-qr-box">
+                    <svg class="badge-qr-svg" viewBox="0 0 100 100" fill="#071529">
+                      <!-- Simulated high-density verification QR code SVG -->
+                      <rect width="100" height="100" fill="#ffffff"/>
+                      <path d="M10,10 h24 v24 h-24 z M14,14 v16 h16 v-16 z M18,18 h8 v8 h-8 z" fill="#071529"/>
+                      <path d="M66,10 h24 v24 h-24 z M70,14 v16 h16 v-16 z M74,18 h8 v8 h-8 z" fill="#071529"/>
+                      <path d="M10,66 h24 v24 h-24 z M14,70 v16 h16 v-16 z M18,74 h8 v8 h-8 z" fill="#071529"/>
+                      <rect x="42" y="10" width="16" height="4" fill="#071529"/>
+                      <rect x="42" y="20" width="8" height="14" fill="#071529"/>
+                      <rect x="54" y="24" width="8" height="10" fill="#071529"/>
+                      <rect x="10" y="42" width="14" height="6" fill="#071529"/>
+                      <rect x="30" y="42" width="8" height="8" fill="#071529"/>
+                      <rect x="44" y="42" width="12" height="12" fill="#071529"/>
+                      <rect x="62" y="42" width="28" height="6" fill="#071529"/>
+                      <rect x="42" y="60" width="10" height="18" fill="#071529"/>
+                      <rect x="58" y="54" width="16" height="12" fill="#071529"/>
+                      <rect x="78" y="54" width="12" height="18" fill="#071529"/>
+                      <rect x="42" y="82" width="22" height="8" fill="#071529"/>
+                      <rect x="70" y="76" width="20" height="14" fill="#071529"/>
+                    </svg>
+                    <span style="font-size: 0.62rem; color: #64748b; font-weight: 700;">SCAN TO VERIFY CERTIFICATION</span>
+                  </div>
+
+                  <div class="badge-sign-box">
+                    <div class="badge-signature-text" id="badgeBackSignature">Nasim Mollick</div>
+                    <div class="badge-signatory-title">Authorized Master Contractor Signatory</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer no-print" style="justify-content: space-between;">
+        <button type="button" class="btn btn-secondary card-flip-btn" id="btnFlipCard">
+          <span>🔄 Flip Badge (Front / Back)</span>
+        </button>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-secondary" id="btnCloseCardModal">Close</button>
+          <button type="button" class="btn btn-primary" id="btnPrintCard">
+            <span>🖨️ Print Badge</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add / Edit Staff Modal -->
+  <div class="modal-overlay" id="staffFormModal">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staffModalTitle">Add New Staff Member</h4>
+        <button type="button" class="modal-close-btn" id="closeStaffFormModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="staffForm">
+          <input type="hidden" id="staffFormId">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStaffName" class="form-label">Full Name <span class="required">*</span></label>
+              <input type="text" id="formStaffName" class="form-control" placeholder="e.g. Subhasis Roy" required>
+            </div>
+            <div class="form-group">
+              <label for="formStaffIdCode" class="form-label">Staff ID Code <span class="required">*</span></label>
+              <input type="text" id="formStaffIdCode" class="form-control" placeholder="e.g. MEI-0108" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStaffRole" class="form-label">Role / Job Title <span class="required">*</span></label>
+              <input type="text" id="formStaffRole" class="form-control" placeholder="e.g. Senior Concealed Electrician" required>
+            </div>
+            <div class="form-group">
+              <label for="formStaffDept" class="form-label">Department <span class="required">*</span></label>
+              <select id="formStaffDept" class="form-control" required>
+                <option value="Electrical Works">Electrical Works</option>
+                <option value="False Ceiling & Gypsum">False Ceiling &amp; Gypsum</option>
+                <option value="Modular Kitchen & Woodwork">Modular Kitchen &amp; Woodwork</option>
+                <option value="Security & Automation">Security &amp; Automation</option>
+                <option value="Turnkey Management">Turnkey Management</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStaffPhone" class="form-label">Mobile Number <span class="required">*</span></label>
+              <input type="tel" id="formStaffPhone" class="form-control" placeholder="e.g. 9830214588" required>
+            </div>
+            <div class="form-group">
+              <label for="formStaffBlood" class="form-label">Blood Group <span class="required">*</span></label>
+              <select id="formStaffBlood" class="form-control" required>
+                <option value="O+">O+</option>
+                <option value="A+">A+</option>
+                <option value="B+">B+</option>
+                <option value="AB+">AB+</option>
+                <option value="O-">O-</option>
+                <option value="A-">A-</option>
+                <option value="B-">B-</option>
+                <option value="AB-">AB-</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStaffLicense" class="form-label">Govt. Skill / License Ref</label>
+              <input type="text" id="formStaffLicense" class="form-control" placeholder="e.g. WB-ELE-91204">
+            </div>
+            <div class="form-group">
+              <label for="formStaffIcon" class="form-label">Trade Icon (Fallback)</label>
+              <select id="formStaffIcon" class="form-control">
+                <option value="⚡">⚡ Electrician / Wireman</option>
+                <option value="✨">✨ False Ceiling Specialist</option>
+                <option value="🍳">🍳 Modular & Carpentry</option>
+                <option value="📹">📹 CCTV & Automation</option>
+                <option value="👷">👷 Site Supervisor</option>
+                <option value="🛠️">🛠️ Multi-skill Technician</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Staff Photo Upload Option -->
+          <div class="form-group">
+            <label class="form-label">🪪 Staff Passport Photo Upload</label>
+            <input type="file" id="formStaffPhotoInput" accept="image/*" style="display: none;">
+            <input type="hidden" id="formStaffPhotoUrl">
+
+            <div class="photo-upload-dropzone" id="staffPhotoDropzone">
+              <div class="photo-upload-icon">📷</div>
+              <div class="photo-upload-title">Click to Upload or Drag &amp; Drop Staff Passport Photo</div>
+              <div class="photo-upload-hint">Upload official photo (JPG, PNG, WEBP) to print on PVC ID card. Compressed automatically.</div>
+            </div>
+
+            <div class="photo-preview-card" id="staffPhotoPreviewWrap" style="display: none; margin-top: 10px; max-width: 130px; margin-left: auto; margin-right: auto; height: 130px; border-radius: 50%;">
+              <img id="staffPhotoPreviewImg" src="" alt="Staff Photo Preview" style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%;">
+              <button type="button" class="btn-remove-photo-badge" id="btnRemoveStaffPhoto">✕ Remove</button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStaffEmergency" class="form-label">Emergency Contact &amp; Relation</label>
+              <input type="text" id="formStaffEmergency" class="form-control" placeholder="e.g. 9830214589 (Spouse)">
+            </div>
+            <div class="form-group">
+              <label for="formStaffZone" class="form-label">Assigned Work Zone</label>
+              <input type="text" id="formStaffZone" class="form-control" placeholder="e.g. Salt Lake & New Town">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="formStaffValid" class="form-label">Badge Valid Thru</label>
+              <input type="date" id="formStaffValid" class="form-control" value="2027-12-31">
+            </div>
+            <div class="form-group">
+              <label for="formStaffStatus" class="form-label">Staff Status</label>
+              <select id="formStaffStatus" class="form-control">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
+            <button type="button" class="btn btn-secondary" id="btnCancelStaffForm">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btnSaveStaff">
+              <span>Save Staff Member</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script Module -->
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml, handleImageUpload, setupDropzone } from './js/admin.js';
+
+    // Auth Guard
+    AdminAuth.checkAuth(true);
+
+    // Initialize layout shell
+    initAdminShell();
+
+    // DOM Elements
+    const staffContainer = document.querySelector('#staffContainer');
+    const searchInput = document.querySelector('#staffSearchInput');
+    const deptFilter = document.querySelector('#staffDeptFilter');
+    const statusFilter = document.querySelector('#staffStatusFilter');
+    const statTotalStaff = document.querySelector('#statTotalStaff');
+    const statActiveStaff = document.querySelector('#statActiveStaff');
+
+    // Modals
+    const idCardModal = document.querySelector('#staffIdCardModal');
+    const closeIdCardModal = document.querySelector('#closeIdCardModal');
+    const btnCloseCardModal = document.querySelector('#btnCloseCardModal');
+    const btnFlipCard = document.querySelector('#btnFlipCard');
+    const cardFlipper = document.querySelector('#cardFlipper');
+    const btnPrintCard = document.querySelector('#btnPrintCard');
+    const btnBatchPrint = document.querySelector('#btnBatchPrint');
+
+    const staffFormModal = document.querySelector('#staffFormModal');
+    const staffForm = document.querySelector('#staffForm');
+    const btnOpenAddStaff = document.querySelector('#btnOpenAddStaff');
+    const closeStaffFormModal = document.querySelector('#closeStaffFormModal');
+    const btnCancelStaffForm = document.querySelector('#btnCancelStaffForm');
+    const staffModalTitle = document.querySelector('#staffModalTitle');
+
+    // Photo Upload Elements
+    const staffPhotoInput = document.querySelector('#formStaffPhotoInput');
+    const staffPhotoDropzone = document.querySelector('#staffPhotoDropzone');
+    const staffPhotoPreviewWrap = document.querySelector('#staffPhotoPreviewWrap');
+    const staffPhotoPreviewImg = document.querySelector('#staffPhotoPreviewImg');
+    const staffPhotoUrlInput = document.querySelector('#formStaffPhotoUrl');
+    const btnRemoveStaffPhoto = document.querySelector('#btnRemoveStaffPhoto');
+
+    function updateStaffPhotoPreview(dataUrl) {
+      if (dataUrl && (dataUrl.startsWith('data:') || dataUrl.startsWith('http'))) {
+        staffPhotoPreviewImg.src = dataUrl;
+        staffPhotoUrlInput.value = dataUrl;
+        staffPhotoPreviewWrap.style.display = 'flex';
+        staffPhotoDropzone.style.display = 'none';
+      } else {
+        staffPhotoPreviewImg.src = '';
+        staffPhotoUrlInput.value = '';
+        staffPhotoPreviewWrap.style.display = 'none';
+        staffPhotoDropzone.style.display = 'flex';
+      }
+    }
+
+    setupDropzone(staffPhotoDropzone, staffPhotoInput, async (file) => {
+      try {
+        const compressed = await handleImageUpload(file, 600, 600, 0.85);
+        updateStaffPhotoPreview(compressed);
+        showToast('✓ Staff passport photo uploaded and cropped!', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to upload photo.', 'error');
+      }
+    });
+
+    btnRemoveStaffPhoto.addEventListener('click', () => {
+      staffPhotoInput.value = '';
+      updateStaffPhotoPreview(null);
+    });
+
+    let currentActiveCardStaff = null;
+
+    // Render staff list
+    function renderStaff() {
+      const allStaff = MollickDB.getStaff();
+      const q = searchInput.value.toLowerCase().trim();
+      const dept = deptFilter.value;
+      const status = statusFilter.value;
+
+      // Update stats
+      statTotalStaff.textContent = allStaff.length;
+      statActiveStaff.textContent = allStaff.filter(s => s.status === 'Active').length;
+
+      const filtered = allStaff.filter(s => {
+        const matchesQ = !q || 
+          s.name.toLowerCase().includes(q) || 
+          s.staffId.toLowerCase().includes(q) || 
+          (s.phone && s.phone.includes(q)) || 
+          (s.role && s.role.toLowerCase().includes(q));
+        
+        const matchesDept = dept === 'all' || (s.department && s.department.toLowerCase().includes(dept.toLowerCase()));
+        const matchesStatus = status === 'all' || s.status === status;
+
+        return matchesQ && matchesDept && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        staffContainer.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 48px; background: #ffffff; border: 1px dashed var(--admin-border); border-radius: var(--admin-radius);">
+            <div style="font-size: 2.5rem; margin-bottom: 12px;">🪪</div>
+            <h3 style="font-size: 1.15rem; color: var(--admin-navy); margin-bottom: 6px;">No staff records found</h3>
+            <p style="color: var(--admin-text-muted); font-size: 0.9rem; margin-bottom: 16px;">Try adjusting your search criteria or register a new staff member.</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnEmptyAddStaff">+ Add First Staff Member</button>
+          </div>
+        `;
+        const emptyBtn = document.querySelector('#btnEmptyAddStaff');
+        if (emptyBtn) emptyBtn.addEventListener('click', openAddModal);
+        return;
+      }
+
+      staffContainer.innerHTML = filtered.map(staff => {
+        const avatarHtml = staff.photoUrl 
+          ? `<img src="${staff.photoUrl}" alt="${escapeHtml(staff.name)}" class="staff-admin-avatar-img">`
+          : `<span>${escapeHtml(staff.avatarIcon || '⚡')}</span>`;
+
+        return `
+        <div class="staff-admin-card" data-id="${staff.id}">
+          <div class="staff-card-top">
+            <div class="staff-avatar-badge">${avatarHtml}</div>
+            <div class="staff-top-meta">
+              <div class="staff-name-text">${escapeHtml(staff.name)}</div>
+              <div class="staff-role-text">${escapeHtml(staff.role)}</div>
+              <span class="staff-id-pill">ID: ${escapeHtml(staff.staffId)}</span>
+            </div>
+            <span class="badge ${staff.status === 'Active' ? 'badge-success' : 'badge-danger'}">
+              ${staff.status}
+            </span>
+          </div>
+
+          <div class="staff-card-details">
+            <div class="staff-detail-row">
+              <span class="staff-detail-label">Department:</span>
+              <span class="staff-detail-val">${escapeHtml(staff.department || 'Electrical')}</span>
+            </div>
+            <div class="staff-detail-row">
+              <span class="staff-detail-label">Mobile:</span>
+              <span class="staff-detail-val">+91 ${escapeHtml(staff.phone || '—')}</span>
+            </div>
+            <div class="staff-detail-row">
+              <span class="staff-detail-label">Blood Group:</span>
+              <span class="blood-badge">${escapeHtml(staff.bloodGroup || 'O+')}</span>
+            </div>
+            <div class="staff-detail-row">
+              <span class="staff-detail-label">Assigned Zone:</span>
+              <span class="staff-detail-val">${escapeHtml(staff.workZone || 'Kolkata')}</span>
+            </div>
+          </div>
+
+          <div class="staff-card-actions">
+            <button type="button" class="btn btn-primary btn-sm btn-view-id" data-id="${staff.id}" style="flex: 1;">
+              <span>🪪 View ID Card</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm btn-edit-staff" data-id="${staff.id}" title="Edit Staff">
+              <span>✏️</span>
+            </button>
+            <button type="button" class="btn btn-danger btn-sm btn-delete-staff" data-id="${staff.id}" title="Delete Staff">
+              <span>🗑️</span>
+            </button>
+          </div>
+        </div>
+      `;
+      }).join('');
+
+      // Bind card actions
+      staffContainer.querySelectorAll('.btn-view-id').forEach(btn => {
+        btn.addEventListener('click', () => openIdCardView(btn.getAttribute('data-id')));
+      });
+
+      staffContainer.querySelectorAll('.btn-edit-staff').forEach(btn => {
+        btn.addEventListener('click', () => openEditModal(btn.getAttribute('data-id')));
+      });
+
+      staffContainer.querySelectorAll('.btn-delete-staff').forEach(btn => {
+        btn.addEventListener('click', () => deleteStaffRecord(btn.getAttribute('data-id')));
+      });
+    }
+
+    // Open Interactive ID Card Viewer
+    function openIdCardView(id) {
+      const staff = MollickDB.getStaffById(id);
+      if (!staff) return;
+      currentActiveCardStaff = staff;
+
+      const settings = MollickDB.getSettings();
+
+      // Front fields
+      const brandIconBox = document.querySelector('#badgeBrandIcon');
+      if (settings.logoImageUrl) {
+        brandIconBox.innerHTML = `<img src="${settings.logoImageUrl}" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">`;
+      } else {
+        brandIconBox.textContent = settings.logoIcon || '⚡';
+      }
+      document.querySelector('#badgeCompanyName').textContent = settings.websiteName || 'MOLLICK ELECTRIC & INTERIOR';
+      
+      const avatarBox = document.querySelector('#badgeAvatarIcon');
+      if (staff.photoUrl) {
+        avatarBox.innerHTML = `<img src="${staff.photoUrl}" alt="${escapeHtml(staff.name)}" class="badge-avatar-img">`;
+      } else {
+        avatarBox.innerHTML = `<span>${staff.avatarIcon || '⚡'}</span>`;
+      }
+
+      document.querySelector('#badgeStaffName').textContent = staff.name;
+      document.querySelector('#badgeStaffRole').textContent = staff.role;
+      document.querySelector('#badgeStaffId').textContent = staff.staffId;
+      document.querySelector('#badgeStaffDept').textContent = staff.department || 'Electrical Works';
+      document.querySelector('#badgeStaffPhone').textContent = `+91 ${staff.phone}`;
+      document.querySelector('#badgeStaffBlood').textContent = staff.bloodGroup || 'O+';
+      document.querySelector('#badgeStaffValid').textContent = staff.validThru || '2028-12-31';
+
+      // Back fields
+      document.querySelector('#badgeBackCompanyName').textContent = settings.websiteName || 'MOLLICK ELECTRIC & INTERIOR';
+      document.querySelector('#badgeBackAddress').textContent = settings.address || 'Rajarhat Main Rd, Chinar Park, Kolkata - 700136';
+      document.querySelector('#badgeBackEmergency').textContent = staff.emergencyContact || settings.phone || '6290858744';
+      document.querySelector('#badgeBackZone').textContent = staff.workZone || settings.serviceAreas || 'Kolkata';
+      document.querySelector('#badgeBackSignature').textContent = settings.contractorName || 'Nasim Mollick';
+
+      // Reset flipper to front
+      cardFlipper.classList.remove('flipped');
+
+      idCardModal.classList.add('active');
+    }
+
+    // Flip Card Toggle
+    function toggleFlipCard() {
+      cardFlipper.classList.toggle('flipped');
+    }
+
+    btnFlipCard.addEventListener('click', toggleFlipCard);
+    cardFlipper.addEventListener('click', toggleFlipCard);
+
+    // Print ID Card
+    btnPrintCard.addEventListener('click', () => {
+      window.print();
+    });
+
+    // Batch Print All
+    btnBatchPrint.addEventListener('click', () => {
+      const all = MollickDB.getStaff();
+      if (all.length === 0) {
+        showToast('No staff records to print.', 'error');
+        return;
+      }
+      openIdCardView(all[0].id);
+      setTimeout(() => window.print(), 300);
+    });
+
+    function closeCardModal() {
+      idCardModal.classList.remove('active');
+    }
+
+    closeIdCardModal.addEventListener('click', closeCardModal);
+    btnCloseCardModal.addEventListener('click', closeCardModal);
+    idCardModal.addEventListener('click', (e) => {
+      if (e.target === idCardModal) closeCardModal();
+    });
+
+    // Add / Edit Form Modal
+    function openAddModal() {
+      staffForm.reset();
+      document.querySelector('#staffFormId').value = '';
+      staffModalTitle.textContent = 'Add New Staff Member';
+      updateStaffPhotoPreview(null);
+
+      // Auto generate staff ID
+      const all = MollickDB.getStaff();
+      document.querySelector('#formStaffIdCode').value = 'MEI-0' + (135 + all.length);
+      document.querySelector('#formStaffValid').value = '2028-12-31';
+      document.querySelector('#formStaffStatus').value = 'Active';
+
+      staffFormModal.classList.add('active');
+    }
+
+    function openEditModal(id) {
+      const staff = MollickDB.getStaffById(id);
+      if (!staff) return;
+
+      document.querySelector('#staffFormId').value = staff.id;
+      document.querySelector('#formStaffName').value = staff.name || '';
+      document.querySelector('#formStaffIdCode').value = staff.staffId || '';
+      document.querySelector('#formStaffRole').value = staff.role || '';
+      document.querySelector('#formStaffDept').value = staff.department || 'Electrical Works';
+      document.querySelector('#formStaffPhone').value = staff.phone || '';
+      document.querySelector('#formStaffBlood').value = staff.bloodGroup || 'O+';
+      document.querySelector('#formStaffLicense').value = staff.licenseRef || '';
+      document.querySelector('#formStaffIcon').value = staff.avatarIcon || '⚡';
+      document.querySelector('#formStaffEmergency').value = staff.emergencyContact || '';
+      document.querySelector('#formStaffZone').value = staff.workZone || '';
+      document.querySelector('#formStaffValid').value = staff.validThru || '2027-12-31';
+      document.querySelector('#formStaffStatus').value = staff.status || 'Active';
+
+      updateStaffPhotoPreview(staff.photoUrl || null);
+
+      staffModalTitle.textContent = 'Edit Staff Member';
+      staffFormModal.classList.add('active');
+    }
+
+    function closeFormModal() {
+      staffFormModal.classList.remove('active');
+    }
+
+    btnOpenAddStaff.addEventListener('click', openAddModal);
+    closeStaffFormModal.addEventListener('click', closeFormModal);
+    btnCancelStaffForm.addEventListener('click', closeFormModal);
+    staffFormModal.addEventListener('click', (e) => {
+      if (e.target === staffFormModal) closeFormModal();
+    });
+
+    // Save Staff Form Submit
+    staffForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const id = document.querySelector('#staffFormId').value;
+      const staffData = {
+        name: document.querySelector('#formStaffName').value.trim(),
+        staffId: document.querySelector('#formStaffIdCode').value.trim(),
+        role: document.querySelector('#formStaffRole').value.trim(),
+        department: document.querySelector('#formStaffDept').value,
+        phone: document.querySelector('#formStaffPhone').value.trim(),
+        bloodGroup: document.querySelector('#formStaffBlood').value,
+        licenseRef: document.querySelector('#formStaffLicense').value.trim(),
+        avatarIcon: document.querySelector('#formStaffIcon').value,
+        photoUrl: document.querySelector('#formStaffPhotoUrl').value || '',
+        emergencyContact: document.querySelector('#formStaffEmergency').value.trim(),
+        workZone: document.querySelector('#formStaffZone').value.trim(),
+        validThru: document.querySelector('#formStaffValid').value,
+        status: document.querySelector('#formStaffStatus').value
+      };
+
+      if (id) {
+        staffData.id = id;
+      }
+
+      MollickDB.saveStaff(staffData);
+      closeFormModal();
+      renderStaff();
+      showToast(`✓ Staff member ${staffData.name} saved successfully!`, 'success');
+    });
+
+    // Delete Staff Record
+    function deleteStaffRecord(id) {
+      const staff = MollickDB.getStaffById(id);
+      if (!staff) return;
+
+      showConfirmModal(
+        'Delete Staff Member',
+        `Are you sure you want to remove ${staff.name} (${staff.staffId}) from the active workforce registry?`,
+        () => {
+          MollickDB.deleteStaff(id);
+          renderStaff();
+          showToast(`Staff member ${staff.name} deleted.`, 'info');
+        }
+      );
+    }
+
+    // Filter listeners
+    searchInput.addEventListener('input', renderStaff);
+    deptFilter.addEventListener('change', renderStaff);
+    statusFilter.addEventListener('change', renderStaff);
+
+    // Initial render
+    renderStaff();
+  </script>
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects Portfolio | Mollick Electric &amp; Interior</title>
+  <meta name="description" content="Explore our completed electrical and interior design projects across apartments, villas, and commercial properties.">
+  <meta property="og:title" content="Completed Projects Portfolio | Mollick Electric &amp; Interior">
+  <meta property="og:description" content="Browse real photos and case studies of concealed wiring, false ceilings, modular kitchens, TV walls, and custom woodwork.">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+  <!-- Topbar -->
+  <aside class="topbar" aria-label="Quick Contact Bar">
+    <div class="container topbar-wrapper">
+      <div class="topbar-contact">
+        <a href="tel:6290858744" class="topbar-item"><span>📞</span> +91 6290858744</a>
+        <a href="tel:8777688287" class="topbar-item"><span>📱</span> +91 8777688287</a>
+        <a href="mailto:mollicknasim810@gmail.com" class="topbar-item"><span>✉️</span> mollicknasim810@gmail.com</a>
+      </div>
+      <div class="topbar-socials">
+        <span class="topbar-badge">850+ Projects Delivered</span>
+        <a href="https://wa.me/916290858744" target="_blank" rel="noopener noreferrer" class="topbar-btn"><span>💬</span> WhatsApp Direct</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Site Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo" aria-label="Mollick Electric &amp; Interior Home">
+        <img src="assets/logo/logo.svg" alt="Mollick Electric &amp; Interior Logo">
+      </a>
+      <nav class="nav-menu" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="gallery.html" class="nav-link">Gallery</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Get Free Estimate</a>
+        <button type="button" class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-nav-overlay" id="mobileOverlay"></div>
+  <aside class="mobile-menu" id="mobileMenu" aria-label="Mobile Navigation">
+    <div>
+      <div style="margin-bottom: 25px;"><img src="assets/logo/logo.svg" alt="Mollick Logo" style="height: 48px;"></div>
+      <ul class="mobile-nav-list">
+        <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+        <li><a href="about.html" class="mobile-nav-link">About Us</a></li>
+        <li><a href="services.html" class="mobile-nav-link">Our Services</a></li>
+        <li><a href="projects.html" class="mobile-nav-link active">Projects Portfolio</a></li>
+        <li><a href="gallery.html" class="mobile-nav-link">Visual Gallery</a></li>
+        <li><a href="contact.html" class="mobile-nav-link">Contact &amp; Feedback</a></li>
+      </ul>
+    </div>
+    <div class="mobile-menu-footer">
+      <a href="tel:6290858744" class="btn btn-secondary btn-sm" style="width: 100%; margin-bottom: 8px;">Call 6290858744</a>
+      <a href="https://wa.me/916290858744" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm" style="width: 100%;">WhatsApp Message</a>
+    </div>
+  </aside>
+
+  <main id="mainContent">
+
+    <!-- Page Header Hero -->
+    <section style="background: linear-gradient(135deg, #071529 0%, #0d2342 100%); color: #ffffff; padding: 60px 0 70px; text-align: center;">
+      <div class="container">
+        <span class="section-subtitle" style="color: var(--accent-gold);">Proven Craftsmanship</span>
+        <h1 style="font-family: var(--font-heading); font-size: 2.8rem; font-weight: 900; margin-bottom: 12px;">Completed Projects Showcase</h1>
+        <p style="color: #cbd5e1; font-size: 1.15rem; max-width: 720px; margin: 0 auto;">Filter through our portfolio of custom residential apartments, penthouses, duplexes, and commercial workspaces.</p>
+      </div>
+    </section>
+
+    <!-- Projects Portfolio Section -->
+    <section class="section">
+      <div class="container">
+
+        <!-- Category Filter Buttons -->
+        <div class="filter-tabs" role="tablist">
+          <button type="button" class="filter-btn active" data-filter="all">All Projects (10)</button>
+          <button type="button" class="filter-btn" data-filter="electrical">Electrical Wiring</button>
+          <button type="button" class="filter-btn" data-filter="ceiling">False Ceiling</button>
+          <button type="button" class="filter-btn" data-filter="kitchen">Modular Kitchen</button>
+          <button type="button" class="filter-btn" data-filter="interior">Living &amp; TV Unit</button>
+          <button type="button" class="filter-btn" data-filter="woodwork">Wardrobes &amp; Mandir</button>
+          <button type="button" class="filter-btn" data-filter="cctv">CCTV &amp; Security</button>
+          <button type="button" class="filter-btn" data-filter="paint">Paint &amp; Tiles</button>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="projects-grid">
+
+          <!-- 1. Electrical Project -->
+          <article class="project-card" data-category="electrical">
+            <div class="project-spec-visual">
+              <span class="project-badge">Electrical Work</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/electric.svg" alt="Concealed Electric Icon">
+              </div>
+              <div class="project-spec-tagline">3-Phase Smart Load Distribution</div>
+              <div class="project-spec-materials">⚡ Havells FR Copper • RCCB 30mA</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Duplex 3-Phase Concealed Electrification</h2>
+              <p class="project-desc">Complete conduit channelling, distribution box with Siemens RCCB safety breakers, surge protector, and Havells fire-safe cables for a 2,600 sq.ft home.</p>
+              <div class="project-footer">
+                <span>📍 Action Area II, New Town</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">100% Load Certified</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. False Ceiling Project -->
+          <article class="project-card" data-category="ceiling">
+            <div class="project-spec-visual">
+              <span class="project-badge">False Ceiling</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/ceiling.svg" alt="False Ceiling Icon">
+              </div>
+              <div class="project-spec-tagline">Gyproc Gypsum Architectural Cove</div>
+              <div class="project-spec-materials">✨ Saint-Gobain • 3000K Warm Glow</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Living Room Architectural Cove Ceiling</h2>
+              <p class="project-desc">Two-tier Saint-Gobain gypsum suspended ceiling with 3000K warm indirect LED troughs, anti-crack GI metal framing, and center magnetic track spotlights.</p>
+              <div class="project-footer">
+                <span>📍 Imperial Heights, Salt Lake</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Gyproc Certified</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Modular Kitchen Project -->
+          <article class="project-card" data-category="kitchen">
+            <div class="project-spec-visual">
+              <span class="project-badge">Modular Kitchen</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/kitchen.svg" alt="Modular Kitchen Icon">
+              </div>
+              <div class="project-spec-tagline">BWP 710 Marine Matte Acrylic</div>
+              <div class="project-spec-materials">🍳 Blum Soft-Close • 10-Yr Warranty</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Charcoal &amp; Gold Matte Acrylic Kitchen</h2>
+              <p class="project-desc">Boiling water-proof (BWP 710) marine plywood carcass, German Blum soft-close tandem drawers, hidden Gola profiles, and quartz stone countertop.</p>
+              <div class="project-footer">
+                <span>📍 Royal Palms, Rajarhat</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">10-Yr Carcass Warranty</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. TV Unit Project -->
+          <article class="project-card" data-category="interior">
+            <div class="project-spec-visual">
+              <span class="project-badge">Interior Living</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/tv-unit.svg" alt="TV Unit Icon">
+              </div>
+              <div class="project-spec-tagline">Statuario Marble &amp; Fluted Louvers</div>
+              <div class="project-spec-materials">📺 Zero Wiring • Aura Backlight</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Statuario Marble &amp; Charcoal Fluted TV Wall</h2>
+              <p class="project-desc">Contemporary entertainment console with zero visible wiring, warm perimeter aura backlights, acoustic charcoal slats, and soft-close soundbar shelf.</p>
+              <div class="project-footer">
+                <span>📍 Greenfield City, Behala</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Zero-Wire Design</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Wardrobe Project -->
+          <article class="project-card" data-category="woodwork">
+            <div class="project-spec-visual">
+              <span class="project-badge">Wardrobe</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/wardrobe.svg" alt="Wardrobe Icon">
+              </div>
+              <div class="project-spec-tagline">Fluted Glass &amp; Aluminum Gliders</div>
+              <div class="project-spec-materials">🚪 Sensor Warm LED • Soft Track</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Tinted Fluted Glass Sliding Wardrobe</h2>
+              <p class="project-desc">Floor-to-ceiling 3-door sliding wardrobe with anti-jump heavy aluminum tracks, automatic motion sensor warm LED rods, and customized drawer inserts.</p>
+              <div class="project-footer">
+                <span>📍 South City Garden, Kolkata</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Soft-Closing System</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Mandir Project -->
+          <article class="project-card" data-category="woodwork">
+            <div class="project-spec-visual">
+              <span class="project-badge">Mandir Unit</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/mandir.svg" alt="Mandir Icon">
+              </div>
+              <div class="project-spec-tagline">Teakwood &amp; Backlit CNC Jaali</div>
+              <div class="project-spec-materials">🛕 Brass Bells • Artisan Carved</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Backlit CNC Jaali Sacred Mandir</h2>
+              <p class="project-desc">Handcrafted teakwood prayer sanctuary featuring laser-cut warm om backlit jaali, brass temple bells, smoke-resistant coating, and pullout diya tray.</p>
+              <div class="project-footer">
+                <span>📍 Eden Green, EM Bypass</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Artisan Handcrafted</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. CCTV Surveillance Project -->
+          <article class="project-card" data-category="cctv">
+            <div class="project-spec-visual">
+              <span class="project-badge">Security CCTV</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/cctv.svg" alt="CCTV Icon">
+              </div>
+              <div class="project-spec-tagline">4K Color Night Vision IP System</div>
+              <div class="project-spec-materials">📹 Hikvision • Smartphone Remote App</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">8-Channel 4K Color Night Vision Surveillance</h2>
+              <p class="project-desc">Weatherproof IP security cameras with 24/7 color night vision, motion alert notification, concealed underground conduit cabling, and mobile app setup.</p>
+              <div class="project-footer">
+                <span>📍 Diamond Commercial Plaza, Sector V</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">24/7 Mobile Monitored</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8. Tiles Project -->
+          <article class="project-card" data-category="paint">
+            <div class="project-spec-visual">
+              <span class="project-badge">Flooring Tiles</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/tiles.svg" alt="Tiles & Marble Icon">
+              </div>
+              <div class="project-spec-tagline">Large Format Glazed Vitrified Tiles</div>
+              <div class="project-spec-materials">🏛️ Laser Leveled • Mirror Polish</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Italian Statuario Marble Flooring &amp; Polish</h2>
+              <p class="project-desc">Laser-guided leveling for 6x4 large-format glazed vitrified tiles and Italian marble with epoxy joint grout and 7-step mirror crystallization polish.</p>
+              <div class="project-footer">
+                <span>📍 Silver Spring Enclave, EM Bypass</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Zero-Lippage Finish</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 9. Paint Project -->
+          <article class="project-card" data-category="paint">
+            <div class="project-spec-visual">
+              <span class="project-badge">Luxury Paint</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/paint.svg" alt="Paint Icon">
+              </div>
+              <div class="project-spec-tagline">Asian Paints Royale &amp; Stucco</div>
+              <div class="project-spec-materials">🎨 Birla White Putty • Metallic Finish</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Asian Paints Royale &amp; Italian Stucco Wall</h2>
+              <p class="project-desc">Machine-sanded 3-coat Birla White putty with Royale luxury emulsion finish and handcrafted Italian metallic gold accent feature wall.</p>
+              <div class="project-footer">
+                <span>📍 Hiland Park Tower, Kolkata</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Washable Luxury Coat</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 10. Turnkey Interior Project -->
+          <article class="project-card" data-category="interior">
+            <div class="project-spec-visual">
+              <span class="project-badge">Full Turnkey</span>
+              <div class="project-spec-icon-box">
+                <img src="assets/icons/bed.svg" alt="Turnkey Interior Icon">
+              </div>
+              <div class="project-spec-tagline">Complete 3BHK Master Execution</div>
+              <div class="project-spec-materials">🏠 All-Inclusive • 34 Days Delivery</div>
+            </div>
+            <div class="project-info">
+              <h2 class="project-title">Complete 3BHK Turnkey Interior &amp; Wiring</h2>
+              <p class="project-desc">All-inclusive transformation: concealed smart wiring, designer cove ceilings, modular kitchen, sliding wardrobes, TV unit, luxury paint, and lighting.</p>
+              <div class="project-footer">
+                <span>📍 Urbana Towers, Anandapur</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">Completed in 34 Days</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Consultation CTA -->
+    <section class="cta-banner" aria-label="Book a Project Consultation">
+      <div class="container">
+        <div class="cta-banner-content">
+          <h2 class="cta-banner-title">Love What You See? Let's Build Yours.</h2>
+          <p class="cta-banner-desc">Book a complimentary measurement visit with Nasim Mollick to receive an itemized estimate for your home or office.</p>
+          <div class="cta-banner-actions">
+            <a href="contact.html" class="btn btn-primary btn-lg">Request Free Quotation</a>
+            <a href="https://wa.me/916290858744" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Floating Actions -->
+  <div class="floating-actions">
+    <a href="https://wa.me/916290858744" target="_blank" rel="noopener noreferrer" class="floating-btn floating-whatsapp" title="WhatsApp Chat" aria-label="WhatsApp Chat"><span style="font-size: 1.6rem;">💬</span></a>
+    <button type="button" class="floating-btn floating-back-to-top" id="backToTopBtn" title="Back to Top" aria-label="Scroll back to top"><span style="font-size: 1.2rem;">▲</span></button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo/logo-white.svg" alt="Mollick Logo" style="height: 50px;">
+          <p>Powering Spaces, Defining Lifestyles. Precision electrical installation, luxury false ceilings, modular kitchens, and custom woodwork.</p>
+        </div>
+        <div>
+          <div class="footer-title">Navigation</div>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="projects.html" class="footer-link">Projects</a></li>
+            <li><a href="gallery.html" class="footer-link">Gallery</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+            <li><a href="admin/index.html" class="footer-link" style="color: var(--accent-gold);">⚡ Admin Portal</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-title">Direct Inquiries</div>
+          <div class="footer-contact-list">
+            <div class="footer-contact-item"><span class="icon">📞</span><div><a href="tel:6290858744" style="color:#fff;">+91 6290858744</a> / <a href="tel:8777688287" style="color:#fff;">8777688287</a></div></div>
+            <div class="footer-contact-item"><span class="icon">✉️</span><div><a href="mailto:mollicknasim810@gmail.com" style="color:#cbd5e1;">mollicknasim810@gmail.com</a></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="footer-title">Warranty Backing</div>
+          <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6;">All installations undergo multi-point safety testing and carry authentic brand warranties.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Mollick Electric &amp; Interior. Master Contractor: Nasim Mollick.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

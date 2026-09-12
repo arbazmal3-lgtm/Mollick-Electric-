@@ -1,0 +1,6 @@
+{
+  "name": "Mollick Electric & Interior",
+  "description": "Professional multi-page website for Mollick Electric & Interior specializing in electrical installations, interior design, false ceilings, modular kitchens, and custom woodwork with interactive portfolio and customer feedback.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

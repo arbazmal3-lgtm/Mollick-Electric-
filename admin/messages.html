@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Inquiries &amp; Messages | Mollick Electric &amp; Interior Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link active">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Client Leads &amp; Inquiries</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../contact.html" target="_blank" class="topbar-btn topbar-btn-website" title="View Public Contact Page">
+            <span>🌐 View Contact Page</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Client Messages &amp; Quotes</h2>
+            <p class="page-subtitle">Form submissions and site inspection requests submitted by Kolkata homeowners.</p>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="admin-card">
+          
+          <div class="table-filter-bar">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="msgSearchInput" placeholder="Search by client name, phone, email, or message...">
+            </div>
+            <div class="filter-group">
+              <select id="msgStatusFilter" class="filter-select">
+                <option value="all">All Messages</option>
+                <option value="unread">Unread Only</option>
+                <option value="read">Read / Handled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Contact Info</th>
+                  <th>Subject / Project Requirement</th>
+                  <th>Date &amp; Time</th>
+                  <th>Status</th>
+                  <th style="text-align: right; width: 140px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="messagesTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Message Detail Modal -->
+  <div class="modal-overlay" id="messageModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="msgModalTitle">Inquiry Details</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseMsgModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 16px;">
+          <span id="msgModalStatus" class="badge badge-danger">Unread</span>
+          <span id="msgModalDate" style="font-size: 0.82rem; color: var(--admin-text-muted); margin-left: 8px;"></span>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid var(--admin-border); border-radius: var(--admin-radius-sm); padding: 14px; margin-bottom: 18px;">
+          <h4 id="msgModalClientName" style="font-size: 1.1rem; font-weight: 700; color: var(--admin-navy); margin-bottom: 6px;"></h4>
+          <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.88rem;">
+            <div><strong>📞 Phone:</strong> <a id="msgModalPhoneLink" href="#" style="color: var(--admin-gold); font-weight: 600; text-decoration: none;"></a></div>
+            <div><strong>✉️ Email:</strong> <span id="msgModalEmail" style="color: var(--admin-text-main);"></span></div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 18px;">
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--admin-text-muted); text-transform: uppercase;">Subject / Requirement:</div>
+          <div id="msgModalSubject" style="font-size: 1rem; font-weight: 700; color: var(--admin-navy); margin-top: 2px;"></div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--admin-text-muted); text-transform: uppercase;">Client Message:</div>
+          <div id="msgModalBody" style="background: #fff; border: 1px solid var(--admin-border); border-radius: 6px; padding: 14px; margin-top: 6px; font-size: 0.92rem; line-height: 1.6; white-space: pre-line; color: var(--admin-text-main);"></div>
+        </div>
+      </div>
+      <div class="modal-footer" style="justify-content: space-between;">
+        <div style="display: flex; gap: 8px;">
+          <a id="msgBtnCall" href="#" class="btn btn-secondary btn-sm" style="color: var(--admin-success);">
+            📞 Call Client
+          </a>
+          <a id="msgBtnWhatsapp" href="#" target="_blank" class="btn btn-secondary btn-sm" style="color: #25d366;">
+            💬 WhatsApp
+          </a>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnToggleReadStatus">Mark as Read</button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnCloseModalBtn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml } from './js/admin.js';
+
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    const tableBody = document.querySelector('#messagesTableBody');
+    const searchInput = document.querySelector('#msgSearchInput');
+    const statusFilter = document.querySelector('#msgStatusFilter');
+
+    // Modal elements
+    const modal = document.querySelector('#messageModal');
+    const msgModalStatus = document.querySelector('#msgModalStatus');
+    const msgModalDate = document.querySelector('#msgModalDate');
+    const msgModalClientName = document.querySelector('#msgModalClientName');
+    const msgModalPhoneLink = document.querySelector('#msgModalPhoneLink');
+    const msgModalEmail = document.querySelector('#msgModalEmail');
+    const msgModalSubject = document.querySelector('#msgModalSubject');
+    const msgModalBody = document.querySelector('#msgModalBody');
+    const msgBtnCall = document.querySelector('#msgBtnCall');
+    const msgBtnWhatsapp = document.querySelector('#msgBtnWhatsapp');
+    const btnToggleReadStatus = document.querySelector('#btnToggleReadStatus');
+
+    let currentViewingMsg = null;
+
+    function openMessageModal(msg) {
+      currentViewingMsg = msg;
+      msgModalStatus.className = `badge ${msg.status === 'unread' ? 'badge-danger' : 'badge-success'}`;
+      msgModalStatus.textContent = msg.status === 'unread' ? 'Unread Inquiry' : 'Read / Handled';
+      msgModalDate.textContent = msg.date;
+      msgModalClientName.textContent = msg.name;
+      msgModalPhoneLink.textContent = msg.phone;
+      msgModalPhoneLink.href = `tel:${msg.phone}`;
+      msgModalEmail.textContent = msg.email || 'None provided';
+      msgModalSubject.textContent = msg.subject || 'General Consultation';
+      msgModalBody.textContent = msg.message;
+
+      msgBtnCall.href = `tel:${msg.phone}`;
+      msgBtnWhatsapp.href = `https://wa.me/91${msg.phone.replace(/[^0-9]/g, '')}?text=Hi%20${encodeURIComponent(msg.name)},%20this%20is%20Nasim%20Mollick%20from%20Mollick%20Electric%20%26%20Interior.%20Thank%20you%20for%20reaching%20out!`;
+
+      btnToggleReadStatus.textContent = msg.status === 'unread' ? 'Mark as Read' : 'Mark as Unread';
+
+      // Auto mark as read on open if unread
+      if (msg.status === 'unread') {
+        MollickDB.markMessageRead(msg.id, 'read');
+        msg.status = 'read';
+        msgModalStatus.className = 'badge badge-success';
+        msgModalStatus.textContent = 'Read / Handled';
+        btnToggleReadStatus.textContent = 'Mark as Unread';
+        renderMessages();
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    document.querySelector('#btnCloseMsgModal').addEventListener('click', closeModal);
+    document.querySelector('#btnCloseModalBtn').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    btnToggleReadStatus.addEventListener('click', () => {
+      if (!currentViewingMsg) return;
+      const newStatus = currentViewingMsg.status === 'unread' ? 'read' : 'unread';
+      MollickDB.markMessageRead(currentViewingMsg.id, newStatus);
+      currentViewingMsg.status = newStatus;
+      msgModalStatus.className = `badge ${newStatus === 'unread' ? 'badge-danger' : 'badge-success'}`;
+      msgModalStatus.textContent = newStatus === 'unread' ? 'Unread Inquiry' : 'Read / Handled';
+      btnToggleReadStatus.textContent = newStatus === 'unread' ? 'Mark as Read' : 'Mark as Unread';
+      showToast(`Marked inquiry as ${newStatus}`, 'info');
+      renderMessages();
+    });
+
+    function renderMessages() {
+      const allMessages = MollickDB.getMessages();
+      const q = searchInput.value.toLowerCase().trim();
+      const status = statusFilter.value;
+
+      const filtered = allMessages.filter(m => {
+        const matchesQuery = m.name.toLowerCase().includes(q) ||
+                             m.phone.toLowerCase().includes(q) ||
+                             (m.email && m.email.toLowerCase().includes(q)) ||
+                             (m.subject && m.subject.toLowerCase().includes(q)) ||
+                             m.message.toLowerCase().includes(q);
+        const matchesStatus = status === 'all' || m.status === status;
+        return matchesQuery && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--admin-text-muted);">No messages found matching criteria.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(m => `
+        <tr style="${m.status === 'unread' ? 'background: #fefce8;' : ''}">
+          <td>
+            <div style="font-weight: 700; color: var(--admin-navy);">${escapeHtml(m.name)}</div>
+          </td>
+          <td>
+            <div style="font-weight: 600; color: var(--admin-gold);"><a href="tel:${escapeHtml(m.phone)}" style="color:inherit; text-decoration:none;">📞 ${escapeHtml(m.phone)}</a></div>
+            <div style="font-size: 0.78rem; color: var(--admin-text-muted);">${escapeHtml(m.email || '—')}</div>
+          </td>
+          <td style="max-width: 260px;">
+            <div style="font-weight: 600; font-size: 0.85rem; color: var(--admin-navy); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${escapeHtml(m.subject || 'Consultation Inquiry')}
+            </div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${escapeHtml(m.message)}
+            </div>
+          </td>
+          <td style="font-size: 0.82rem; color: var(--admin-text-muted); white-space: nowrap;">${escapeHtml(m.date)}</td>
+          <td>
+            <span class="badge ${m.status === 'unread' ? 'badge-danger' : 'badge-success'}">
+              ${m.status === 'unread' ? 'Unread' : 'Read'}
+            </span>
+          </td>
+          <td style="text-align: right;">
+            <div class="action-buttons" style="justify-content: flex-end;">
+              <button type="button" class="btn-icon btn-view-msg" data-id="${m.id}" title="Read Full Message">
+                👁️
+              </button>
+              <button type="button" class="btn-icon btn-icon-danger btn-delete-msg" data-id="${m.id}" title="Delete Inquiry">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      tableBody.querySelectorAll('.btn-view-msg').forEach(btn => {
+        btn.onclick = () => {
+          const m = allMessages.find(item => item.id === btn.dataset.id);
+          if (m) openMessageModal(m);
+        };
+      });
+
+      tableBody.querySelectorAll('.btn-delete-msg').forEach(btn => {
+        btn.onclick = () => {
+          const m = allMessages.find(item => item.id === btn.dataset.id);
+          showConfirmModal('Delete Inquiry', `Delete inquiry from ${m.name}?`, () => {
+            MollickDB.deleteMessage(btn.dataset.id);
+            showToast('Message deleted', 'success');
+            renderMessages();
+          });
+        };
+      });
+    }
+
+    searchInput.addEventListener('input', renderMessages);
+    statusFilter.addEventListener('change', renderMessages);
+
+    renderMessages();
+  </script>
+</body>
+</html>

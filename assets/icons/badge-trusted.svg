@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" fill="none">
+  <rect x="1" y="1" width="158" height="48" rx="8" fill="#0c1e38" stroke="#f5b301" stroke-width="1.5"/>
+  <g transform="translate(10, 8)">
+    <circle cx="17" cy="17" r="14" fill="#f5b301"/>
+    <!-- Handshake silhouette -->
+    <path d="M10 18L14 14L18 17L22 13L25 16L21 20L18 18L14 22Z" fill="#0c1e38"/>
+  </g>
+  <text x="50" y="24" font-family="'Montserrat', sans-serif" font-weight="900" font-size="12" fill="#ffffff" letter-spacing="1">TRUSTED SERVICE</text>
+  <text x="50" y="36" font-family="'Segoe UI', sans-serif" font-weight="600" font-size="9" fill="#f5b301" letter-spacing="0.5">12+ Years Trust</text>
+</svg>

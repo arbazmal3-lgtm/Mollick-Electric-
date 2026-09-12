@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Management | Mollick Electric &amp; Interior Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link active">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Service Offerings Management</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../services.html" target="_blank" class="topbar-btn topbar-btn-website" title="View Services on Public Site">
+            <span>🌐 View Services Page</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Body -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Services &amp; Rate Specifications</h2>
+            <p class="page-subtitle">Add, edit, enable, or disable services displayed across the public website and rate card.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btnAddNewService">
+              <span>+ Add New Service</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="admin-card">
+          
+          <!-- Filter Bar -->
+          <div class="table-filter-bar">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="serviceSearchInput" placeholder="Search services by title or description...">
+            </div>
+            <div class="filter-group">
+              <select id="serviceCategoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Ceiling">Ceiling</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Interior">Interior</option>
+                <option value="Woodwork">Woodwork</option>
+                <option value="CCTV">CCTV</option>
+                <option value="Paint">Paint</option>
+              </select>
+              <select id="serviceStatusFilter" class="filter-select">
+                <option value="all">All Statuses</option>
+                <option value="active">Active Only</option>
+                <option value="disabled">Disabled Only</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Services Table -->
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 50px;">Icon</th>
+                  <th>Service Title</th>
+                  <th>Category</th>
+                  <th>Specification / Grade</th>
+                  <th>Status</th>
+                  <th style="text-align: right; width: 140px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="servicesTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Add / Edit Service Modal -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="serviceModalTitle">Add Service</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseServiceModal">&times;</button>
+      </div>
+      <form id="serviceForm">
+        <div class="modal-body">
+          <input type="hidden" id="serviceId">
+
+          <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+              <label for="serviceTitle" class="form-label">Service Title <span class="required">*</span></label>
+              <input type="text" id="serviceTitle" class="form-control" placeholder="e.g. Electric Concealed Wiring" required>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label for="serviceIcon" class="form-label">Emoji Icon</label>
+              <input type="text" id="serviceIcon" class="form-control" placeholder="⚡" maxlength="4">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="serviceCategory" class="form-label">Category <span class="required">*</span></label>
+              <select id="serviceCategory" class="form-control" required>
+                <option value="Electrical">Electrical</option>
+                <option value="Ceiling">Ceiling</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Interior">Interior</option>
+                <option value="Woodwork">Woodwork</option>
+                <option value="CCTV">CCTV</option>
+                <option value="Paint">Paint</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="servicePrice" class="form-label">Specification / Brand Grade</label>
+              <input type="text" id="servicePrice" class="form-control" placeholder="e.g. Havells FR / Saint-Gobain">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="serviceImage" class="form-label">Icon / Image Path or URL</label>
+            <input type="text" id="serviceImage" class="form-control" placeholder="assets/icons/electric.svg">
+            <div class="form-hint">Path to icon/image asset (e.g. assets/icons/electric.svg) or any valid image URL.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="serviceDesc" class="form-label">Detailed Description <span class="required">*</span></label>
+            <textarea id="serviceDesc" class="form-control" rows="3" placeholder="Technical specs, materials used (e.g. BWP 710, Havells wires), and finish details..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" id="serviceActive" checked>
+              <span><strong>Active &amp; Visible</strong> on Public Website</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCancelServiceModal">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btnSaveService">Save Service</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml } from './js/admin.js';
+
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    const tableBody = document.querySelector('#servicesTableBody');
+    const searchInput = document.querySelector('#serviceSearchInput');
+    const categoryFilter = document.querySelector('#serviceCategoryFilter');
+    const statusFilter = document.querySelector('#serviceStatusFilter');
+
+    // Modal elements
+    const modal = document.querySelector('#serviceModal');
+    const modalTitle = document.querySelector('#serviceModalTitle');
+    const serviceForm = document.querySelector('#serviceForm');
+    const serviceId = document.querySelector('#serviceId');
+    const serviceTitle = document.querySelector('#serviceTitle');
+    const serviceIcon = document.querySelector('#serviceIcon');
+    const serviceCategory = document.querySelector('#serviceCategory');
+    const servicePrice = document.querySelector('#servicePrice');
+    const serviceImage = document.querySelector('#serviceImage');
+    const serviceDesc = document.querySelector('#serviceDesc');
+    const serviceActive = document.querySelector('#serviceActive');
+
+    function openModal(service = null) {
+      serviceForm.reset();
+      if (service) {
+        modalTitle.textContent = 'Edit Service';
+        serviceId.value = service.id;
+        serviceTitle.value = service.title;
+        serviceIcon.value = service.icon || '⚡';
+        serviceCategory.value = service.category || 'Electrical';
+        servicePrice.value = service.priceRange || '';
+        serviceImage.value = service.image || '';
+        serviceDesc.value = service.description || '';
+        serviceActive.checked = service.active !== false;
+      } else {
+        modalTitle.textContent = 'Add New Service';
+        serviceId.value = '';
+        serviceIcon.value = '⚡';
+        serviceActive.checked = true;
+      }
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    document.querySelector('#btnAddNewService').addEventListener('click', () => openModal());
+    document.querySelector('#btnCloseServiceModal').addEventListener('click', closeModal);
+    document.querySelector('#btnCancelServiceModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    // Save Service Form Submit
+    serviceForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const srvData = {
+        id: serviceId.value || undefined,
+        title: serviceTitle.value.trim(),
+        icon: serviceIcon.value.trim() || '⚡',
+        category: serviceCategory.value,
+        priceRange: servicePrice.value.trim(),
+        image: serviceImage.value.trim() || 'assets/icons/electric.svg',
+        description: serviceDesc.value.trim(),
+        active: serviceActive.checked
+      };
+
+      MollickDB.saveService(srvData);
+      closeModal();
+      showToast(serviceId.value ? 'Service updated successfully!' : 'New service created!', 'success');
+      renderServices();
+    });
+
+    // Render Table
+    function renderServices() {
+      const allServices = MollickDB.getServices();
+      const q = searchInput.value.toLowerCase().trim();
+      const cat = categoryFilter.value;
+      const status = statusFilter.value;
+
+      const filtered = allServices.filter(s => {
+        const matchesQuery = s.title.toLowerCase().includes(q) || s.description.toLowerCase().includes(q);
+        const matchesCat = cat === 'all' || s.category === cat;
+        const matchesStatus = status === 'all' || (status === 'active' ? s.active : !s.active);
+        return matchesQuery && matchesCat && matchesStatus;
+      });
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding:30px; color:var(--admin-text-muted);">No services matching criteria.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(s => `
+        <tr>
+          <td style="font-size: 1.5rem; text-align: center;">${escapeHtml(s.icon || '⚡')}</td>
+          <td>
+            <div style="font-weight: 700; color: var(--admin-navy);">${escapeHtml(s.title)}</div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${escapeHtml(s.description)}
+            </div>
+          </td>
+          <td><span class="badge badge-info">${escapeHtml(s.category)}</span></td>
+          <td style="font-weight: 600; color: var(--admin-gold); font-size: 0.85rem;">${escapeHtml(s.priceRange || 'N/A')}</td>
+          <td>
+            <button type="button" class="badge ${s.active ? 'badge-success' : 'badge-gray'} btn-toggle-active" data-id="${s.id}" style="cursor: pointer; border: none;" title="Click to toggle visibility">
+              ${s.active ? 'Active' : 'Disabled'}
+            </button>
+          </td>
+          <td style="text-align: right;">
+            <div class="action-buttons" style="justify-content: flex-end;">
+              <button type="button" class="btn-icon btn-edit-service" data-id="${s.id}" title="Edit Service">
+                ✏️
+              </button>
+              <button type="button" class="btn-icon btn-icon-danger btn-delete-service" data-id="${s.id}" title="Delete Service">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+
+      // Bind dynamic actions
+      tableBody.querySelectorAll('.btn-edit-service').forEach(btn => {
+        btn.onclick = () => {
+          const s = allServices.find(item => item.id === btn.dataset.id);
+          if (s) openModal(s);
+        };
+      });
+
+      tableBody.querySelectorAll('.btn-toggle-active').forEach(btn => {
+        btn.onclick = () => {
+          MollickDB.toggleService(btn.dataset.id);
+          showToast('Service status updated', 'info');
+          renderServices();
+        };
+      });
+
+      tableBody.querySelectorAll('.btn-delete-service').forEach(btn => {
+        btn.onclick = () => {
+          const s = allServices.find(item => item.id === btn.dataset.id);
+          showConfirmModal('Delete Service', `Are you sure you want to permanently delete "${s.title}"?`, () => {
+            MollickDB.deleteService(btn.dataset.id);
+            showToast('Service deleted', 'success');
+            renderServices();
+          });
+        };
+      });
+    }
+
+    searchInput.addEventListener('input', renderServices);
+    categoryFilter.addEventListener('change', renderServices);
+    statusFilter.addEventListener('change', renderServices);
+
+    renderServices();
+  </script>
+</body>
+</html>

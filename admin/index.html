@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Mollick Electric &amp; Interior</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="login-body">
+
+  <div class="login-card">
+    <div class="login-brand">
+      <div class="login-logo-badge">⚡</div>
+      <h1 class="login-title">Admin Portal</h1>
+      <p class="login-desc">Mollick Electric &amp; Interior Administration</p>
+    </div>
+
+    <!-- Alert Box -->
+    <div id="loginAlert" class="login-alert login-alert-danger" role="alert"></div>
+
+    <form id="adminLoginForm" novalidate>
+      <div class="form-group">
+        <label for="adminUser" class="form-label">Email or Username <span class="required">*</span></label>
+        <input 
+          type="text" 
+          id="adminUser" 
+          class="form-control" 
+          placeholder="admin@mollick.com or nasim.mollick" 
+          required 
+          autocomplete="username"
+          autofocus
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="adminPassword" class="form-label">Password <span class="required">*</span></label>
+        <div class="password-input-wrap">
+          <input 
+            type="password" 
+            id="adminPassword" 
+            class="form-control" 
+            placeholder="••••••••••••" 
+            required 
+            autocomplete="current-password"
+          >
+          <button type="button" id="btnTogglePassword" class="btn-toggle-pwd" title="Show or hide password" aria-label="Toggle password visibility">
+            👁️
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+        <label class="form-check">
+          <input type="checkbox" id="rememberMe">
+          <span>Remember this device</span>
+        </label>
+      </div>
+
+      <button type="submit" id="btnLoginSubmit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.95rem;">
+        <span id="loginBtnText">Sign In to Admin Panel &rarr;</span>
+      </button>
+
+      <div style="text-align: center; margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--admin-border);">
+        <a href="../index.html" style="font-size: 0.85rem; color: var(--admin-text-muted); text-decoration: none;">
+          &larr; Back to Public Website
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { AdminAuth } from './js/admin.js';
+
+    // If already logged in, redirect straight to dashboard
+    if (AdminAuth.isAuthenticated()) {
+      window.location.replace('dashboard.html');
+    }
+
+    const loginForm = document.querySelector('#adminLoginForm');
+    const userInput = document.querySelector('#adminUser');
+    const passwordInput = document.querySelector('#adminPassword');
+    const togglePwdBtn = document.querySelector('#btnTogglePassword');
+    const rememberMeBox = document.querySelector('#rememberMe');
+    const alertBox = document.querySelector('#loginAlert');
+    const btnSubmit = document.querySelector('#btnLoginSubmit');
+    const btnText = document.querySelector('#loginBtnText');
+
+    // Toggle Password Visibility
+    togglePwdBtn.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePwdBtn.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+
+    // Handle Login Submit
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      alertBox.classList.remove('show');
+
+      const userVal = userInput.value.trim();
+      const passVal = passwordInput.value.trim();
+
+      if (!userVal || !passVal) {
+        showAlert('Please enter both username/email and password.');
+        return;
+      }
+
+      // Show Loading State
+      btnSubmit.disabled = true;
+      btnText.innerHTML = 'Signing in... <span style="display:inline-block; animation:spin 1s linear infinite;">⏳</span>';
+
+      try {
+        const result = await AdminAuth.login(userVal, passVal, rememberMeBox.checked);
+        if (result.success) {
+          btnText.textContent = 'Success! Redirecting...';
+          btnSubmit.style.background = 'var(--admin-success)';
+          setTimeout(() => {
+            window.location.replace('dashboard.html');
+          }, 400);
+        } else {
+          btnSubmit.disabled = false;
+          btnText.textContent = 'Sign In to Admin Panel →';
+          showAlert(result.message || 'Authentication failed.');
+        }
+      } catch (err) {
+        btnSubmit.disabled = false;
+        btnText.textContent = 'Sign In to Admin Panel →';
+        showAlert('An unexpected authentication error occurred.');
+      }
+    });
+
+    function showAlert(msg) {
+      alertBox.textContent = msg;
+      alertBox.className = 'login-alert login-alert-danger show';
+    }
+  </script>
+</body>
+</html>

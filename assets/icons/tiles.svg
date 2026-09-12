@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" fill="#0a1d37" stroke="#f5b301" stroke-width="2"/>
+  <!-- Tiles grid -->
+  <rect x="18" y="18" width="13" height="13" rx="1" fill="#ffffff" stroke="#0a1d37" stroke-width="1.5"/>
+  <rect x="33" y="18" width="13" height="13" rx="1" fill="#f5b301" stroke="#0a1d37" stroke-width="1.5"/>
+  <rect x="18" y="33" width="13" height="13" rx="1" fill="#f5b301" stroke="#0a1d37" stroke-width="1.5"/>
+  <rect x="33" y="33" width="13" height="13" rx="1" fill="#ffffff" stroke="#0a1d37" stroke-width="1.5"/>
+  <!-- Marble vein -->
+  <path d="M22 22C24 25 28 26 30 29" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M37 37C39 40 42 41 44 44" stroke="#94a3b8" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

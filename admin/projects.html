@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Management | Mollick Electric &amp; Interior Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link active">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Project Portfolio Management</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../projects.html" target="_blank" class="topbar-btn topbar-btn-website" title="View Portfolio on Public Site">
+            <span>🌐 View Projects Page</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Project Portfolio</h2>
+            <p class="page-subtitle">Manage residential &amp; commercial projects, locations, photo showcases, and featured homepage highlights.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btnAddNewProject">
+              <span>+ Add New Project</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="admin-card">
+          
+          <div class="table-filter-bar">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="projectSearchInput" placeholder="Search by project name, location, or details...">
+            </div>
+            <div class="filter-group">
+              <select id="projectCategoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Interior">Interior</option>
+                <option value="CCTV">CCTV</option>
+                <option value="Lighting">Lighting</option>
+                <option value="Other">Other</option>
+              </select>
+              <select id="projectFeaturedFilter" class="filter-select">
+                <option value="all">All Projects</option>
+                <option value="featured">Featured On Homepage</option>
+                <option value="regular">Standard Portfolio</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">Preview</th>
+                  <th>Project Name</th>
+                  <th>Category</th>
+                  <th>Location</th>
+                  <th>Handover Date</th>
+                  <th>Featured</th>
+                  <th style="text-align: right; width: 130px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="projectsTableBody">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Add / Edit Project Modal -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="projectModalTitle">Add Project</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseProjectModal">&times;</button>
+      </div>
+      <form id="projectForm">
+        <div class="modal-body">
+          <input type="hidden" id="projectId">
+
+          <div class="form-group">
+            <label for="projectTitle" class="form-label">Project Title <span class="required">*</span></label>
+            <input type="text" id="projectTitle" class="form-control" placeholder="e.g. Duplex 3-Phase Concealed Electrification" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="projectCategory" class="form-label">Category <span class="required">*</span></label>
+              <select id="projectCategory" class="form-control" required>
+                <option value="Electrical">Electrical</option>
+                <option value="Interior">Interior</option>
+                <option value="CCTV">CCTV</option>
+                <option value="Lighting">Lighting</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="projectLocation" class="form-label">Location (Kolkata Area) <span class="required">*</span></label>
+              <input type="text" id="projectLocation" class="form-control" placeholder="e.g. Action Area II, New Town" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="projectDate" class="form-label">Completion Date</label>
+              <input type="date" id="projectDate" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <label for="projectImage" class="form-label">Project Asset URL / Path</label>
+              <input type="text" id="projectImage" class="form-control" placeholder="assets/icons/electric.svg">
+            </div>
+          </div>
+
+          <!-- Photo Upload Option -->
+          <div class="form-group">
+            <label class="form-label">📸 Project Site Photo Upload</label>
+            <input type="file" id="projectPhotoFileInput" accept="image/*" style="display: none;">
+            
+            <div class="photo-upload-dropzone" id="projectPhotoDropzone">
+              <div class="photo-upload-icon">📷</div>
+              <div class="photo-upload-title">Click to Upload or Drag &amp; Drop Project Photo</div>
+              <div class="photo-upload-hint">Supports JPG, PNG, WEBP. Automatically compressed for ultra-fast loading.</div>
+            </div>
+
+            <div class="photo-preview-card" id="projectPhotoPreviewWrap" style="display: none; margin-top: 10px;">
+              <img id="projectPhotoPreviewImg" src="" alt="Project Photo Preview">
+              <button type="button" class="btn-remove-photo-badge" id="btnRemoveProjectPhoto">✕ Remove Photo</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="projectDesc" class="form-label">Scope &amp; Specifications <span class="required">*</span></label>
+            <textarea id="projectDesc" class="form-control" rows="3" placeholder="Describe the materials, safety tests, brand of wires/plywood, and finish..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" id="projectFeatured">
+              <span><strong>Feature this project</strong> on the Homepage showcase carousel</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCancelProjectModal">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btnSaveProject">Save Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml, handleImageUpload, setupDropzone } from './js/admin.js';
+
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    const tableBody = document.querySelector('#projectsTableBody');
+    const searchInput = document.querySelector('#projectSearchInput');
+    const categoryFilter = document.querySelector('#projectCategoryFilter');
+    const featuredFilter = document.querySelector('#projectFeaturedFilter');
+
+    // Modal elements
+    const modal = document.querySelector('#projectModal');
+    const modalTitle = document.querySelector('#projectModalTitle');
+    const projectForm = document.querySelector('#projectForm');
+    const projectId = document.querySelector('#projectId');
+    const projectTitle = document.querySelector('#projectTitle');
+    const projectCategory = document.querySelector('#projectCategory');
+    const projectLocation = document.querySelector('#projectLocation');
+    const projectDate = document.querySelector('#projectDate');
+    const projectImage = document.querySelector('#projectImage');
+    const projectDesc = document.querySelector('#projectDesc');
+    const projectFeatured = document.querySelector('#projectFeatured');
+
+    // Photo Upload Elements
+    const photoFileInput = document.querySelector('#projectPhotoFileInput');
+    const photoDropzone = document.querySelector('#projectPhotoDropzone');
+    const photoPreviewWrap = document.querySelector('#projectPhotoPreviewWrap');
+    const photoPreviewImg = document.querySelector('#projectPhotoPreviewImg');
+    const btnRemovePhoto = document.querySelector('#btnRemoveProjectPhoto');
+
+    function updatePhotoPreview(imgSrc) {
+      if (imgSrc && (imgSrc.startsWith('data:') || imgSrc.startsWith('http') || imgSrc.startsWith('assets/'))) {
+        photoPreviewImg.src = imgSrc.startsWith('data:') || imgSrc.startsWith('http') ? imgSrc : `../${imgSrc}`;
+        photoPreviewWrap.style.display = 'flex';
+        photoDropzone.style.display = 'none';
+      } else {
+        photoPreviewImg.src = '';
+        photoPreviewWrap.style.display = 'none';
+        photoDropzone.style.display = 'flex';
+      }
+    }
+
+    setupDropzone(photoDropzone, photoFileInput, async (file) => {
+      try {
+        const compressedDataUrl = await handleImageUpload(file);
+        projectImage.value = compressedDataUrl;
+        updatePhotoPreview(compressedDataUrl);
+        showToast('✓ Project photo uploaded and optimized!', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to upload photo.', 'error');
+      }
+    });
+
+    btnRemovePhoto.addEventListener('click', () => {
+      projectImage.value = 'assets/icons/electric.svg';
+      photoFileInput.value = '';
+      updatePhotoPreview(null);
+    });
+
+    projectImage.addEventListener('input', () => {
+      updatePhotoPreview(projectImage.value.trim());
+    });
+
+    function openModal(project = null) {
+      projectForm.reset();
+      if (project) {
+        modalTitle.textContent = 'Edit Project';
+        projectId.value = project.id;
+        projectTitle.value = project.title;
+        projectCategory.value = project.category || 'Electrical';
+        projectLocation.value = project.location || '';
+        projectDate.value = project.completionDate || '';
+        projectImage.value = project.image || '';
+        projectDesc.value = project.description || '';
+        projectFeatured.checked = !!project.featured;
+        updatePhotoPreview(project.image);
+      } else {
+        modalTitle.textContent = 'Add New Project';
+        projectId.value = '';
+        projectDate.value = new Date().toISOString().split('T')[0];
+        projectImage.value = 'assets/icons/electric.svg';
+        projectFeatured.checked = false;
+        updatePhotoPreview(null);
+      }
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    document.querySelector('#btnAddNewProject').addEventListener('click', () => openModal());
+    document.querySelector('#btnCloseProjectModal').addEventListener('click', closeModal);
+    document.querySelector('#btnCancelProjectModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    projectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const prjData = {
+        id: projectId.value || undefined,
+        title: projectTitle.value.trim(),
+        category: projectCategory.value,
+        location: projectLocation.value.trim(),
+        completionDate: projectDate.value,
+        image: projectImage.value.trim() || 'assets/icons/electric.svg',
+        description: projectDesc.value.trim(),
+        featured: projectFeatured.checked
+      };
+
+      MollickDB.saveProject(prjData);
+      closeModal();
+      showToast(projectId.value ? 'Project updated successfully!' : 'New project added to portfolio!', 'success');
+      renderProjects();
+    });
+
+    function renderProjects() {
+      const allProjects = MollickDB.getProjects();
+      const q = searchInput.value.toLowerCase().trim();
+      const cat = categoryFilter.value;
+      const feat = featuredFilter.value;
+
+      const filtered = allProjects.filter(p => {
+        const matchesQuery = p.title.toLowerCase().includes(q) || 
+                             (p.location && p.location.toLowerCase().includes(q)) || 
+                             (p.description && p.description.toLowerCase().includes(q));
+        const matchesCat = cat === 'all' || p.category === cat;
+        const matchesFeat = feat === 'all' || (feat === 'featured' ? p.featured : !p.featured);
+        return matchesQuery && matchesCat && matchesFeat;
+      });
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:30px; color:var(--admin-text-muted);">No projects found matching filter.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered.map(p => {
+        const isUploaded = p.image && (p.image.startsWith('data:') || p.image.startsWith('http'));
+        const imgSrc = isUploaded ? p.image : `../${p.image || 'assets/icons/electric.svg'}`;
+        
+        return `
+        <tr>
+          <td>
+            <div style="width: 52px; height: 42px; border-radius: 6px; border: 1px solid var(--admin-border); background: #071529; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+              <img src="${imgSrc}" alt="${escapeHtml(p.title)}" style="width: 100%; height: 100%; object-fit: ${isUploaded ? 'cover' : 'contain'};" onerror="this.src='../assets/icons/electric.svg'">
+            </div>
+          </td>
+          <td>
+            <div style="font-weight: 700; color: var(--admin-navy);">${escapeHtml(p.title)}</div>
+            <div style="font-size: 0.8rem; color: var(--admin-text-muted); max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+              ${escapeHtml(p.description)}
+            </div>
+          </td>
+          <td><span class="badge badge-info">${escapeHtml(p.category)}</span></td>
+          <td style="font-size: 0.85rem; color: var(--admin-text-main);">📍 ${escapeHtml(p.location)}</td>
+          <td style="font-size: 0.85rem; color: var(--admin-text-muted);">${escapeHtml(p.completionDate || 'N/A')}</td>
+          <td>
+            <button type="button" class="badge ${p.featured ? 'badge-warning' : 'badge-gray'} btn-toggle-featured" data-id="${p.id}" style="cursor: pointer; border: none;" title="Toggle homepage spotlight">
+              ${p.featured ? '★ Featured' : 'Standard'}
+            </button>
+          </td>
+          <td style="text-align: right;">
+            <div class="action-buttons" style="justify-content: flex-end;">
+              <button type="button" class="btn-icon btn-edit-project" data-id="${p.id}" title="Edit Project">
+                ✏️
+              </button>
+              <button type="button" class="btn-icon btn-icon-danger btn-delete-project" data-id="${p.id}" title="Delete Project">
+                🗑️
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+      }).join('');
+
+      tableBody.querySelectorAll('.btn-edit-project').forEach(btn => {
+        btn.onclick = () => {
+          const p = allProjects.find(item => item.id === btn.dataset.id);
+          if (p) openModal(p);
+        };
+      });
+
+      tableBody.querySelectorAll('.btn-toggle-featured').forEach(btn => {
+        btn.onclick = () => {
+          MollickDB.toggleFeaturedProject(btn.dataset.id);
+          showToast('Featured status toggled', 'info');
+          renderProjects();
+        };
+      });
+
+      tableBody.querySelectorAll('.btn-delete-project').forEach(btn => {
+        btn.onclick = () => {
+          const p = allProjects.find(item => item.id === btn.dataset.id);
+          showConfirmModal('Delete Project', `Are you sure you want to delete "${p.title}"?`, () => {
+            MollickDB.deleteProject(btn.dataset.id);
+            showToast('Project deleted successfully', 'success');
+            renderProjects();
+          });
+        };
+      });
+    }
+
+    searchInput.addEventListener('input', renderProjects);
+    categoryFilter.addEventListener('change', renderProjects);
+    featuredFilter.addEventListener('change', renderProjects);
+
+    renderProjects();
+  </script>
+</body>
+</html>

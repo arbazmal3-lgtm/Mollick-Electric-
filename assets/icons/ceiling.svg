@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <circle cx="32" cy="32" r="30" fill="#0a1d37" stroke="#f5b301" stroke-width="2"/>
+  <!-- False Ceiling Steps & Cove Glow -->
+  <polygon points="14,24 50,24 44,32 20,32" stroke="#ffffff" stroke-width="2" fill="#1e293b"/>
+  <polygon points="20,32 44,32 38,40 26,40" stroke="#f5b301" stroke-width="2" fill="#334155"/>
+  <circle cx="32" cy="40" r="3" fill="#fef08a"/>
+  <!-- Light rays -->
+  <line x1="28" y1="46" x2="25" y2="52" stroke="#fef08a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="32" y1="46" x2="32" y2="53" stroke="#fef08a" stroke-width="2" stroke-linecap="round"/>
+  <line x1="36" y1="46" x2="39" y2="52" stroke="#fef08a" stroke-width="2" stroke-linecap="round"/>
+</svg>

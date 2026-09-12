@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Management | Mollick Electric &amp; Interior Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="gallery.html" class="nav-link active">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name">Nasim Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Visual Showcase &amp; Gallery</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../gallery.html" target="_blank" class="topbar-btn topbar-btn-website" title="View Public Gallery">
+            <span>🌐 View Public Gallery</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Photo Gallery Management</h2>
+            <p class="page-subtitle">Add and curate high-resolution on-site photographs displayed on the public gallery and filter tabs.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btnAddNewPhoto">
+              <span>+ Add Photo / Asset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar Card -->
+        <div class="admin-card" style="margin-bottom: 24px;">
+          <div class="table-filter-bar">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="gallerySearchInput" placeholder="Search photos by title or category...">
+            </div>
+            <div class="filter-group">
+              <select id="galleryCategoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+                <option value="Ceiling">Ceiling</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Living">Living Room</option>
+                <option value="Wardrobe">Wardrobe</option>
+                <option value="Mandir">Mandir</option>
+                <option value="CCTV">CCTV</option>
+                <option value="Flooring">Flooring</option>
+                <option value="Paint">Paint</option>
+                <option value="Turnkey">Turnkey</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="admin-gallery-grid" id="galleryGridContainer">
+          <!-- Populated by JS -->
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Add Photo Modal -->
+  <div class="modal-overlay" id="galleryModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" id="galleryModalTitle">Add Gallery Photo</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseGalleryModal">&times;</button>
+      </div>
+      <form id="galleryForm">
+        <div class="modal-body">
+          <input type="hidden" id="galleryItemId">
+
+          <div class="form-group">
+            <label for="galleryTitle" class="form-label">Photo Title / Caption <span class="required">*</span></label>
+            <input type="text" id="galleryTitle" class="form-control" placeholder="e.g. Modern False Ceiling with Cove Lighting" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="galleryCategory" class="form-label">Filter Category <span class="required">*</span></label>
+              <select id="galleryCategory" class="form-control" required>
+                <option value="Ceiling">Ceiling</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Kitchen">Kitchen</option>
+                <option value="Living">Living Room</option>
+                <option value="Wardrobe">Wardrobe</option>
+                <option value="Mandir">Mandir</option>
+                <option value="CCTV">CCTV</option>
+                <option value="Flooring">Flooring</option>
+                <option value="Paint">Paint</option>
+                <option value="Turnkey">Turnkey</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="galleryImage" class="form-label">Asset Path / Icon URL</label>
+              <input type="text" id="galleryImage" class="form-control" placeholder="assets/icons/ceiling.svg">
+            </div>
+          </div>
+
+          <!-- Photo Upload Option -->
+          <div class="form-group">
+            <label class="form-label">📸 Gallery Photo Upload</label>
+            <input type="file" id="galleryPhotoFileInput" accept="image/*" style="display: none;">
+            
+            <div class="photo-upload-dropzone" id="galleryPhotoDropzone">
+              <div class="photo-upload-icon">📷</div>
+              <div class="photo-upload-title">Click to Upload or Drag &amp; Drop Gallery Photo</div>
+              <div class="photo-upload-hint">Upload site photographs (JPG, PNG, WEBP). Compressed automatically for instant loading.</div>
+            </div>
+
+            <div class="photo-preview-card" id="galleryPhotoPreviewWrap" style="display: none; margin-top: 10px;">
+              <img id="galleryPhotoPreviewImg" src="" alt="Gallery Photo Preview">
+              <button type="button" class="btn-remove-photo-badge" id="btnRemoveGalleryPhoto">✕ Remove Photo</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" id="galleryFeatured">
+              <span>Mark as <strong>Featured Highlight</strong></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCancelGalleryModal">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btnSaveGalleryItem">Save Visual</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml, handleImageUpload, setupDropzone } from './js/admin.js';
+
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    const gridContainer = document.querySelector('#galleryGridContainer');
+    const searchInput = document.querySelector('#gallerySearchInput');
+    const categoryFilter = document.querySelector('#galleryCategoryFilter');
+
+    // Modal elements
+    const modal = document.querySelector('#galleryModal');
+    const modalTitle = document.querySelector('#galleryModalTitle');
+    const galleryForm = document.querySelector('#galleryForm');
+    const galleryItemId = document.querySelector('#galleryItemId');
+    const galleryTitle = document.querySelector('#galleryTitle');
+    const galleryCategory = document.querySelector('#galleryCategory');
+    const galleryImage = document.querySelector('#galleryImage');
+    const galleryFeatured = document.querySelector('#galleryFeatured');
+
+    // Photo Upload Elements
+    const photoFileInput = document.querySelector('#galleryPhotoFileInput');
+    const photoDropzone = document.querySelector('#galleryPhotoDropzone');
+    const photoPreviewWrap = document.querySelector('#galleryPhotoPreviewWrap');
+    const photoPreviewImg = document.querySelector('#galleryPhotoPreviewImg');
+    const btnRemovePhoto = document.querySelector('#btnRemoveGalleryPhoto');
+
+    function updatePhotoPreview(imgSrc) {
+      if (imgSrc && (imgSrc.startsWith('data:') || imgSrc.startsWith('http') || imgSrc.startsWith('assets/'))) {
+        photoPreviewImg.src = imgSrc.startsWith('data:') || imgSrc.startsWith('http') ? imgSrc : `../${imgSrc}`;
+        photoPreviewWrap.style.display = 'flex';
+        photoDropzone.style.display = 'none';
+      } else {
+        photoPreviewImg.src = '';
+        photoPreviewWrap.style.display = 'none';
+        photoDropzone.style.display = 'flex';
+      }
+    }
+
+    setupDropzone(photoDropzone, photoFileInput, async (file) => {
+      try {
+        const compressedDataUrl = await handleImageUpload(file);
+        galleryImage.value = compressedDataUrl;
+        updatePhotoPreview(compressedDataUrl);
+        showToast('✓ Photo uploaded and compressed for gallery!', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to upload photo.', 'error');
+      }
+    });
+
+    btnRemovePhoto.addEventListener('click', () => {
+      galleryImage.value = 'assets/icons/ceiling.svg';
+      photoFileInput.value = '';
+      updatePhotoPreview(null);
+    });
+
+    galleryImage.addEventListener('input', () => {
+      updatePhotoPreview(galleryImage.value.trim());
+    });
+
+    function openModal(item = null) {
+      galleryForm.reset();
+      if (item) {
+        modalTitle.textContent = 'Edit Gallery Item';
+        galleryItemId.value = item.id;
+        galleryTitle.value = item.title;
+        galleryCategory.value = item.category || 'Ceiling';
+        galleryImage.value = item.image;
+        galleryFeatured.checked = !!item.featured;
+        updatePhotoPreview(item.image);
+      } else {
+        modalTitle.textContent = 'Add Visual to Gallery';
+        galleryItemId.value = '';
+        galleryImage.value = 'assets/icons/ceiling.svg';
+        galleryFeatured.checked = false;
+        updatePhotoPreview(null);
+      }
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    document.querySelector('#btnAddNewPhoto').addEventListener('click', () => openModal());
+    document.querySelector('#btnCloseGalleryModal').addEventListener('click', closeModal);
+    document.querySelector('#btnCancelGalleryModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    galleryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const itemData = {
+        id: galleryItemId.value || undefined,
+        title: galleryTitle.value.trim(),
+        category: galleryCategory.value,
+        image: galleryImage.value.trim() || 'assets/icons/ceiling.svg',
+        featured: galleryFeatured.checked
+      };
+
+      MollickDB.saveGalleryItem(itemData);
+      closeModal();
+      showToast(galleryItemId.value ? 'Visual updated' : 'Visual added to gallery', 'success');
+      renderGallery();
+    });
+
+    function renderGallery() {
+      const allItems = MollickDB.getGallery();
+      const q = searchInput.value.toLowerCase().trim();
+      const cat = categoryFilter.value;
+
+      const filtered = allItems.filter(item => {
+        const matchesQuery = item.title.toLowerCase().includes(q);
+        const matchesCat = cat === 'all' || item.category === cat;
+        return matchesQuery && matchesCat;
+      });
+
+      if (filtered.length === 0) {
+        gridContainer.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #fff; border-radius: var(--admin-radius); border: 1px solid var(--admin-border); color: var(--admin-text-muted);">
+            No items found matching filter.
+          </div>
+        `;
+        return;
+      }
+
+      gridContainer.innerHTML = filtered.map(item => {
+        const isUploaded = item.image && (item.image.startsWith('data:') || item.image.startsWith('http'));
+        const imgSrc = isUploaded ? item.image : `../${item.image || 'assets/icons/ceiling.svg'}`;
+
+        return `
+        <div class="gallery-admin-card">
+          <div style="height: 160px; background: #071529; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 8px 8px 0 0;">
+            <img src="${imgSrc}" alt="${escapeHtml(item.title)}" style="width: 100%; height: 100%; object-fit: ${isUploaded ? 'cover' : 'contain'}; padding: ${isUploaded ? '0' : '20px'};" onerror="this.src='../assets/icons/ceiling.svg'">
+          </div>
+          <div class="gallery-admin-meta">
+            <div>
+              <div class="gallery-admin-title">${escapeHtml(item.title)}</div>
+              <div class="gallery-admin-cat">${escapeHtml(item.category)} ${item.featured ? '• ★ Featured' : ''}</div>
+            </div>
+            <div class="gallery-admin-actions">
+              <button type="button" class="btn btn-secondary btn-sm btn-edit-photo" data-id="${item.id}" style="padding: 4px 8px; font-size: 0.78rem;">
+                ✏️ Edit
+              </button>
+              <button type="button" class="btn btn-danger btn-sm btn-delete-photo" data-id="${item.id}" style="padding: 4px 8px; font-size: 0.78rem;">
+                🗑️ Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      }).join('');
+
+      gridContainer.querySelectorAll('.btn-edit-photo').forEach(btn => {
+        btn.onclick = () => {
+          const item = allItems.find(i => i.id === btn.dataset.id);
+          if (item) openModal(item);
+        };
+      });
+
+      gridContainer.querySelectorAll('.btn-delete-photo').forEach(btn => {
+        btn.onclick = () => {
+          const item = allItems.find(i => i.id === btn.dataset.id);
+          showConfirmModal('Delete Photo', `Remove "${item.title}" from public gallery?`, () => {
+            MollickDB.deleteGalleryItem(btn.dataset.id);
+            showToast('Photo removed from gallery', 'success');
+            renderGallery();
+          });
+        };
+      });
+    }
+
+    searchInput.addEventListener('input', renderGallery);
+    categoryFilter.addEventListener('change', renderGallery);
+
+    renderGallery();
+  </script>
+</body>
+</html>

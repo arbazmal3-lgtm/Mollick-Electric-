@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 50" fill="none">
+  <rect x="1" y="1" width="158" height="48" rx="8" fill="#0c1e38" stroke="#f5b301" stroke-width="1.5"/>
+  <g transform="translate(10, 8)">
+    <path d="M17 3L6 8V18C6 25 11 31 17 33C23 31 28 25 28 18V8L17 3Z" fill="#f5b301"/>
+    <path d="M12 18L15 21L22 14" stroke="#0c1e38" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="50" y="24" font-family="'Montserrat', sans-serif" font-weight="900" font-size="12" fill="#ffffff" letter-spacing="1">SAFE WORK</text>
+  <text x="50" y="36" font-family="'Segoe UI', sans-serif" font-weight="600" font-size="9" fill="#f5b301" letter-spacing="0.5">100% Certified</text>
+</svg>
