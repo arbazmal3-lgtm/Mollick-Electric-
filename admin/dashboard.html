@@ -40,9 +40,21 @@
           <span class="nav-icon">📁</span>
           <span>Projects</span>
         </a>
+        <a href="tours.html" class="nav-link">
+          <span class="nav-icon">🏡</span>
+          <span>Home Tours</span>
+        </a>
+        <a href="designs.html" class="nav-link">
+          <span class="nav-icon">🎨</span>
+          <span>Room Designs</span>
+        </a>
         <a href="gallery.html" class="nav-link">
           <span class="nav-icon">🖼️</span>
           <span>Gallery</span>
+        </a>
+        <a href="reviews.html" class="nav-link">
+          <span class="nav-icon">⭐</span>
+          <span>Customer Reviews</span>
         </a>
         <a href="messages.html" class="nav-link">
           <span class="nav-icon">💬</span>
@@ -65,7 +77,7 @@
         <div class="sidebar-user">
           <div class="user-avatar" id="adminAvatar">NM</div>
           <div class="user-meta">
-            <div class="user-name" id="adminName">Nasim Mollick</div>
+            <div class="user-name" id="adminName">Najmul Mollick</div>
             <div class="user-role">Master Contractor</div>
           </div>
         </div>
@@ -101,15 +113,15 @@
         
         <div class="page-header">
           <div>
-            <h2 class="page-title">Welcome back, Nasim Bhai</h2>
+            <h2 class="page-title">Welcome back, Najmul Bhai</h2>
             <p class="page-subtitle">Here is what's happening across Mollick Electric &amp; Interior operations today.</p>
           </div>
           <div class="page-actions">
-            <a href="projects.html" class="btn btn-primary btn-sm">
-              <span>+ Add Project</span>
+            <a href="tours.html" class="btn btn-primary btn-sm">
+              <span>+ Add Home Tour</span>
             </a>
-            <a href="services.html" class="btn btn-secondary btn-sm">
-              <span>+ Add Service</span>
+            <a href="reviews.html" class="btn btn-secondary btn-sm">
+              <span>+ Submit Review</span>
             </a>
           </div>
         </div>
@@ -155,11 +167,29 @@
 
           <div class="stat-card">
             <div>
+              <div class="stat-label">Home Makeovers</div>
+              <div class="stat-val" id="statTours">0</div>
+              <div class="stat-note" id="statActiveTours">0 active on homepage</div>
+            </div>
+            <div class="stat-icon-wrap icon-emerald">🏡</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Customer Reviews</div>
+              <div class="stat-val" id="statReviews">0</div>
+              <div class="stat-note">Verified client feedback</div>
+            </div>
+            <div class="stat-icon-wrap icon-amber">⭐</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
               <div class="stat-label">Workforce &amp; Staff</div>
               <div class="stat-val" id="statStaff">0</div>
               <div class="stat-note" id="statActiveStaff">0 active with verified ID</div>
             </div>
-            <div class="stat-icon-wrap icon-amber">🪪</div>
+            <div class="stat-icon-wrap icon-blue">🪪</div>
           </div>
 
         </div>
@@ -170,12 +200,14 @@
             <h3 class="card-title">⚡ Quick Management Shortcuts</h3>
           </div>
           <div class="admin-card-body" style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="staff.html" class="btn btn-primary btn-sm">🪪 Print Staff ID Badges</a>
+            <a href="tours.html" class="btn btn-primary btn-sm">🏡 Upload Real Home Makeover</a>
+            <a href="reviews.html" class="btn btn-primary btn-sm">⭐ Submit Client Review</a>
+            <a href="staff.html" class="btn btn-secondary btn-sm">🪪 Print Staff ID Badges</a>
             <a href="projects.html" class="btn btn-secondary btn-sm">📁 Manage All Projects</a>
             <a href="services.html" class="btn btn-secondary btn-sm">🛠️ Manage Rate Card &amp; Services</a>
             <a href="gallery.html" class="btn btn-secondary btn-sm">🖼️ Upload Gallery Photos</a>
             <a href="messages.html" class="btn btn-secondary btn-sm">💬 Check Customer Leads</a>
-            <a href="settings.html" class="btn btn-secondary btn-sm">⚙️ Change Logo Name &amp; Phone</a>
+            <a href="settings.html" class="btn btn-secondary btn-sm">⚙️ Website Settings &amp; GSTIN</a>
           </div>
         </div>
 
@@ -258,6 +290,15 @@
       document.querySelector('#statGallery').textContent = stats.totalGallery;
       document.querySelector('#statMessages').textContent = stats.totalMessages;
       document.querySelector('#statUnread').textContent = `${stats.unreadMessages} unread inquiries`;
+      if (document.querySelector('#statTours')) {
+        document.querySelector('#statTours').textContent = stats.totalTours || 0;
+      }
+      if (document.querySelector('#statActiveTours')) {
+        document.querySelector('#statActiveTours').textContent = `${stats.activeTours || 0} active on homepage`;
+      }
+      if (document.querySelector('#statReviews')) {
+        document.querySelector('#statReviews').textContent = stats.totalReviews || 0;
+      }
       if (document.querySelector('#statStaff')) {
         document.querySelector('#statStaff').textContent = stats.totalStaff || 0;
       }

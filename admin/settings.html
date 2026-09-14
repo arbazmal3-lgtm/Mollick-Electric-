@@ -39,9 +39,21 @@
           <span class="nav-icon">📁</span>
           <span>Projects</span>
         </a>
+        <a href="tours.html" class="nav-link">
+          <span class="nav-icon">🏡</span>
+          <span>Home Tours</span>
+        </a>
+        <a href="designs.html" class="nav-link">
+          <span class="nav-icon">🎨</span>
+          <span>Room Designs</span>
+        </a>
         <a href="gallery.html" class="nav-link">
           <span class="nav-icon">🖼️</span>
           <span>Gallery</span>
+        </a>
+        <a href="reviews.html" class="nav-link">
+          <span class="nav-icon">⭐</span>
+          <span>Customer Reviews</span>
         </a>
         <a href="messages.html" class="nav-link">
           <span class="nav-icon">💬</span>
@@ -64,7 +76,7 @@
         <div class="sidebar-user">
           <div class="user-avatar" id="adminAvatar">NM</div>
           <div class="user-meta">
-            <div class="user-name" id="adminName">Nasim Mollick</div>
+            <div class="user-name" id="adminName">Najmul Mollick</div>
             <div class="user-role">Master Contractor</div>
           </div>
         </div>
@@ -105,10 +117,20 @@
           </div>
         </div>
 
+        <!-- Quick Section Jumper Pills -->
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;">
+          <a href="#brandCard" style="text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 6px 12px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 20px; color: var(--admin-text-main); display: inline-flex; align-items: center; gap: 5px;">🎨 Brand &amp; Logo</a>
+          <a href="#contractorCard" style="text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 6px 12px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 20px; color: var(--admin-text-main); display: inline-flex; align-items: center; gap: 5px;">👤 Contractor &amp; Licenses</a>
+          <a href="#contactCard" style="text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 6px 12px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 20px; color: var(--admin-text-main); display: inline-flex; align-items: center; gap: 5px;">📞 Contact &amp; Areas</a>
+          <a href="#heroCard" style="text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 6px 12px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 20px; color: var(--admin-text-main); display: inline-flex; align-items: center; gap: 5px;">🏠 Hero Showcase</a>
+          <a href="#estimatorCard" style="text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 6px 12px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 20px; color: var(--admin-text-main); display: inline-flex; align-items: center; gap: 5px;">💰 Estimator Rates</a>
+          <a href="#securitySection" style="text-decoration: none; font-size: 0.82rem; font-weight: 700; padding: 6px 12px; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 20px; color: #b91c1c; display: inline-flex; align-items: center; gap: 5px;">🔐 Email &amp; Password</a>
+        </div>
+
         <div style="display: flex; flex-direction: column; gap: 24px;">
           
           <!-- BRAND & LOGO CUSTOMIZER CARD -->
-          <div class="admin-card">
+          <div class="admin-card" id="brandCard">
             <div class="admin-card-header">
               <div>
                 <h3 class="card-title">🎨 Logo &amp; Brand Visual Identity</h3>
@@ -280,42 +302,172 @@
             </div>
             <div class="admin-card-body">
               <form id="contractorForm">
+                <!-- Contractor Photo Upload & Visual Display -->
+                <div style="margin-bottom: 22px; padding: 18px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div>
+                      <label class="form-label" style="margin-bottom: 2px; font-weight: 700; color: var(--admin-navy);">
+                        📸 Contractor Profile Photo / Avatar
+                      </label>
+                      <p style="font-size: 0.8rem; color: var(--admin-muted); margin: 0;">
+                        Upload a photo of Najmul Mollick or your master contractor. Displayed on the spotlight section, staff ID, and trust cards.
+                      </p>
+                    </div>
+                    <span class="badge badge-info" id="contractorPhotoStatusBadge">Default Monogram</span>
+                  </div>
+
+                  <!-- Active Contractor Photo Preview -->
+                  <div id="contractorPhotoActiveCard" style="display: none; align-items: center; gap: 16px; background: #ffffff; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 12px;">
+                    <div style="width: 70px; height: 70px; border-radius: 50%; overflow: hidden; border: 2px solid var(--admin-gold); flex-shrink: 0; background: #070e1a; display: flex; align-items: center; justify-content: center;">
+                      <img id="contractorPhotoActiveImg" src="" alt="Contractor Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 700; font-size: 0.92rem; color: var(--admin-navy);">Master Contractor Verified Photo</div>
+                      <div style="font-size: 0.78rem; color: #16a34a; font-weight: 600;">✓ Active on Public Website &amp; Admin Panel</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnChangeContractorPhoto">Replace Photo</button>
+                      <button type="button" class="btn btn-sm" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;" id="btnRemoveContractorPhoto">Remove</button>
+                    </div>
+                  </div>
+
+                  <!-- Dropzone / File Picker -->
+                  <div class="logo-upload-dropzone" id="contractorPhotoDropzone" style="cursor: pointer; padding: 20px; text-align: center; border: 2px dashed var(--admin-border); border-radius: 8px; background: #ffffff; transition: all 0.2s ease;">
+                    <div style="font-size: 2rem; margin-bottom: 6px;">🧑‍🔧</div>
+                    <div style="font-weight: 700; font-size: 0.92rem; color: var(--admin-navy);">
+                      Click or Drag &amp; Drop Contractor Photo Here
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--admin-muted); margin-top: 4px;">
+                      Supports JPG, PNG, WEBP. Auto-cropped &amp; compressed for instant high-speed loading.
+                    </div>
+                    <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnBrowseContractorPhoto" style="font-size: 0.8rem;">
+                        📁 Browse Image File
+                      </button>
+                      <button type="button" class="btn btn-sm" id="btnSampleContractorPhoto" style="background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-size: 0.8rem; font-weight: 700;">
+                        ✨ Use Sample Portrait
+                      </button>
+                    </div>
+                  </div>
+                  <input type="file" id="setContractorPhotoInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+
+                  <div style="margin-top: 10px;">
+                    <label for="setContractorPhotoUrl" style="font-size: 0.78rem; color: var(--admin-muted); font-weight: 600;">Or Paste External Photo URL directly:</label>
+                    <input type="url" id="setContractorPhotoUrl" class="form-control" placeholder="https://images.unsplash.com/... or data:image/..." style="font-size: 0.82rem; margin-top: 2px;">
+                  </div>
+
+                  <!-- Photo Adjustment & Alignment Option -->
+                  <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: #ffffff; padding: 10px 14px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <div>
+                      <label for="setContractorPhotoPosition" style="font-size: 0.82rem; font-weight: 700; color: var(--admin-navy); margin-bottom: 2px; display: block;">
+                        📐 Photo Vertical Alignment (ছবি অ্যাডজাস্টমেন্ট):
+                      </label>
+                      <span style="font-size: 0.74rem; color: var(--admin-muted);">Center face or adjust framed position inside crest circle</span>
+                    </div>
+                    <select id="setContractorPhotoPosition" class="form-control" style="width: auto; min-width: 180px; padding: 6px 10px; font-size: 0.82rem; font-weight: 600;">
+                      <option value="center 15%">Upper / Face Focus (Recommended)</option>
+                      <option value="center 30%">Upper-Middle</option>
+                      <option value="center center">Centered Focus</option>
+                      <option value="center 65%">Lower Focus</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="form-row">
                   <div class="form-group">
                     <label for="setContractorName" class="form-label">Contractor Full Name <span class="required">*</span></label>
-                    <input type="text" id="setContractorName" class="form-control" required>
+                    <input type="text" id="setContractorName" class="form-control" placeholder="e.g. Najmul Mollick" required>
                   </div>
                   <div class="form-group">
                     <label for="setContractorRole" class="form-label">Official Designation <span class="required">*</span></label>
-                    <input type="text" id="setContractorRole" class="form-control" required>
+                    <input type="text" id="setContractorRole" class="form-control" placeholder="e.g. Founder &amp; Licensed Master Contractor" required>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group">
-                    <label for="setContractorLicense" class="form-label">Govt. Contractor License / Registration Details</label>
-                    <input type="text" id="setContractorLicense" class="form-control" placeholder="Govt. Electrical Contractor Lic #WB/KOL/2014-9982">
+                    <label for="setPermitAuthority" class="form-label">Government Authority &amp; Permit Title</label>
+                    <input type="text" id="setPermitAuthority" class="form-control" placeholder="GOVERNMENT OF WEST BENGAL Electrical Workman's Permit">
                   </div>
+                  <div class="form-group">
+                    <label for="setWpNo" class="form-label">W. P. Number (Workman's Permit)</label>
+                    <input type="text" id="setWpNo" class="form-control" placeholder="WP02/2024/03883">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="setGstin" class="form-label">GSTIN (Goods &amp; Services Tax ID)</label>
+                    <input type="text" id="setGstin" class="form-control" placeholder="19ECKPM3966B1ZB">
+                  </div>
+                  <div class="form-group">
+                    <label for="setContractorLicense" class="form-label">Govt. Contractor License / Combined Text</label>
+                    <input type="text" id="setContractorLicense" class="form-control" placeholder="GOVERNMENT OF WEST BENGAL Electrical Workman's Permit | W. P. No.: WP02/2024/03883 | GSTIN: 19ECKPM3966B1ZB">
+                  </div>
+                </div>
+
+                <div class="form-row">
                   <div class="form-group">
                     <label for="setWarranty" class="form-label">Workmanship Guarantee Badge</label>
-                    <input type="text" id="setWarranty" class="form-control" placeholder="5-Year Workmanship Warranty">
+                    <input type="text" id="setWarranty" class="form-control" placeholder="10-Year Modular Woodwork &amp; 5-Year Electrical Warranty">
                   </div>
-                </div>
-
-                <div class="form-row">
                   <div class="form-group">
                     <label for="setExpYears" class="form-label">Years of Field Experience</label>
                     <input type="text" id="setExpYears" class="form-control" placeholder="12+">
                   </div>
+                </div>
+
+                <div class="form-row">
                   <div class="form-group">
                     <label for="setProjectsDone" class="form-label">Projects Completed Counter</label>
                     <input type="text" id="setProjectsDone" class="form-control" placeholder="850+">
                   </div>
                 </div>
 
+                <div class="form-group">
+                  <label for="setContractorBio" class="form-label">Contractor Personal Promise &amp; Spotlight Bio</label>
+                  <textarea id="setContractorBio" class="form-control" rows="3" placeholder="Direct quote displayed on the homepage spotlight section..."></textarea>
+                  <div class="form-hint">Displayed inside the master contractor spotlight quote card on the homepage and about page.</div>
+                </div>
+
+                <!-- Live Interactive Contractor Spotlight Preview -->
+                <div style="margin-top: 16px; padding: 16px; background: #f8fafc; border-radius: 10px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <span style="font-size: 0.84rem; font-weight: 700; color: var(--admin-navy);">
+                      👁️ Real-Time Spotlight Card Preview (Homepage &amp; About Page)
+                    </span>
+                    <span style="font-size: 0.72rem; color: #16a34a; font-weight: 600; background: #ecfdf5; padding: 2px 8px; border-radius: 999px;">● Live Dynamic</span>
+                  </div>
+
+                  <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+                    <!-- Crest Column -->
+                    <div style="text-align: center; width: 130px; flex-shrink: 0; background: #070e1a; padding: 14px 10px; border-radius: 10px; border: 1px solid rgba(217,119,6,0.3);">
+                      <div id="previewContractorPhotoContainer" style="display: none; width: 68px; height: 68px; border-radius: 50%; overflow: hidden; margin: 0 auto 8px; border: 2px solid #d97706;">
+                        <img id="previewContractorPhotoImg" src="" alt="Contractor Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                      </div>
+                      <div id="previewContractorMonogram" style="width: 54px; height: 54px; border-radius: 50%; background: linear-gradient(135deg, #1e293b, #0f172a); border: 2px solid #d97706; color: #f59e0b; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.15rem; margin: 0 auto 8px;">NM</div>
+                      <div id="previewContractorName" style="font-weight: 700; color: #f8fafc; font-size: 0.82rem; line-height: 1.2;">Najmul Mollick</div>
+                      <div id="previewContractorRole" style="font-size: 0.62rem; color: #94a3b8; margin-top: 2px;">MASTER CONTRACTOR</div>
+                      <div id="previewContractorLicense" style="display: inline-block; background: rgba(217,119,6,0.15); color: #fbbf24; border: 1px solid rgba(217,119,6,0.3); font-size: 0.58rem; font-weight: 700; padding: 2px 5px; border-radius: 4px; margin-top: 5px;">★ WB LICENSED ★</div>
+                    </div>
+
+                    <!-- Bio & Details Column -->
+                    <div style="flex: 1; min-width: 220px;">
+                      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                        <h4 id="previewHeadingName" style="margin: 0; font-size: 1.1rem; font-weight: 800; color: #070e1a;">Najmul Mollick</h4>
+                        <span style="background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 999px;">Govt. Licensed Supervisor</span>
+                      </div>
+                      <div id="previewSubRole" style="font-size: 0.8rem; font-weight: 600; color: #d97706; margin-bottom: 8px;">Founder &amp; Principal On-Site Master Contractor</div>
+                      <p id="previewContractorBio" style="font-size: 0.82rem; color: #475569; font-style: italic; line-height: 1.5; margin: 0; border-left: 3px solid #d97706; padding-left: 10px; background: #fffbeb; padding-top: 6px; padding-bottom: 6px; border-radius: 0 6px 6px 0;">
+                        "When you hire Mollick Electric &amp; Interior, you do not deal with call center agents or third-party brokers. I personally inspect your site, calculate the exact electrical load, check the wall alignments, and supervise my experienced Bengali carpenter and electrician team daily. We guarantee clean work, zero fire risk, and turnkey delivery on agreed time."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 <div style="text-align: right; margin-top: 14px;">
                   <button type="submit" class="btn btn-primary">
-                    <span>💾 Save Contractor Profile</span>
+                    <span>💾 Save Contractor Profile &amp; Photo</span>
                   </button>
                 </div>
               </form>
@@ -378,30 +530,126 @@
             </div>
           </div>
 
-          <!-- HERO BANNER & HEADLINES CARD -->
+          <!-- HERO BANNER, BADGE & HEADLINES CARD -->
           <div class="admin-card">
             <div class="admin-card-header">
               <div>
-                <h3 class="card-title">🌟 Hero Banner, Headlines &amp; Call to Action</h3>
-                <p class="card-subtitle">Control the homepage hero title, sub-headline, and call-to-action buttons.</p>
+                <h3 class="card-title">🌟 Hero Banner, Headlines &amp; Background Photo</h3>
+                <p class="card-subtitle">Control the homepage hero badge, main headline, description, hero background photo, and CTA buttons.</p>
               </div>
             </div>
             <div class="admin-card-body">
               <form id="heroSettingsForm">
                 <div class="form-group">
+                  <label for="setHeroBadge" class="form-label">Hero Badge / Pill Tagline</label>
+                  <input type="text" id="setHeroBadge" class="form-control" placeholder="Govt. Licensed Electrical Contractor & Turnkey Interior Specialist">
+                </div>
+
+                <div class="form-group">
                   <label for="setHeroTitle" class="form-label">Homepage Main Headline</label>
-                  <input type="text" id="setHeroTitle" class="form-control" placeholder="Powering Spaces, Defining Lifestyles">
+                  <input type="text" id="setHeroTitle" class="form-control" placeholder="Complete Home Interiors & Precision Electrical Mastery">
                 </div>
 
                 <div class="form-group">
                   <label for="setHeroDesc" class="form-label">Homepage Sub-headline / Trust Statement</label>
-                  <textarea id="setHeroDesc" class="form-control" rows="2"></textarea>
+                  <textarea id="setHeroDesc" class="form-control" rows="3"></textarea>
+                </div>
+
+                <!-- Hero Background / Showcase Photo Upload -->
+                <div style="margin-bottom: 20px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--admin-border);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <div>
+                      <label class="form-label" style="margin-bottom: 2px; font-weight: 700; color: var(--admin-navy);">
+                        🖼️ Hero Showcase Photo / Background Image
+                      </label>
+                      <p style="font-size: 0.8rem; color: var(--admin-muted); margin: 0;">
+                        Upload a photo of your turnkey interior projects (e.g. modular kitchen, luxury living room) for the hero section.
+                      </p>
+                    </div>
+                    <span class="badge badge-info" id="heroPhotoStatusBadge">Default Blueprint Showcase</span>
+                  </div>
+
+                  <!-- Active Hero Image Card -->
+                  <div id="heroPhotoActiveCard" style="display: none; align-items: center; gap: 16px; background: #ffffff; padding: 12px; border-radius: 8px; border: 1px solid var(--admin-border); margin-bottom: 10px;">
+                    <div style="width: 100px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid var(--admin-border); flex-shrink: 0; background: #070e1a;">
+                      <img id="heroPhotoActiveImg" src="" alt="Hero Image Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <div style="flex: 1;">
+                      <div style="font-weight: 700; font-size: 0.9rem; color: var(--admin-navy);">Custom Hero Photo Loaded</div>
+                      <div style="font-size: 0.78rem; color: #16a34a; font-weight: 600;">✓ Visible on Homepage Hero</div>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnChangeHeroPhoto">Replace Photo</button>
+                      <button type="button" class="btn btn-sm" style="background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5;" id="btnRemoveHeroPhoto">Remove</button>
+                    </div>
+                  </div>
+
+                  <!-- Dropzone -->
+                  <div class="logo-upload-dropzone" id="heroPhotoDropzone" style="cursor: pointer; padding: 18px; text-align: center; border: 2px dashed var(--admin-border); border-radius: 8px; background: #ffffff;">
+                    <div style="font-size: 1.8rem; margin-bottom: 4px;">🌆</div>
+                    <div style="font-weight: 700; font-size: 0.92rem; color: var(--admin-navy);">
+                      Click or Drag &amp; Drop Hero Background Picture Here
+                    </div>
+                    <div style="font-size: 0.78rem; color: var(--admin-muted); margin-top: 4px;">
+                      Recommended: High-res architectural interior photo (1920×1080px or 1200×800px).
+                    </div>
+                    <div style="margin-top: 10px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnBrowseHeroPhoto" style="font-size: 0.8rem;">
+                        📁 Browse Image File
+                      </button>
+                    </div>
+                  </div>
+                  <input type="file" id="setHeroPhotoInput" accept="image/jpeg,image/png,image/webp" style="display: none;">
+
+                  <!-- Quick 1-Click Bengali Interior Presets -->
+                  <div style="margin-top: 12px; padding: 12px; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div style="font-size: 0.8rem; font-weight: 700; color: var(--admin-navy); margin-bottom: 6px;">
+                      ⚡ Quick 1-Click Interior Presets (তাত্ক্ষণিক ব্যাকগ্রাউন্ড ছবি পছন্দ করুন):
+                    </div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                      <button type="button" class="btn btn-sm" id="btnHeroPreset1" style="font-size: 0.76rem; background: #f8fafc; border: 1px solid #cbd5e1; color: #1e293b; font-weight: 600;">
+                        🌟 1. Luxury Living &amp; False Ceiling
+                      </button>
+                      <button type="button" class="btn btn-sm" id="btnHeroPreset2" style="font-size: 0.76rem; background: #f8fafc; border: 1px solid #cbd5e1; color: #1e293b; font-weight: 600;">
+                        💡 2. Modern Hall &amp; Recessed Lights
+                      </button>
+                      <button type="button" class="btn btn-sm" id="btnHeroPreset3" style="font-size: 0.76rem; background: #f8fafc; border: 1px solid #cbd5e1; color: #1e293b; font-weight: 600;">
+                        🏡 3. Architectural Woodwork &amp; Warm Interior
+                      </button>
+                    </div>
+                  </div>
+
+                  <div style="margin-top: 10px;">
+                    <label for="setHeroImageUrl" style="font-size: 0.78rem; color: var(--admin-muted); font-weight: 600;">Or Paste Image URL directly:</label>
+                    <input type="url" id="setHeroImageUrl" class="form-control" placeholder="https://images.unsplash.com/... or data:image/..." style="font-size: 0.82rem; margin-top: 2px;">
+                  </div>
+
+                  <!-- Live Interactive Hero Banner Preview inside Admin Panel -->
+                  <div style="margin-top: 14px; padding: 14px; background: #f8fafc; border-radius: 8px; border: 1px solid var(--admin-border);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                      <span style="font-size: 0.82rem; font-weight: 700; color: var(--admin-navy);">
+                        👁️ Live Hero Section Preview (হোমপেজ ব্যাকগ্রাউন্ড ছবি লাইভ প্রিভিউ)
+                      </span>
+                      <span style="font-size: 0.7rem; color: #16a34a; font-weight: 600; background: #ecfdf5; padding: 2px 8px; border-radius: 999px;">● Dynamic Real-Time</span>
+                    </div>
+                    <div id="previewHeroBannerBox" style="position: relative; border-radius: 8px; overflow: hidden; min-height: 130px; display: flex; flex-direction: column; justify-content: center; padding: 18px 20px; color: #ffffff; background-color: #060b14; background-position: center; background-size: cover; border: 1px solid #0f172a; transition: background 0.3s ease;">
+                      <div style="display: inline-block; background: rgba(225,29,36,0.9); color: #fff; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; width: fit-content; margin-bottom: 6px;" id="previewHeroBadgeText">
+                        Govt. Licensed Electrical Contractor &amp; Turnkey Interior Specialist
+                      </div>
+                      <h4 id="previewHeroTitleText" style="margin: 0; font-size: 1.05rem; font-weight: 800; color: #ffffff; line-height: 1.3; text-shadow: 0 2px 6px rgba(0,0,0,0.8);">
+                        Complete Home Interiors &amp; Precision Electrical Mastery
+                      </h4>
+                      <p id="previewHeroDescText" style="font-size: 0.72rem; color: #e2e8f0; margin-top: 4px; margin-bottom: 0; max-width: 85%; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.8); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                        From 100% waterproof BWP 710 modular kitchens to short-circuit-safe concealed copper wiring.
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group">
                     <label for="setCtaText" class="form-label">Primary CTA Button Text</label>
-                    <input type="text" id="setCtaText" class="form-control" placeholder="Get Free Site Inspection">
+                    <input type="text" id="setCtaText" class="form-control" placeholder="Calculate Interior Cost">
                   </div>
                   <div class="form-group">
                     <label for="setEmergencyText" class="form-label">Emergency Hotline Text</label>
@@ -429,37 +677,269 @@
             </div>
           </div>
 
+          <!-- LIVSPACE-STYLE COST ESTIMATOR PRICE & RATE CONTROL CARD -->
+          <div class="admin-card" id="cardEstimatorSettings">
+            <div class="admin-card-header" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;">
+              <div>
+                <h3 class="card-title">📐 Home Interior &amp; Electrical Cost Estimator Price Control</h3>
+                <p class="card-subtitle">Control and fine-tune every price, room percentage, and quality multiplier used on the public calculator.</p>
+              </div>
+              <a href="designs.html" class="btn btn-outline btn-sm" style="border-color: #e11d24; color: #e11d24; font-weight: 600;">
+                <span>🎨 Manage Room Designs &amp; Photos →</span>
+              </a>
+            </div>
+            <div class="admin-card-body">
+              <form id="estimatorRatesForm">
+                
+                <!-- 1. Flat Size Base Packages -->
+                <div style="margin-bottom: 24px;">
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                    <span>🏢 1. Apartment Size Turnkey Base Packages (₹)</span>
+                  </h4>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="setEst1Bhk" class="form-label">1 BHK Base Estimate (₹)</label>
+                      <input type="number" id="setEst1Bhk" class="form-control" value="220000" step="5000" required>
+                      <div class="form-hint">Approx. 550–700 sq.ft flat</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="setEst2Bhk" class="form-label">2 BHK Base Estimate (₹)</label>
+                      <input type="number" id="setEst2Bhk" class="form-control" value="385000" step="5000" required>
+                      <div class="form-hint">Approx. 850–1050 sq.ft flat</div>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="setEst3Bhk" class="form-label">3 BHK Base Estimate (₹)</label>
+                      <input type="number" id="setEst3Bhk" class="form-control" value="560000" step="5000" required>
+                      <div class="form-hint">Approx. 1300–1600 sq.ft flat</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="setEst4Bhk" class="form-label">4 BHK / Villa Base Estimate (₹)</label>
+                      <input type="number" id="setEst4Bhk" class="form-control" value="820000" step="5000" required>
+                      <div class="form-hint">Approx. 1800–2400 sq.ft duplex/bungalow</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Room & Solution Cost Allocation Weights -->
+                <div style="margin-bottom: 24px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 8px;">
+                      <span>🏠 2. Spaces &amp; Solutions Cost Breakdown (% Share of Budget)</span>
+                    </h4>
+                    <span id="estTotalPercentBadge" style="font-size: 0.8rem; font-weight: 700; padding: 2px 10px; border-radius: 9999px; background: #dcfce7; color: #166534;">
+                      Total: 100%
+                    </span>
+                  </div>
+                  <p style="font-size: 0.84rem; color: #64748b; margin-bottom: 14px;">
+                    When clients select specific rooms or view their itemized estimate, these percentages determine how much of the turnkey package goes to each trade.
+                  </p>
+
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;">
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="setEstSpaceKitchen" class="form-label">🍳 Modular Kitchen (%)</label>
+                      <input type="number" id="setEstSpaceKitchen" class="form-control est-space-input" value="32" min="1" max="100" step="1" required>
+                      <div class="form-hint">BWP 710 + Tandem drawers</div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="setEstSpaceLiving" class="form-label">📺 Living &amp; TV Unit (%)</label>
+                      <input type="number" id="setEstSpaceLiving" class="form-control est-space-input" value="18" min="1" max="100" step="1" required>
+                      <div class="form-hint">Louvered console + marble wall</div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="setEstSpaceWardrobe" class="form-label">🚪 Bedrooms &amp; Wardrobes (%)</label>
+                      <input type="number" id="setEstSpaceWardrobe" class="form-control est-space-input" value="24" min="1" max="100" step="1" required>
+                      <div class="form-hint">Sliding wardrobe + storage</div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="setEstSpaceCeiling" class="form-label">✨ False Ceiling &amp; Coves (%)</label>
+                      <input type="number" id="setEstSpaceCeiling" class="form-control est-space-input" value="10" min="1" max="100" step="1" required>
+                      <div class="form-hint">Saint-Gobain Gyproc + LEDs</div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="setEstSpaceElectric" class="form-label">⚡ Concealed Electric &amp; DB (%)</label>
+                      <input type="number" id="setEstSpaceElectric" class="form-control est-space-input" value="9" min="1" max="100" step="1" required>
+                      <div class="form-hint">Havells copper + Siemens RCCB</div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                      <label for="setEstSpacePaint" class="form-label">🎨 Royale Paint &amp; Texture (%)</label>
+                      <input type="number" id="setEstSpacePaint" class="form-control est-space-input" value="7" min="1" max="100" step="1" required>
+                      <div class="form-hint">Birla Putty + Asian Paints</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Finish Tiers Multipliers & Range Buffer -->
+                <div style="margin-bottom: 24px; padding-top: 16px; border-top: 1px dashed #e2e8f0;">
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: #0f172a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                    <span>💎 3. Material &amp; Finish Quality Tier Multipliers (% of Base Rate)</span>
+                  </h4>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+                    <div class="form-group">
+                      <label for="setEstTierEssential" class="form-label">🟢 Essential Tier Multiplier (%)</label>
+                      <input type="number" id="setEstTierEssential" class="form-control" value="85" min="50" max="200" step="1" required>
+                      <div class="form-hint">Standard MR Ply &amp; 0.8mm laminate (e.g. 85%)</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="setEstTierPremium" class="form-label">⭐ Premium Tier Multiplier (%)</label>
+                      <input type="number" id="setEstTierPremium" class="form-control" value="100" min="50" max="200" step="1" required>
+                      <div class="form-hint">BWP 710 Marine &amp; Soft-Close Blum (e.g. 100%)</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="setEstTierLuxe" class="form-label">👑 Luxe Signature Tier Multiplier (%)</label>
+                      <input type="number" id="setEstTierLuxe" class="form-control" value="138" min="50" max="300" step="1" required>
+                      <div class="form-hint">Acrylic, Quartz, Statuario &amp; Smart DB (e.g. 138%)</div>
+                    </div>
+                    <div class="form-group">
+                      <label for="setEstMarginHigh" class="form-label">📈 High-End Range Buffer Margin (%)</label>
+                      <input type="number" id="setEstMarginHigh" class="form-control" value="18" min="5" max="50" step="1" required>
+                      <div class="form-hint">Sets range ceiling (e.g. +18% above low)</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 4. Interactive Live Test Simulator in Admin -->
+                <div style="background: #0b1320; color: #ffffff; border-radius: 10px; padding: 18px; margin-bottom: 20px;">
+                  <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 14px;">
+                    <div>
+                      <div style="font-size: 0.78rem; font-weight: 700; color: #e11d24; text-transform: uppercase; letter-spacing: 0.5px;">⚡ Live Estimator Preview Sandbox</div>
+                      <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">How prices will appear to clients on your website right now</div>
+                    </div>
+                    <div style="display: flex; gap: 6px;">
+                      <button type="button" class="btn btn-outline btn-sm btn-sandbox-bhk active" data-bhk="2" style="padding: 4px 10px; font-size: 0.78rem;">2 BHK</button>
+                      <button type="button" class="btn btn-outline btn-sm btn-sandbox-bhk" data-bhk="3" style="padding: 4px 10px; font-size: 0.78rem;">3 BHK</button>
+                      <button type="button" class="btn btn-outline btn-sm btn-sandbox-bhk" data-bhk="1" style="padding: 4px 10px; font-size: 0.78rem;">1 BHK</button>
+                      <button type="button" class="btn btn-outline btn-sm btn-sandbox-bhk" data-bhk="4" style="padding: 4px 10px; font-size: 0.78rem;">4 BHK</button>
+                    </div>
+                  </div>
+
+                  <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px; background: rgba(255,255,255,0.06); padding: 14px 18px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                    <div>
+                      <div style="font-size: 0.78rem; color: #94a3b8;" id="sandboxSummaryTitle">2 BHK • Turnkey Full Home • Premium Quality</div>
+                      <div style="font-size: 1.6rem; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;" id="sandboxRangePrice">₹3,85,000 – ₹4,54,300</div>
+                    </div>
+                    <div style="text-align: right;">
+                      <div style="font-size: 0.78rem; color: #cbd5e1;">Turnkey Delivery Timeline</div>
+                      <div style="font-size: 1.05rem; font-weight: 700; color: #38bdf8;" id="sandboxTimeline">42–50 Days Handover</div>
+                    </div>
+                  </div>
+
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-top: 12px; font-size: 0.76rem;" id="sandboxBreakdownGrid">
+                    <!-- Populated dynamically -->
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnResetEstimatorDefaults">
+                    🔄 Reset Standard Rates
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    <span>💾 Save Estimator Prices &amp; Rates</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
           <!-- SECURITY & CLOUD OPTIONS -->
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+          <div id="securitySection" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px;">
             
-            <!-- Admin Password Card -->
-            <div class="admin-card">
+            <!-- Admin Login Email & Username Card -->
+            <div class="admin-card" id="adminEmailCard">
+              <div class="admin-card-header">
+                <div>
+                  <h3 class="card-title">✉️ Admin Login Email &amp; Username</h3>
+                  <p class="card-subtitle">Change the email and username used to sign in to this admin panel</p>
+                </div>
+              </div>
+              <div class="admin-card-body">
+                <!-- Current Credentials Banner -->
+                <div style="margin-bottom: 16px; padding: 14px 16px; background: #f8fafc; border-radius: var(--admin-radius-sm); border: 1px solid var(--admin-border);">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 0.75rem; font-weight: 700; color: var(--admin-text-muted); text-transform: uppercase; letter-spacing: 0.5px;">Current Active Admin Login</span>
+                    <span class="badge badge-success">Active</span>
+                  </div>
+                  <div style="font-size: 1rem; font-weight: 750; color: var(--admin-navy); font-family: monospace;" id="displayCurrentAdminEmail">
+                    admin@mollick.com
+                  </div>
+                  <div style="font-size: 0.8rem; color: var(--admin-text-muted); margin-top: 4px;">
+                    Username: <span id="displayCurrentAdminUser" style="font-weight: 700; color: var(--admin-navy); font-family: monospace;">najmul.mollick</span>
+                  </div>
+                </div>
+
+                <form id="changeAdminEmailForm">
+                  <div class="form-group">
+                    <label for="newAdminEmail" class="form-label">New Admin Email Address <span class="required">*</span></label>
+                    <input type="email" id="newAdminEmail" class="form-control" placeholder="e.g. yourname@gmail.com" required autocomplete="email">
+                    <small style="display: block; font-size: 0.74rem; color: var(--admin-text-muted); margin-top: 4px;">
+                      You can use this email to log in to the admin panel at any time.
+                    </small>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="newAdminUsername" class="form-label">Admin Username / ID <span class="required">*</span></label>
+                    <input type="text" id="newAdminUsername" class="form-control" placeholder="e.g. najmul.mollick or admin" required autocomplete="username">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="confirmEmailCurrentPassword" class="form-label">Current Password (to confirm change) <span class="required">*</span></label>
+                    <div class="password-input-wrap">
+                      <input type="password" id="confirmEmailCurrentPassword" class="form-control" placeholder="Enter your current password" required autocomplete="current-password">
+                      <button type="button" class="btn-toggle-pwd" data-target="confirmEmailCurrentPassword" title="Toggle password visibility">👁️</button>
+                    </div>
+                  </div>
+
+                  <div style="text-align: right; margin-top: 18px;">
+                    <button type="submit" class="btn btn-primary" id="btnUpdateEmailSubmit">
+                      <span>✓ Save New Email &amp; Username</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Admin Password Security Card -->
+            <div class="admin-card" id="adminPasswordCard">
               <div class="admin-card-header">
                 <div>
                   <h3 class="card-title">🔐 Admin Password Security</h3>
-                  <p class="card-subtitle">Change administrative login credentials</p>
+                  <p class="card-subtitle">Change administrative login password</p>
                 </div>
               </div>
               <div class="admin-card-body">
                 <form id="changePasswordForm">
                   <div class="form-group">
                     <label for="currentPassword" class="form-label">Current Password <span class="required">*</span></label>
-                    <input type="password" id="currentPassword" class="form-control" placeholder="••••••••" required>
+                    <div class="password-input-wrap">
+                      <input type="password" id="currentPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+                      <button type="button" class="btn-toggle-pwd" data-target="currentPassword" title="Toggle password visibility">👁️</button>
+                    </div>
                   </div>
 
                   <div class="form-group">
                     <label for="newPassword" class="form-label">New Password <span class="required">*</span></label>
-                    <input type="password" id="newPassword" class="form-control" placeholder="Minimum 6 characters" required>
+                    <div class="password-input-wrap">
+                      <input type="password" id="newPassword" class="form-control" placeholder="Minimum 6 characters" required autocomplete="new-password">
+                      <button type="button" class="btn-toggle-pwd" data-target="newPassword" title="Toggle password visibility">👁️</button>
+                    </div>
+                    <small style="display: block; font-size: 0.74rem; color: var(--admin-text-muted); margin-top: 4px;">
+                      Must contain at least 6 characters (recommended: mix of letters, numbers &amp; symbols).
+                    </small>
                   </div>
 
                   <div class="form-group">
                     <label for="confirmNewPassword" class="form-label">Confirm New Password <span class="required">*</span></label>
-                    <input type="password" id="confirmNewPassword" class="form-control" placeholder="••••••••" required>
+                    <div class="password-input-wrap">
+                      <input type="password" id="confirmNewPassword" class="form-control" placeholder="Re-type new password" required autocomplete="new-password">
+                      <button type="button" class="btn-toggle-pwd" data-target="confirmNewPassword" title="Toggle password visibility">👁️</button>
+                    </div>
                   </div>
 
-                  <div style="text-align: right; margin-top: 14px;">
-                    <button type="submit" class="btn btn-secondary">
-                      <span>Update Password</span>
+                  <div style="text-align: right; margin-top: 18px;">
+                    <button type="submit" class="btn btn-secondary" id="btnUpdatePasswordSubmit">
+                      <span>✓ Update Password</span>
                     </button>
                   </div>
                 </form>
@@ -505,7 +985,7 @@
   <div id="adminToastContainer" class="toast-container"></div>
 
   <script type="module">
-    import { MollickDB, AdminAuth, initAdminShell, showToast, handleImageUpload } from './js/admin.js';
+    import { MollickDB, AdminAuth, initAdminShell, showToast, handleImageUpload, setupDropzone } from './js/admin.js';
 
     // Auth Guard
     AdminAuth.checkAuth(true);
@@ -549,10 +1029,25 @@
     const contractorForm = document.querySelector('#contractorForm');
     const setContractorName = document.querySelector('#setContractorName');
     const setContractorRole = document.querySelector('#setContractorRole');
+    const setPermitAuthority = document.querySelector('#setPermitAuthority');
+    const setWpNo = document.querySelector('#setWpNo');
+    const setGstin = document.querySelector('#setGstin');
     const setContractorLicense = document.querySelector('#setContractorLicense');
     const setWarranty = document.querySelector('#setWarranty');
     const setExpYears = document.querySelector('#setExpYears');
     const setProjectsDone = document.querySelector('#setProjectsDone');
+    const setContractorBio = document.querySelector('#setContractorBio');
+
+    // Contractor Photo Elements
+    const setContractorPhotoInput = document.querySelector('#setContractorPhotoInput');
+    const setContractorPhotoUrl = document.querySelector('#setContractorPhotoUrl');
+    const setContractorPhotoPosition = document.querySelector('#setContractorPhotoPosition');
+    const contractorPhotoDropzone = document.querySelector('#contractorPhotoDropzone');
+    const contractorPhotoActiveCard = document.querySelector('#contractorPhotoActiveCard');
+    const contractorPhotoActiveImg = document.querySelector('#contractorPhotoActiveImg');
+    const contractorPhotoStatusBadge = document.querySelector('#contractorPhotoStatusBadge');
+    const btnChangeContractorPhoto = document.querySelector('#btnChangeContractorPhoto');
+    const btnRemoveContractorPhoto = document.querySelector('#btnRemoveContractorPhoto');
 
     // Elements - Contact
     const contactForm = document.querySelector('#contactSettingsForm');
@@ -566,12 +1061,127 @@
 
     // Elements - Hero
     const heroForm = document.querySelector('#heroSettingsForm');
+    const setHeroBadge = document.querySelector('#setHeroBadge');
     const setHeroTitle = document.querySelector('#setHeroTitle');
     const setHeroDesc = document.querySelector('#setHeroDesc');
     const setCtaText = document.querySelector('#setCtaText');
     const setEmergencyText = document.querySelector('#setEmergencyText');
     const setFacebook = document.querySelector('#setFacebook');
     const setInstagram = document.querySelector('#setInstagram');
+
+    // Hero Photo Elements
+    const setHeroPhotoInput = document.querySelector('#setHeroPhotoInput');
+    const setHeroImageUrl = document.querySelector('#setHeroImageUrl');
+    const heroPhotoDropzone = document.querySelector('#heroPhotoDropzone');
+    const heroPhotoActiveCard = document.querySelector('#heroPhotoActiveCard');
+    const heroPhotoActiveImg = document.querySelector('#heroPhotoActiveImg');
+    const heroPhotoStatusBadge = document.querySelector('#heroPhotoStatusBadge');
+    const btnChangeHeroPhoto = document.querySelector('#btnChangeHeroPhoto');
+    const btnRemoveHeroPhoto = document.querySelector('#btnRemoveHeroPhoto');
+    const btnBrowseHeroPhoto = document.querySelector('#btnBrowseHeroPhoto');
+    const btnHeroPreset1 = document.querySelector('#btnHeroPreset1');
+    const btnHeroPreset2 = document.querySelector('#btnHeroPreset2');
+    const btnHeroPreset3 = document.querySelector('#btnHeroPreset3');
+    const previewHeroBannerBox = document.querySelector('#previewHeroBannerBox');
+    const previewHeroBadgeText = document.querySelector('#previewHeroBadgeText');
+    const previewHeroTitleText = document.querySelector('#previewHeroTitleText');
+    const previewHeroDescText = document.querySelector('#previewHeroDescText');
+
+    // Elements - Estimator Rates & Price Control
+    const estimatorRatesForm = document.querySelector('#estimatorRatesForm');
+    const setEst1Bhk = document.querySelector('#setEst1Bhk');
+    const setEst2Bhk = document.querySelector('#setEst2Bhk');
+    const setEst3Bhk = document.querySelector('#setEst3Bhk');
+    const setEst4Bhk = document.querySelector('#setEst4Bhk');
+    const setEstSpaceKitchen = document.querySelector('#setEstSpaceKitchen');
+    const setEstSpaceLiving = document.querySelector('#setEstSpaceLiving');
+    const setEstSpaceWardrobe = document.querySelector('#setEstSpaceWardrobe');
+    const setEstSpaceCeiling = document.querySelector('#setEstSpaceCeiling');
+    const setEstSpaceElectric = document.querySelector('#setEstSpaceElectric');
+    const setEstSpacePaint = document.querySelector('#setEstSpacePaint');
+    const setEstTierEssential = document.querySelector('#setEstTierEssential');
+    const setEstTierPremium = document.querySelector('#setEstTierPremium');
+    const setEstTierLuxe = document.querySelector('#setEstTierLuxe');
+    const setEstMarginHigh = document.querySelector('#setEstMarginHigh');
+    const estTotalPercentBadge = document.querySelector('#estTotalPercentBadge');
+    const sandboxSummaryTitle = document.querySelector('#sandboxSummaryTitle');
+    const sandboxRangePrice = document.querySelector('#sandboxRangePrice');
+    const sandboxTimeline = document.querySelector('#sandboxTimeline');
+    const sandboxBreakdownGrid = document.querySelector('#sandboxBreakdownGrid');
+    const btnResetEstimatorDefaults = document.querySelector('#btnResetEstimatorDefaults');
+
+    let currentSandboxBhk = '2';
+    let currentSandboxTier = 'premium';
+
+    function updateSandboxEstimator() {
+      if (!setEst1Bhk || !sandboxRangePrice) return;
+
+      const b1 = parseFloat(setEst1Bhk.value) || 220000;
+      const b2 = parseFloat(setEst2Bhk.value) || 385000;
+      const b3 = parseFloat(setEst3Bhk.value) || 560000;
+      const b4 = parseFloat(setEst4Bhk.value) || 820000;
+
+      const baseMap = { '1': b1, '2': b2, '3': b3, '4': b4 };
+      const baseRate = baseMap[currentSandboxBhk] || b2;
+
+      const tEssential = (parseFloat(setEstTierEssential.value) || 85) / 100;
+      const tPremium = (parseFloat(setEstTierPremium.value) || 100) / 100;
+      const tLuxe = (parseFloat(setEstTierLuxe.value) || 138) / 100;
+      const tierMult = currentSandboxTier === 'essential' ? tEssential : (currentSandboxTier === 'luxe' ? tLuxe : tPremium);
+
+      const marginHigh = (parseFloat(setEstMarginHigh.value) || 18) / 100;
+
+      const lowEstimate = Math.round(baseRate * tierMult);
+      const highEstimate = Math.round(lowEstimate * (1 + marginHigh));
+
+      if (sandboxSummaryTitle) {
+        sandboxSummaryTitle.textContent = `${currentSandboxBhk} BHK • Turnkey Full Home • ${currentSandboxTier.toUpperCase()} Quality`;
+      }
+      if (sandboxRangePrice) {
+        sandboxRangePrice.textContent = `₹${lowEstimate.toLocaleString('en-IN')} – ₹${highEstimate.toLocaleString('en-IN')}`;
+      }
+
+      const timelineMap = { '1': '30–38 Days', '2': '42–50 Days', '3': '55–65 Days', '4': '70–85 Days' };
+      if (sandboxTimeline) {
+        sandboxTimeline.textContent = `${timelineMap[currentSandboxBhk] || '45 Days'} Handover`;
+      }
+
+      // Space allocations
+      const pKitchen = parseFloat(setEstSpaceKitchen.value) || 32;
+      const pLiving = parseFloat(setEstSpaceLiving.value) || 18;
+      const pWardrobe = parseFloat(setEstSpaceWardrobe.value) || 24;
+      const pCeiling = parseFloat(setEstSpaceCeiling.value) || 10;
+      const pElectric = parseFloat(setEstSpaceElectric.value) || 9;
+      const pPaint = parseFloat(setEstSpacePaint.value) || 7;
+
+      const totalP = Math.round(pKitchen + pLiving + pWardrobe + pCeiling + pElectric + pPaint);
+      if (estTotalPercentBadge) {
+        estTotalPercentBadge.textContent = `Total: ${totalP}%`;
+        estTotalPercentBadge.style.background = totalP === 100 ? '#dcfce7' : '#fef3c7';
+        estTotalPercentBadge.style.color = totalP === 100 ? '#166534' : '#92400e';
+      }
+
+      const items = [
+        { name: 'Kitchen', p: pKitchen, icon: '🍳' },
+        { name: 'Living & TV', p: pLiving, icon: '📺' },
+        { name: 'Wardrobes', p: pWardrobe, icon: '🚪' },
+        { name: 'Ceiling', p: pCeiling, icon: '✨' },
+        { name: 'Electrical', p: pElectric, icon: '⚡' },
+        { name: 'Paint & Putty', p: pPaint, icon: '🎨' }
+      ];
+
+      if (sandboxBreakdownGrid) {
+        sandboxBreakdownGrid.innerHTML = items.map(item => {
+          const roomVal = Math.round((lowEstimate * item.p) / 100);
+          return `
+            <div style="background: rgba(255,255,255,0.05); padding: 8px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">
+              <div style="color: #94a3b8; font-size: 0.72rem;">${item.icon} ${item.name} (${item.p}%)</div>
+              <div style="color: #ffffff; font-weight: 700; margin-top: 3px;">₹${roomVal.toLocaleString('en-IN')}</div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
 
     // Update Live Brand Preview in Real-time
     function updateLivePreview() {
@@ -699,12 +1309,220 @@
       }
     });
 
+    // Contractor Real-Time Live Preview
+    function updateContractorLivePreview() {
+      const name = (setContractorName?.value || '').trim() || 'Najmul Mollick';
+      const role = (setContractorRole?.value || '').trim() || 'Founder & Licensed Master Contractor';
+      const lic = (setContractorLicense?.value || '').trim() || 'GOVERNMENT OF WEST BENGAL Electrical Workman\'s Permit | W. P. No.: WP02/2024/03883 | GSTIN: 19ECKPM3966B1ZB';
+      const bio = (setContractorBio?.value || '').trim() || 'When you hire Mollick Electric & Interior, you do not deal with call center agents or third-party brokers. I personally inspect your site, calculate the exact electrical load, check the wall alignments, and supervise my experienced Bengali carpenter and electrician team daily. We guarantee clean work, zero fire risk, and turnkey delivery on agreed time.';
+      const photo = (setContractorPhotoUrl?.value || '').trim();
+
+      const previewName = document.querySelector('#previewContractorName');
+      const previewHeading = document.querySelector('#previewHeadingName');
+      const previewRole = document.querySelector('#previewContractorRole');
+      const previewSubRole = document.querySelector('#previewSubRole');
+      const previewLic = document.querySelector('#previewContractorLicense');
+      const previewBio = document.querySelector('#previewContractorBio');
+      const previewPhotoContainer = document.querySelector('#previewContractorPhotoContainer');
+      const previewPhotoImg = document.querySelector('#previewContractorPhotoImg');
+      const previewMonogram = document.querySelector('#previewContractorMonogram');
+
+      if (previewName) previewName.textContent = name;
+      if (previewHeading) previewHeading.textContent = name;
+      if (previewRole) previewRole.textContent = role.toUpperCase();
+      if (previewSubRole) previewSubRole.textContent = role;
+      if (previewLic) previewLic.textContent = lic ? `★ ${lic} ★` : '★ WB LICENSED ★';
+      if (previewBio) {
+        const cleanBio = bio.replace(/^["'\s]+|["'\s]+$/g, '');
+        previewBio.textContent = `"${cleanBio}"`;
+      }
+
+      const initials = name.split(/\s+/).filter(Boolean).map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'NM';
+      if (previewMonogram) previewMonogram.textContent = initials;
+
+      if (photo) {
+        if (previewPhotoContainer) previewPhotoContainer.style.display = 'block';
+        if (previewPhotoImg) {
+          previewPhotoImg.src = photo;
+          if (setContractorPhotoPosition && setContractorPhotoPosition.value) {
+            previewPhotoImg.style.objectPosition = setContractorPhotoPosition.value;
+          }
+        }
+        if (previewMonogram) previewMonogram.style.display = 'none';
+      } else {
+        if (previewPhotoContainer) previewPhotoContainer.style.display = 'none';
+        if (previewMonogram) previewMonogram.style.display = 'flex';
+      }
+    }
+
+    // Contractor Photo Upload Handlers
+    function setContractorPhoto(dataUrl) {
+      setContractorPhotoUrl.value = dataUrl || '';
+      if (dataUrl) {
+        contractorPhotoActiveImg.src = dataUrl;
+        if (setContractorPhotoPosition && setContractorPhotoPosition.value) {
+          contractorPhotoActiveImg.style.objectPosition = setContractorPhotoPosition.value;
+        }
+        contractorPhotoActiveCard.style.display = 'flex';
+        contractorPhotoDropzone.style.display = 'none';
+        contractorPhotoStatusBadge.textContent = 'Custom Photo Active';
+        contractorPhotoStatusBadge.className = 'badge badge-success';
+      } else {
+        contractorPhotoActiveImg.src = '';
+        contractorPhotoActiveCard.style.display = 'none';
+        contractorPhotoDropzone.style.display = 'block';
+        contractorPhotoStatusBadge.textContent = 'Default Monogram';
+        contractorPhotoStatusBadge.className = 'badge badge-info';
+      }
+      updateContractorLivePreview();
+    }
+
+    async function processContractorFile(file) {
+      if (!file) return;
+      try {
+        const dataUrl = await handleImageUpload(file, 600, 600, 0.88);
+        setContractorPhoto(dataUrl);
+        showToast('✓ Contractor photo loaded! Click "Save Contractor Profile & Photo" to apply.', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to upload photo.', 'error');
+      }
+    }
+
+    // Wire Drag & Drop and manual file input for contractor photo
+    setupDropzone(contractorPhotoDropzone, setContractorPhotoInput, processContractorFile);
+
+    btnChangeContractorPhoto.addEventListener('click', () => setContractorPhotoInput.click());
+    btnRemoveContractorPhoto.addEventListener('click', () => {
+      setContractorPhotoInput.value = '';
+      setContractorPhoto('');
+      showToast('Contractor photo removed. Restored to default initials monogram.', 'info');
+    });
+
+    document.querySelector('#btnBrowseContractorPhoto')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setContractorPhotoInput.click();
+    });
+
+    document.querySelector('#btnSampleContractorPhoto')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // High-res portrait of master contractor
+      setContractorPhoto('https://images.unsplash.com/photo-1541888946425-d0fbb186156f?auto=format&fit=crop&w=600&q=80');
+      showToast('✨ Sample Master Contractor portrait loaded! Click "Save Contractor Profile & Photo" to apply.', 'success');
+    });
+
+    setContractorPhotoUrl.addEventListener('input', () => {
+      const val = setContractorPhotoUrl.value.trim();
+      setContractorPhoto(val);
+    });
+
+    if (setContractorPhotoPosition) {
+      setContractorPhotoPosition.addEventListener('change', () => {
+        if (contractorPhotoActiveImg) {
+          contractorPhotoActiveImg.style.objectPosition = setContractorPhotoPosition.value;
+        }
+        updateContractorLivePreview();
+      });
+    }
+
+    // Real-time live updating for contractor fields
+    [setContractorName, setContractorRole, setContractorLicense, setContractorBio].forEach(input => {
+      if (input) input.addEventListener('input', updateContractorLivePreview);
+    });
+
+    // Hero Section Real-Time Live Preview
+    function updateHeroLivePreview() {
+      const badge = (setHeroBadge?.value || '').trim() || 'Govt. Licensed Electrical Contractor & Turnkey Interior Specialist';
+      const title = (setHeroTitle?.value || '').trim() || 'Complete Home Interiors & Precision Electrical Mastery';
+      const desc = (setHeroDesc?.value || '').trim() || 'From 100% waterproof BWP 710 modular kitchens to short-circuit-safe concealed copper wiring.';
+      const img = (setHeroImageUrl?.value || '').trim() || 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80';
+
+      if (previewHeroBadgeText) previewHeroBadgeText.textContent = badge;
+      if (previewHeroTitleText) previewHeroTitleText.textContent = title;
+      if (previewHeroDescText) previewHeroDescText.textContent = desc;
+      if (previewHeroBannerBox) {
+        previewHeroBannerBox.style.backgroundImage = `linear-gradient(135deg, rgba(6, 11, 20, 0.88) 0%, rgba(12, 20, 36, 0.82) 50%, rgba(19, 34, 56, 0.88) 100%), url('${img}')`;
+      }
+    }
+
+    // Hero Photo Upload Handlers
+    function setHeroPhoto(dataUrl) {
+      setHeroImageUrl.value = dataUrl || '';
+      if (dataUrl) {
+        heroPhotoActiveImg.src = dataUrl;
+        heroPhotoActiveCard.style.display = 'flex';
+        heroPhotoDropzone.style.display = 'none';
+        heroPhotoStatusBadge.textContent = 'Custom Photo Active';
+        heroPhotoStatusBadge.className = 'badge badge-success';
+      } else {
+        heroPhotoActiveImg.src = '';
+        heroPhotoActiveCard.style.display = 'none';
+        heroPhotoDropzone.style.display = 'block';
+        heroPhotoStatusBadge.textContent = 'Default Showcase';
+        heroPhotoStatusBadge.className = 'badge badge-info';
+      }
+      updateHeroLivePreview();
+    }
+
+    async function processHeroFile(file) {
+      if (!file) return;
+      try {
+        const dataUrl = await handleImageUpload(file, 1920, 1080, 0.85);
+        setHeroPhoto(dataUrl);
+        showToast('✓ Hero background photo loaded! Click "Save Hero & Headlines" to apply.', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to upload hero image.', 'error');
+      }
+    }
+
+    // Wire Drag & Drop for Hero Photo
+    setupDropzone(heroPhotoDropzone, setHeroPhotoInput, processHeroFile);
+
+    btnBrowseHeroPhoto?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setHeroPhotoInput.click();
+    });
+    btnChangeHeroPhoto.addEventListener('click', () => setHeroPhotoInput.click());
+    btnRemoveHeroPhoto.addEventListener('click', () => {
+      setHeroPhotoInput.value = '';
+      setHeroPhoto('');
+      showToast('Hero background photo reset to default.', 'info');
+    });
+
+    // 1-Click Bengali Interior Presets
+    btnHeroPreset1?.addEventListener('click', () => {
+      setHeroPhoto('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80');
+      showToast('🌟 Luxury Living & False Ceiling preset selected! Click "Save Hero & Headlines" to apply.', 'info');
+    });
+    btnHeroPreset2?.addEventListener('click', () => {
+      setHeroPhoto('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=80');
+      showToast('💡 Modern Hall & Recessed Lights preset selected! Click "Save Hero & Headlines" to apply.', 'info');
+    });
+    btnHeroPreset3?.addEventListener('click', () => {
+      setHeroPhoto('https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1920&q=80');
+      showToast('🏡 Architectural Woodwork & Warm Interior preset selected! Click "Save Hero & Headlines" to apply.', 'info');
+    });
+
+    setHeroPhotoInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        processHeroFile(e.target.files[0]);
+      }
+    });
+    setHeroImageUrl.addEventListener('input', () => {
+      const val = setHeroImageUrl.value.trim();
+      if (val) setHeroPhoto(val);
+      updateHeroLivePreview();
+    });
+
+    [setHeroBadge, setHeroTitle, setHeroDesc].forEach(input => {
+      if (input) input.addEventListener('input', updateHeroLivePreview);
+    });
+
     // Display mode change
     modeEmblem.addEventListener('change', updateLivePreview);
     modeStandalone.addEventListener('change', updateLivePreview);
 
     // Load initial settings
-    function loadAllSettings() {
+    async function loadAllSettings() {
       const s = MollickDB.getSettings();
 
       // Brand
@@ -731,12 +1549,24 @@
       }
 
       // Contractor
-      setContractorName.value = s.contractorName || 'Nasim Mollick';
+      setContractorName.value = s.contractorName || 'Najmul Mollick';
       setContractorRole.value = s.contractorRole || 'Founder & Licensed Master Contractor';
-      setContractorLicense.value = s.contractorLicense || 'Govt. Electrical Contractor Lic #WB/KOL/2014-9982';
-      setWarranty.value = s.guaranteeYears || '5-Year Workmanship Warranty';
+      if (setPermitAuthority) setPermitAuthority.value = s.permitAuthority || "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit";
+      if (setWpNo) setWpNo.value = s.wpNo || 'WP02/2024/03883';
+      if (setGstin) setGstin.value = s.gstin || '19ECKPM3966B1ZB';
+      setContractorLicense.value = s.contractorLicense || "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit | W. P. No.: WP02/2024/03883 | GSTIN: 19ECKPM3966B1ZB";
+      setWarranty.value = s.guaranteeYears || '10-Year Modular Woodwork & 5-Year Electrical Warranty';
       setExpYears.value = s.experienceYears || '12+';
       setProjectsDone.value = s.completedProjects || '850+';
+      setContractorBio.value = s.contractorBio || '';
+      if (setContractorPhotoPosition && s.contractorPhotoPosition) {
+        setContractorPhotoPosition.value = s.contractorPhotoPosition;
+      }
+      if (s.contractorPhoto) {
+        setContractorPhoto(s.contractorPhoto);
+      } else {
+        setContractorPhoto('');
+      }
 
       // Contact
       setPhone.value = s.phone || '6290858744';
@@ -748,19 +1578,59 @@
       setServiceAreas.value = s.serviceAreas || 'New Town, Salt Lake, Rajarhat, EM Bypass, Lake Town, Behala, Kolkata';
 
       // Hero
-      setHeroTitle.value = s.heroTitle || 'Powering Spaces, Defining Lifestyles';
+      setHeroBadge.value = s.heroBadge || 'Govt. Licensed Electrical Contractor & Turnkey Interior Specialist';
+      setHeroTitle.value = s.heroTitle || 'Complete Home Interiors & Precision Electrical Mastery';
       setHeroDesc.value = s.heroDescription || '';
-      setCtaText.value = s.ctaText || 'Get Free Site Inspection';
+      setCtaText.value = s.ctaText || 'Calculate Interior Cost';
       setEmergencyText.value = s.emergencyText || '24/7 Rapid Emergency Response: 6290858744';
       setFacebook.value = s.facebookUrl || '';
       setInstagram.value = s.instagramUrl || '';
+      if (s.heroImage) {
+        setHeroPhoto(s.heroImage);
+      } else {
+        setHeroPhoto('');
+      }
+
+      // Estimator Rates
+      if (setEst1Bhk) setEst1Bhk.value = s.estimator1Bhk || '220000';
+      if (setEst2Bhk) setEst2Bhk.value = s.estimator2Bhk || '385000';
+      if (setEst3Bhk) setEst3Bhk.value = s.estimator3Bhk || '560000';
+      if (setEst4Bhk) setEst4Bhk.value = s.estimator4Bhk || '820000';
+      if (setEstSpaceKitchen) setEstSpaceKitchen.value = s.estSpaceKitchen || '32';
+      if (setEstSpaceLiving) setEstSpaceLiving.value = s.estSpaceLiving || '18';
+      if (setEstSpaceWardrobe) setEstSpaceWardrobe.value = s.estSpaceWardrobe || '24';
+      if (setEstSpaceCeiling) setEstSpaceCeiling.value = s.estSpaceCeiling || '10';
+      if (setEstSpaceElectric) setEstSpaceElectric.value = s.estSpaceElectric || '9';
+      if (setEstSpacePaint) setEstSpacePaint.value = s.estSpacePaint || '7';
+      if (setEstTierEssential) setEstTierEssential.value = s.estTierEssential || '85';
+      if (setEstTierPremium) setEstTierPremium.value = s.estTierPremium || '100';
+      if (setEstTierLuxe) setEstTierLuxe.value = s.estTierLuxe || '138';
+      if (setEstMarginHigh) setEstMarginHigh.value = s.estMarginHigh || '18';
+      updateSandboxEstimator();
 
       const fbInput = document.querySelector('#firebaseConfigJson');
       if (fbInput && s.firebaseConfig) {
         fbInput.value = s.firebaseConfig;
       }
 
+      // Load Admin Credentials for Email / Username management
+      try {
+        const creds = await AdminAuth.getCredentials();
+        const displayEmail = document.querySelector('#displayCurrentAdminEmail');
+        const displayUser = document.querySelector('#displayCurrentAdminUser');
+        const inputNewEmail = document.querySelector('#newAdminEmail');
+        const inputNewUser = document.querySelector('#newAdminUsername');
+        if (displayEmail) displayEmail.textContent = creds.email;
+        if (displayUser) displayUser.textContent = creds.username;
+        if (inputNewEmail && !inputNewEmail.value) inputNewEmail.value = creds.email;
+        if (inputNewUser && !inputNewUser.value) inputNewUser.value = creds.username;
+      } catch (err) {
+        console.warn('Could not load admin credentials:', err);
+      }
+
       updateLivePreview();
+      updateContractorLivePreview();
+      updateHeroLivePreview();
     }
 
     loadAllSettings();
@@ -810,13 +1680,19 @@
       const updated = {
         contractorName: setContractorName.value.trim(),
         contractorRole: setContractorRole.value.trim(),
-        contractorLicense: setContractorLicense.value.trim(),
+        permitAuthority: setPermitAuthority ? setPermitAuthority.value.trim() : "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit",
+        wpNo: setWpNo ? setWpNo.value.trim() : 'WP02/2024/03883',
+        gstin: setGstin ? setGstin.value.trim() : '19ECKPM3966B1ZB',
+        contractorLicense: setContractorLicense.value.trim() || `GOVERNMENT OF WEST BENGAL Electrical Workman's Permit | W. P. No.: ${setWpNo ? setWpNo.value.trim() : 'WP02/2024/03883'} | GSTIN: ${setGstin ? setGstin.value.trim() : '19ECKPM3966B1ZB'}`,
         guaranteeYears: setWarranty.value.trim(),
         experienceYears: setExpYears.value.trim(),
-        completedProjects: setProjectsDone.value.trim()
+        completedProjects: setProjectsDone.value.trim(),
+        contractorBio: setContractorBio.value.trim(),
+        contractorPhoto: setContractorPhotoUrl.value || '',
+        contractorPhotoPosition: setContractorPhotoPosition ? setContractorPhotoPosition.value : 'center 20%'
       };
       MollickDB.saveSettings(updated);
-      showToast('✓ Contractor credentials & warranties saved!', 'success');
+      showToast('✓ Contractor credentials, bio & photo saved! Public site updated.', 'success');
     });
 
     // 3. Save Contact Details
@@ -839,40 +1715,180 @@
     heroForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const updated = {
+        heroBadge: setHeroBadge.value.trim(),
         heroTitle: setHeroTitle.value.trim(),
         heroDescription: setHeroDesc.value.trim(),
+        heroImage: setHeroImageUrl.value || '',
         ctaText: setCtaText.value.trim(),
         emergencyText: setEmergencyText.value.trim(),
         facebookUrl: setFacebook.value.trim(),
         instagramUrl: setInstagram.value.trim()
       };
       MollickDB.saveSettings(updated);
-      showToast('✓ Homepage hero banner and call-to-action saved!', 'success');
+      showToast('✓ Homepage hero banner, badge & showcase photo saved!', 'success');
     });
 
-    // 5. Password Change
+    // 5. Save Estimator Rates & Live Sandbox Controls
+    const estInputs = [
+      setEst1Bhk, setEst2Bhk, setEst3Bhk, setEst4Bhk,
+      setEstSpaceKitchen, setEstSpaceLiving, setEstSpaceWardrobe,
+      setEstSpaceCeiling, setEstSpaceElectric, setEstSpacePaint,
+      setEstTierEssential, setEstTierPremium, setEstTierLuxe, setEstMarginHigh
+    ];
+    estInputs.forEach(input => {
+      if (input) {
+        input.addEventListener('input', updateSandboxEstimator);
+      }
+    });
+
+    document.querySelectorAll('.btn-sandbox-bhk').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.btn-sandbox-bhk').forEach(b => {
+          b.classList.remove('active');
+          b.style.background = 'transparent';
+          b.style.color = '#ffffff';
+          b.style.borderColor = 'rgba(255,255,255,0.2)';
+        });
+        btn.classList.add('active');
+        btn.style.background = '#e11d24';
+        btn.style.color = '#ffffff';
+        btn.style.borderColor = '#e11d24';
+        currentSandboxBhk = btn.dataset.bhk;
+        updateSandboxEstimator();
+      });
+    });
+
+    if (btnResetEstimatorDefaults) {
+      btnResetEstimatorDefaults.addEventListener('click', () => {
+        if (!confirm('Reset all estimator pricing & percentages back to default standard rates?')) return;
+        if (setEst1Bhk) setEst1Bhk.value = '220000';
+        if (setEst2Bhk) setEst2Bhk.value = '385000';
+        if (setEst3Bhk) setEst3Bhk.value = '560000';
+        if (setEst4Bhk) setEst4Bhk.value = '820000';
+        if (setEstSpaceKitchen) setEstSpaceKitchen.value = '32';
+        if (setEstSpaceLiving) setEstSpaceLiving.value = '18';
+        if (setEstSpaceWardrobe) setEstSpaceWardrobe.value = '24';
+        if (setEstSpaceCeiling) setEstSpaceCeiling.value = '10';
+        if (setEstSpaceElectric) setEstSpaceElectric.value = '9';
+        if (setEstSpacePaint) setEstSpacePaint.value = '7';
+        if (setEstTierEssential) setEstTierEssential.value = '85';
+        if (setEstTierPremium) setEstTierPremium.value = '100';
+        if (setEstTierLuxe) setEstTierLuxe.value = '138';
+        if (setEstMarginHigh) setEstMarginHigh.value = '18';
+        updateSandboxEstimator();
+        showToast('Estimator values reset to standard defaults. Click Save to persist.', 'info');
+      });
+    }
+
+    if (estimatorRatesForm) {
+      estimatorRatesForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const updated = {
+          estimator1Bhk: setEst1Bhk ? setEst1Bhk.value.trim() : '220000',
+          estimator2Bhk: setEst2Bhk ? setEst2Bhk.value.trim() : '385000',
+          estimator3Bhk: setEst3Bhk ? setEst3Bhk.value.trim() : '560000',
+          estimator4Bhk: setEst4Bhk ? setEst4Bhk.value.trim() : '820000',
+          estSpaceKitchen: setEstSpaceKitchen ? setEstSpaceKitchen.value.trim() : '32',
+          estSpaceLiving: setEstSpaceLiving ? setEstSpaceLiving.value.trim() : '18',
+          estSpaceWardrobe: setEstSpaceWardrobe ? setEstSpaceWardrobe.value.trim() : '24',
+          estSpaceCeiling: setEstSpaceCeiling ? setEstSpaceCeiling.value.trim() : '10',
+          estSpaceElectric: setEstSpaceElectric ? setEstSpaceElectric.value.trim() : '9',
+          estSpacePaint: setEstSpacePaint ? setEstSpacePaint.value.trim() : '7',
+          estTierEssential: setEstTierEssential ? setEstTierEssential.value.trim() : '85',
+          estTierPremium: setEstTierPremium ? setEstTierPremium.value.trim() : '100',
+          estTierLuxe: setEstTierLuxe ? setEstTierLuxe.value.trim() : '138',
+          estMarginHigh: setEstMarginHigh ? setEstMarginHigh.value.trim() : '18'
+        };
+        MollickDB.saveSettings(updated);
+        showToast('✓ Home interior & electrical estimator prices & rates saved! Public site calculator updated.', 'success');
+      });
+    }
+
+    // Toggle Password Visibility for all eye buttons in settings
+    document.querySelectorAll('.btn-toggle-pwd').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        const input = document.getElementById(targetId);
+        if (!input) return;
+        const isPass = input.getAttribute('type') === 'password';
+        input.setAttribute('type', isPass ? 'text' : 'password');
+        btn.textContent = isPass ? '🙈' : '👁️';
+      });
+    });
+
+    // 6. Admin Email & Username Update
+    const emailForm = document.querySelector('#changeAdminEmailForm');
+    if (emailForm) {
+      emailForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const newEmail = document.querySelector('#newAdminEmail').value.trim();
+        const newUser = document.querySelector('#newAdminUsername').value.trim();
+        const currentPwd = document.querySelector('#confirmEmailCurrentPassword').value;
+
+        if (!newEmail || !newUser) {
+          showToast('Please provide both email and username.', 'error');
+          return;
+        }
+
+        if (!currentPwd) {
+          showToast('Please enter your current password to confirm the change.', 'error');
+          return;
+        }
+
+        const btn = document.querySelector('#btnUpdateEmailSubmit');
+        if (btn) btn.disabled = true;
+
+        const res = await AdminAuth.updateEmail(newEmail, newUser, currentPwd);
+        if (btn) btn.disabled = false;
+
+        if (res.success) {
+          showToast(res.message, 'success');
+          const displayEmail = document.querySelector('#displayCurrentAdminEmail');
+          const displayUser = document.querySelector('#displayCurrentAdminUser');
+          if (displayEmail) displayEmail.textContent = res.email;
+          if (displayUser) displayUser.textContent = res.username;
+          document.querySelector('#confirmEmailCurrentPassword').value = '';
+        } else {
+          showToast(res.message, 'error');
+        }
+      });
+    }
+
+    // 7. Password Change
     const pwdForm = document.querySelector('#changePasswordForm');
-    pwdForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const oldPwd = document.querySelector('#currentPassword').value;
-      const newPwd = document.querySelector('#newPassword').value;
-      const confirmPwd = document.querySelector('#confirmNewPassword').value;
+    if (pwdForm) {
+      pwdForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const oldPwd = document.querySelector('#currentPassword').value;
+        const newPwd = document.querySelector('#newPassword').value;
+        const confirmPwd = document.querySelector('#confirmNewPassword').value;
 
-      if (newPwd !== confirmPwd) {
-        showToast('New passwords do not match.', 'error');
-        return;
-      }
+        if (newPwd.length < 6) {
+          showToast('New password must be at least 6 characters long.', 'error');
+          return;
+        }
 
-      const res = await AdminAuth.changePassword(oldPwd, newPwd);
-      if (res.success) {
-        showToast('✓ Admin password successfully updated!', 'success');
-        pwdForm.reset();
-      } else {
-        showToast(res.message, 'error');
-      }
-    });
+        if (newPwd !== confirmPwd) {
+          showToast('New passwords do not match.', 'error');
+          return;
+        }
 
-    // 6. Firebase Config
+        const btn = document.querySelector('#btnUpdatePasswordSubmit');
+        if (btn) btn.disabled = true;
+
+        const res = await AdminAuth.changePassword(oldPwd, newPwd);
+        if (btn) btn.disabled = false;
+
+        if (res.success) {
+          showToast(res.message, 'success');
+          pwdForm.reset();
+        } else {
+          showToast(res.message, 'error');
+        }
+      });
+    }
+
+    // 8. Firebase Config
     document.querySelector('#btnSaveFirebaseConfig').addEventListener('click', () => {
       const fbVal = document.querySelector('#firebaseConfigJson').value.trim();
       MollickDB.saveSettings({ firebaseConfig: fbVal });

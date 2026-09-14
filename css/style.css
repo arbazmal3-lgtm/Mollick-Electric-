@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
 /* ==========================================================================
    MOLLICK ELECTRIC & INTERIOR - COMPLETE STYLESHEET
    Pure CSS3 - Modern, Responsive, Production-Ready Design System
@@ -44,9 +46,9 @@
   --text-white: #ffffff;
   --text-gold: #e11d24;
 
-  /* Typography Specs */
-  --font-heading: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  /* Typography Specs - Simple, Modern, Architectural & Professional */
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(11, 19, 32, 0.05);
@@ -479,7 +481,11 @@ ul, ol {
    -------------------------------------------------------------------------- */
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #060b14 0%, #0c1424 50%, #132238 100%);
+  background-color: #060b14;
+  background-image: linear-gradient(135deg, rgba(6, 11, 20, 0.88) 0%, rgba(12, 20, 36, 0.82) 50%, rgba(19, 34, 56, 0.88) 100%), url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   color: var(--text-white);
   padding: 70px 0 80px;
   overflow: hidden;
@@ -502,34 +508,53 @@ ul, ol {
   align-items: center;
 }
 
-.hero-tag {
+.hero-tag,
+#heroBadgeTag {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(225, 29, 36, 0.14);
-  color: var(--accent-gold);
-  border: 1px solid var(--border-gold);
-  padding: 6px 14px;
+  background: rgba(6, 11, 20, 0.85);
+  color: #fecaca;
+  border: 1px solid rgba(225, 29, 36, 0.45);
+  padding: 7px 16px;
   border-radius: var(--radius-full);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 20px;
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  line-height: 1.4;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
-.hero-title {
+.hero-tag::before,
+#heroBadgeTag::before {
+  content: '🛡️';
+  font-size: 0.9rem;
+  display: inline-block;
+  line-height: 1;
+}
+
+.hero-title,
+#heroTitleEl {
   font-family: var(--font-heading);
-  font-size: 3.2rem;
-  font-weight: 900;
-  line-height: 1.15;
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  font-weight: 750;
+  line-height: 1.22;
   color: #ffffff;
   margin-bottom: 20px;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
-.hero-title .highlight {
-  color: var(--accent-gold);
+.hero-title .highlight,
+#heroTitleEl .highlight {
+  color: #ff4d4f;
+  font-weight: 800;
+  text-shadow: 0 2px 10px rgba(225, 29, 36, 0.35);
 }
 
 .hero-description {
@@ -2224,17 +2249,16 @@ textarea.form-control {
    -------------------------------------------------------------------------- */
 .contractor-crest {
   width: 100%;
-  max-width: 200px;
-  aspect-ratio: 1 / 1;
+  max-width: 210px;
   background: linear-gradient(135deg, #071529 0%, #0e274a 100%);
-  border: 3px solid var(--accent-gold);
-  border-radius: var(--radius-md);
+  border: 2px solid var(--accent-gold);
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 16px 10px;
+  padding: 18px 12px;
   box-shadow: 0 10px 25px rgba(7, 21, 41, 0.25);
   position: relative;
   overflow: hidden;
@@ -2242,33 +2266,63 @@ textarea.form-control {
   background-size: 14px 14px;
 }
 
+.contractor-photo-container {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 10px;
+  border: 3px solid var(--accent-gold);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  background: #070e1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contractor-spotlight-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+}
+
 .contractor-crest-monogram {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 2px solid var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 900;
   color: var(--accent-gold);
   line-height: 1;
-  margin-bottom: 6px;
+  margin: 0 auto 10px;
   letter-spacing: 2px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .contractor-crest-title {
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 800;
   text-transform: uppercase;
   color: #ffffff;
-  letter-spacing: 1px;
-  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
 }
 
 .contractor-crest-badge {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
   color: var(--accent-gold);
   background: rgba(217, 163, 67, 0.15);
   border: 1px solid rgba(217, 163, 67, 0.4);
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 999px;
   margin-top: 4px;
 }
@@ -2436,5 +2490,1059 @@ textarea.form-control {
   justify-content: space-between;
   font-size: 0.78rem;
   color: #cbd5e1;
+}
+
+/* ==============================================================================
+   LIVSPACE DESIGN SYSTEM ENHANCEMENTS
+   Modern turnkey interior design components, interactive calculators & showcases
+   ============================================================================== */
+
+/* Hero Quick Estimate & Consultation Card */
+.hero-estimate-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-estimate-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--accent-gold), #ff4d4f);
+}
+
+.hero-estimate-header {
+  margin-bottom: 18px;
+}
+
+.hero-estimate-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 4px;
+  line-height: 1.25;
+}
+
+.hero-estimate-subtitle {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.hero-estimate-form .form-group {
+  margin-bottom: 14px;
+}
+
+.hero-estimate-form .form-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.hero-estimate-form .form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  transition: all var(--transition-fast);
+  background-color: #f8fafc;
+  color: var(--primary-navy);
+}
+
+.hero-estimate-form .form-control:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(225, 29, 36, 0.12);
+}
+
+.hero-estimate-trust {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* Livspace Trust Strip Pills */
+.livspace-trust-strip {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-light);
+  padding: 18px 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.livspace-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  .livspace-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .livspace-trust-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.livspace-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+}
+
+.livspace-trust-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(225, 29, 36, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  color: var(--accent-gold);
+}
+
+.livspace-trust-heading {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 2px;
+}
+
+.livspace-trust-sub {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   LIVSPACE SIGNATURE COST ESTIMATOR (PRICE CALCULATOR)
+   -------------------------------------------------------------------------- */
+.cost-estimator-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  padding: 80px 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.estimator-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.estimator-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 40px rgba(11, 19, 32, 0.08);
+  border: 1.5px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.estimator-header-banner {
+  background: linear-gradient(135deg, #0b1320 0%, #152238 100%);
+  color: #ffffff;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.estimator-banner-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.estimator-banner-subtitle {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+}
+
+.estimator-step-badge {
+  background: rgba(225, 29, 36, 0.2);
+  border: 1px solid var(--border-gold);
+  color: #ff8085;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estimator-body-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 0;
+}
+
+@media (max-width: 991px) {
+  .estimator-body-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.estimator-controls-panel {
+  padding: 32px;
+  border-right: 1px solid var(--border-light);
+}
+
+@media (max-width: 768px) {
+  .estimator-controls-panel {
+    padding: 20px;
+  }
+}
+
+.estimator-step-block {
+  margin-bottom: 30px;
+}
+
+.estimator-step-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 14px;
+}
+
+.estimator-step-num {
+  width: 26px;
+  height: 26px;
+  background: var(--primary-navy);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* BHK Selector Buttons */
+.bhk-btn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 576px) {
+  .bhk-btn-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.bhk-option-btn {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.bhk-option-btn:hover {
+  border-color: var(--accent-gold);
+  background: #fffdfa;
+}
+
+.bhk-option-btn.active {
+  border-color: var(--accent-gold);
+  background: #fff5f5;
+  box-shadow: 0 4px 14px rgba(225, 29, 36, 0.15);
+}
+
+.bhk-option-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 2px;
+}
+
+.bhk-option-btn.active .bhk-option-title {
+  color: var(--accent-gold);
+}
+
+.bhk-option-sqft {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Space Checkbox Grid */
+.spaces-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 576px) {
+  .spaces-toggle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.space-toggle-card {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.space-toggle-card:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.space-toggle-card.active {
+  border-color: var(--accent-gold);
+  background: #fff5f5;
+}
+
+.space-toggle-card input[type="checkbox"] {
+  accent-color: var(--accent-gold);
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.space-toggle-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.space-toggle-name {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+  margin-bottom: 2px;
+}
+
+.space-toggle-spec {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Finish Tier Selector */
+.tier-toggle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .tier-toggle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tier-option-card {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  background: #ffffff;
+}
+
+.tier-option-card:hover {
+  border-color: var(--accent-gold);
+}
+
+.tier-option-card.active {
+  border-color: var(--accent-gold);
+  background: #fff5f5;
+  box-shadow: 0 4px 16px rgba(225, 29, 36, 0.12);
+}
+
+.tier-popular-tag {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-gold);
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tier-option-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 4px;
+}
+
+.tier-option-card.active .tier-option-title {
+  color: var(--accent-gold);
+}
+
+.tier-option-desc {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Estimator Live Results Output Panel */
+.estimator-results-panel {
+  background: #0b1320;
+  color: #ffffff;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .estimator-results-panel {
+    padding: 24px;
+  }
+}
+
+.estimator-price-badge {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.estimator-price-range {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.15;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.estimator-price-range .price-highlight {
+  color: var(--accent-gold);
+}
+
+.estimator-price-note {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Breakdown List */
+.estimator-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.breakdown-row-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breakdown-row-val {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.estimator-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.estimator-action-group .btn {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   LIVSPACE ROOM-BY-ROOM INSPIRATION EXPLORER
+   -------------------------------------------------------------------------- */
+.livspace-gallery-section {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.livspace-room-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 991px) {
+  .livspace-room-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .livspace-room-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.livspace-room-card {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.livspace-room-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(11, 19, 32, 0.12);
+  border-color: #cbd5e1;
+}
+
+.livspace-room-photo-wrap {
+  position: relative;
+  height: 230px;
+  overflow: hidden;
+  background: #0b1320;
+}
+
+.livspace-room-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 40%, #1a2a47 0%, #071529 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.livspace-placeholder-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 12px;
+  background: rgba(217, 163, 67, 0.15);
+  border: 1px solid rgba(217, 163, 67, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: 1.8rem;
+}
+
+.livspace-placeholder-label {
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.livspace-room-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.livspace-room-card:hover .livspace-room-photo-wrap img {
+  transform: scale(1.05);
+}
+
+.livspace-room-category-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(11, 19, 32, 0.85);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.livspace-room-warranty-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(225, 29, 36, 0.9);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.livspace-room-info {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.livspace-room-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 6px;
+}
+
+.livspace-room-specs {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.livspace-room-materials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--primary-navy);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.livspace-room-materials span {
+  color: var(--accent-gold);
+}
+
+.livspace-room-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+  padding-top: 12px;
+}
+
+.livspace-room-price-est {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+/* --------------------------------------------------------------------------
+   THE MOLLICK / LIVSPACE 4-STEP TURNKEY JOURNEY
+   -------------------------------------------------------------------------- */
+.process-section {
+  padding: 80px 0;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-light);
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.process-step-card {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 28px 20px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.process-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-gold);
+}
+
+.process-step-number {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-navy);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(11, 19, 32, 0.15);
+}
+
+.process-step-card:hover .process-step-number {
+  background: var(--accent-gold);
+}
+
+.process-step-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 8px;
+}
+
+.process-step-desc {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   LIVSPACE COMPARISON GRID (US VS LOCAL CONTRACTORS)
+   -------------------------------------------------------------------------- */
+.comparison-section {
+  padding: 80px 0;
+  background: #ffffff;
+}
+
+.comparison-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.comparison-table th {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  background: #f8fafc;
+  color: var(--primary-navy);
+  font-size: 0.95rem;
+}
+
+.comparison-table th.highlight-col,
+.comparison-table td.highlight-col {
+  background: #fff8f8;
+  border-left: 2px solid var(--accent-gold);
+  border-right: 2px solid var(--accent-gold);
+}
+
+.comparison-table th.highlight-col {
+  background: #ffebeb;
+  color: var(--accent-gold);
+  font-size: 1.05rem;
+}
+
+.comparison-feature-name {
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+.comparison-feature-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.check-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: #15803d;
+  font-size: 0.86rem;
+}
+
+.cross-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #b91c1c;
+  font-size: 0.84rem;
+}
+
+/* --------------------------------------------------------------------------
+   KOLKATA REAL HOME TOURS (LIVSPACE HOME SHOWCASE)
+   -------------------------------------------------------------------------- */
+.hometours-section {
+  padding: 80px 0;
+  background: #f8fafc;
+  border-top: 1px solid var(--border-light);
+}
+
+.hometours-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 991px) {
+  .hometours-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .hometours-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hometour-card {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.hometour-image-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #0b1320;
+}
+
+.hometour-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.hometour-card:hover .hometour-image-wrap img {
+  transform: scale(1.04);
+}
+
+.hometour-bhk-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(11, 19, 32, 0.88);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.hometour-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.hometour-community {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+  margin-bottom: 4px;
+}
+
+.hometour-location {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.hometour-specs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #f8fafc;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+.hometour-spec-col {
+  text-align: center;
+}
+
+.hometour-spec-val {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+}
+
+.hometour-spec-lbl {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.hometour-quote {
+  font-size: 0.82rem;
+  color: var(--text-body);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.hometour-client {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--primary-navy);
+}
+
+/* --------------------------------------------------------------------------
+   LIVSPACE DESIGN CONSULTATION MODAL
+   -------------------------------------------------------------------------- */
+.livspace-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 19, 32, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.livspace-modal-overlay.is-active {
+  display: flex;
+}
+
+.livspace-modal-box {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  max-width: 540px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.livspace-modal-header {
+  background: linear-gradient(135deg, #0b1320 0%, #17263c 100%);
+  color: #ffffff;
+  padding: 20px 24px;
+  position: relative;
+}
+
+.livspace-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.livspace-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.livspace-modal-subtitle {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.livspace-modal-body {
+  padding: 24px;
 }
 

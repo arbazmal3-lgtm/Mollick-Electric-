@@ -8,6 +8,9 @@
   <meta property="og:title" content="Mollick Electric &amp; Interior | Powering Spaces, Defining Lifestyles">
   <meta property="og:description" content="Expert electrical installations, modern interior design, modular solutions, and false ceilings. Call: 6290858744 / 8777688287.">
   <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
 </head>
@@ -95,78 +98,90 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-content">
-            <div class="hero-tag">Govt. Licensed Electrical Contractor &amp; Turnkey Interior Specialist</div>
-            <h1 class="hero-title">
-              Safe Concealed Wiring &amp; <br><span class="highlight">Luxury Turnkey Interiors.</span>
+            <div class="hero-tag" id="heroBadgeTag">Govt. of West Bengal Electrical Workman's Permit • Turnkey Interior Specialist</div>
+            <h1 class="hero-title" id="heroTitleEl">
+              Interiors You'll Love, <br><span class="highlight">Guaranteed On-Time.</span>
             </h1>
-            <p class="hero-description">
-              Directly executed and supervised by Master Contractor Nasim Mollick with 12+ years of on-site experience across Kolkata. From short-circuit-safe concealed copper wiring and MCB/RCCB panels to Saint-Gobain Gyproc false ceilings, waterproof BWP 710 modular kitchens, and custom sliding wardrobes.
+            <p class="hero-description" id="heroDescEl">
+              Directly executed and supervised by Master Contractor Najmul Mollick with 12+ years of on-site experience across Kolkata. From 100% shock-safe concealed FR wiring to Saint-Gobain Gyproc false ceilings, waterproof BWP 710 modular kitchens, and custom sliding wardrobes.
             </p>
             <div class="hero-cta-group">
-              <a href="contact.html" class="btn btn-primary btn-lg">Book Free Site Measurement</a>
-              <a href="projects.html" class="btn btn-outline-gold btn-lg">Explore Completed Projects</a>
+              <button type="button" class="btn btn-primary btn-lg" id="btnHeroOpenConsult">Book Free 3D Design</button>
             </div>
             <div class="hero-features-list">
               <div class="hero-feature-item">
-                <span>⚡</span> Havells &amp; Polycab FR Copper Wiring
+                <span>🛡️</span> 10-Yr Woodwork &amp; 5-Yr Electric Warranty
               </div>
               <div class="hero-feature-item">
-                <span>🛡️</span> 100% Waterproof BWP 710 Marine Ply
+                <span>⏱️</span> 45-Day Guaranteed Handover
               </div>
               <div class="hero-feature-item">
                 <span>📍</span> New Town, Salt Lake, Rajarhat &amp; Kolkata
               </div>
             </div>
           </div>
+
           <div class="hero-visual">
-            <div class="hero-blueprint-board">
-              <div class="blueprint-header">
-                <div class="blueprint-title">
-                  <span>⚡</span> Master Execution Blueprint
-                </div>
-                <div class="blueprint-stamp">WB LICENSED</div>
+            <!-- Livspace Quick Consultation & Price Estimator Card -->
+            <div class="hero-estimate-card" id="heroEstimateCard">
+              <div class="hero-estimate-header">
+                <div class="hero-estimate-title">Get Free 3D Design &amp; Quote</div>
+                <div class="hero-estimate-subtitle">Direct consultation &amp; site visit by Master Contractor Najmul Mollick</div>
               </div>
-              <div class="blueprint-grid">
-                <div class="blueprint-item">
-                  <div class="blueprint-item-icon">
-                    <img src="assets/icons/electric.svg" alt="Concealed Electric">
-                  </div>
-                  <div>
-                    <div class="blueprint-item-name">CESC / ISI Electric</div>
-                    <div class="blueprint-item-desc">Havells FR copper cables, RCCB 30mA safety breakers &amp; smart modules.</div>
-                  </div>
+
+              <form id="heroQuickEstimateForm" class="hero-estimate-form" novalidate>
+                <div class="form-group">
+                  <label for="heroQuickBhk" class="form-label">Select Home Layout</label>
+                  <select id="heroQuickBhk" class="form-control" required>
+                    <option value="1 BHK">1 BHK Apartment (500 - 650 sq.ft)</option>
+                    <option value="2 BHK" selected>2 BHK Apartment (800 - 1050 sq.ft)</option>
+                    <option value="3 BHK">3 BHK Apartment (1200 - 1550 sq.ft)</option>
+                    <option value="4 BHK / Villa">4 BHK / Duplex / Villa (1800+ sq.ft)</option>
+                    <option value="Commercial Office">Commercial / Office Space</option>
+                  </select>
                 </div>
-                <div class="blueprint-item">
-                  <div class="blueprint-item-icon">
-                    <img src="assets/icons/ceiling.svg" alt="False Ceiling">
-                  </div>
-                  <div>
-                    <div class="blueprint-item-name">Gyproc False Ceiling</div>
-                    <div class="blueprint-item-desc">Saint-Gobain gypsum boards, anti-crack GI channel framing &amp; warm coves.</div>
-                  </div>
+
+                <div class="form-group">
+                  <label for="heroQuickScope" class="form-label">Scope of Work</label>
+                  <select id="heroQuickScope" class="form-control">
+                    <option value="Full Turnkey Home (Kitchen, Wardrobes, Ceiling, Electric, Paint)">Full Turnkey Home Interior</option>
+                    <option value="Modular Kitchen & Dining">Modular Kitchen &amp; Dining Only</option>
+                    <option value="Living Room & TV Wall">Living Room &amp; TV Entertainment Wall</option>
+                    <option value="Bedrooms & Sliding Wardrobes">Bedrooms &amp; Custom Wardrobes</option>
+                    <option value="Concealed Electrical & Safety DB">Concealed Electric &amp; 3-Phase DB</option>
+                  </select>
                 </div>
-                <div class="blueprint-item">
-                  <div class="blueprint-item-icon">
-                    <img src="assets/icons/kitchen.svg" alt="Modular Kitchen">
-                  </div>
-                  <div>
-                    <div class="blueprint-item-name">BWP 710 Marine Ply</div>
-                    <div class="blueprint-item-desc">Century/Greenply marine carcasses, Blum soft-close &amp; acrylic shutters.</div>
-                  </div>
+
+                <div class="form-group">
+                  <label for="heroQuickLocation" class="form-label">Flat / Site Location <span class="required">*</span></label>
+                  <input type="text" id="heroQuickLocation" name="heroQuickLocation" class="form-control" placeholder="Type your flat / society / area name..." required autocomplete="street-address" list="kolkataLocationsList">
+                  <datalist id="kolkataLocationsList">
+                    <option value="New Town, Action Area I">
+                    <option value="New Town, Action Area II">
+                    <option value="New Town, Action Area III">
+                    <option value="Rajarhat / Chinar Park">
+                    <option value="Salt Lake (Sector I, II, III, V)">
+                    <option value="EM Bypass / Ruby / Garia">
+                    <option value="Kestopur / VIP Road">
+                    <option value="Lake Town / Dum Dum">
+                    <option value="Behala / South Kolkata">
+                    <option value="Howrah / Other Locations">
+                  </datalist>
                 </div>
-                <div class="blueprint-item">
-                  <div class="blueprint-item-icon">
-                    <img src="assets/icons/paint.svg" alt="Putty & Paint">
-                  </div>
-                  <div>
-                    <div class="blueprint-item-name">Royale Emulsion &amp; POP</div>
-                    <div class="blueprint-item-desc">Birla White putty with Asian Paints Royale washable luxury finish.</div>
-                  </div>
+
+                <div class="form-group">
+                  <label for="heroQuickPhone" class="form-label">Your Mobile / WhatsApp <span class="required">*</span></label>
+                  <input type="tel" id="heroQuickPhone" class="form-control" placeholder="e.g. 9876543210" required>
                 </div>
-              </div>
-              <div class="blueprint-footer">
-                <span>📍 Direct On-Site Supervision in Kolkata</span>
-                <span style="color: var(--accent-gold); font-weight: 700;">★ 15+ Years Trust</span>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 0.95rem; font-weight: 800; padding: 13px;">
+                  Get Instant Estimate &amp; Free 3D Design &rarr;
+                </button>
+              </form>
+
+              <div class="hero-estimate-trust">
+                <span>★ 850+ Homes Delivered</span>
+                <span>🔒 100% Free Site Measurement</span>
               </div>
             </div>
           </div>
@@ -174,29 +189,36 @@
       </div>
     </section>
 
-    <!-- Trust Badges Strip -->
-    <section class="trust-strip" aria-label="Company Core Guarantees">
+    <!-- Livspace 4-Pillar Trust Guarantees Strip -->
+    <section class="livspace-trust-strip" aria-label="Livspace Standard Core Guarantees">
       <div class="container">
-        <div class="trust-grid">
-          <div class="trust-card">
-            <img src="assets/icons/badge-safe.svg" alt="Safe Work Icon" class="trust-icon">
+        <div class="livspace-trust-grid">
+          <div class="livspace-trust-item">
+            <div class="livspace-trust-icon">🛡️</div>
             <div>
-              <div class="trust-title">SAFE WORK</div>
-              <div class="trust-desc">Concealed ISI copper conduits, RCCB breakers &amp; fire-safe protocols.</div>
+              <div class="livspace-trust-heading">10-Year Modular Warranty</div>
+              <div class="livspace-trust-sub">100% Waterproof BWP 710 Marine Plywood with branded Blum/Hettich fittings.</div>
             </div>
           </div>
-          <div class="trust-card">
-            <img src="assets/icons/badge-finish.svg" alt="Perfect Finish Icon" class="trust-icon">
+          <div class="livspace-trust-item">
+            <div class="livspace-trust-icon">⏱️</div>
             <div>
-              <div class="trust-title">PERFECT FINISH</div>
-              <div class="trust-desc">Laser-leveled POP, flawless putty coats &amp; seamless Italian marble joints.</div>
+              <div class="livspace-trust-heading">45-Day Move-in Guarantee</div>
+              <div class="livspace-trust-sub">Turnkey delivery on fixed committed schedule. Zero open-ended contractor delays.</div>
             </div>
           </div>
-          <div class="trust-card">
-            <img src="assets/icons/badge-trusted.svg" alt="Trusted Service Icon" class="trust-icon">
+          <div class="livspace-trust-item">
+            <div class="livspace-trust-icon">⚡</div>
             <div>
-              <div class="trust-title">TRUSTED SERVICE</div>
-              <div class="trust-desc">12+ years of on-time delivery across 850+ residential &amp; commercial projects.</div>
+              <div class="livspace-trust-heading">100% Shock-Proof Safety</div>
+              <div class="livspace-trust-sub">Govt. Licensed Master Contractor supervised. Havells FR copper &amp; RCCB 30mA relays.</div>
+            </div>
+          </div>
+          <div class="livspace-trust-item">
+            <div class="livspace-trust-icon">💰</div>
+            <div>
+              <div class="livspace-trust-heading">Zero Hidden Cost Lock</div>
+              <div class="livspace-trust-sub">Detailed, transparent itemized BOQ. Price locked before first nail is hammered.</div>
             </div>
           </div>
         </div>
@@ -227,6 +249,195 @@
       </div>
     </section>
 
+    <!-- Livspace Signature Interactive Interior Cost Estimator -->
+    <section class="cost-estimator-section" id="costEstimatorSection">
+      <div class="container estimator-container">
+        <div class="section-header" style="text-align: center; margin-bottom: 35px;">
+          <span class="section-subtitle">Instant Livspace-Style Pricing in Kolkata</span>
+          <h2 class="section-title">Home Interior &amp; Electrical Cost Estimator</h2>
+          <div class="section-title-line"></div>
+          <p class="section-lead">Calculate transparent, itemized budgets for your flat in New Town, Salt Lake, Rajarhat, or Kolkata in under 30 seconds.</p>
+        </div>
+
+        <div class="estimator-card">
+          <div class="estimator-header-banner">
+            <div>
+              <div class="estimator-banner-title">Customize Your Turnkey Interior Package</div>
+              <div class="estimator-banner-subtitle">Select your BHK, spaces, and quality tier. Price updates dynamically in real-time.</div>
+            </div>
+            <div class="estimator-step-badge">Live Price Engine</div>
+          </div>
+
+          <div class="estimator-body-grid">
+            <!-- Left Controls -->
+            <div class="estimator-controls-panel">
+              <!-- Step 1: BHK -->
+              <div class="estimator-step-block">
+                <div class="estimator-step-label">
+                  <span class="estimator-step-num">1</span>
+                  <span>Select Apartment Layout</span>
+                </div>
+                <div class="bhk-btn-grid" id="bhkSelector">
+                  <div class="bhk-option-btn" data-bhk="1BHK">
+                    <div class="bhk-option-title">1 BHK</div>
+                    <div class="bhk-option-sqft">500 – 650 sq.ft</div>
+                  </div>
+                  <div class="bhk-option-btn active" data-bhk="2BHK">
+                    <div class="bhk-option-title">2 BHK</div>
+                    <div class="bhk-option-sqft">800 – 1050 sq.ft</div>
+                  </div>
+                  <div class="bhk-option-btn" data-bhk="3BHK">
+                    <div class="bhk-option-title">3 BHK</div>
+                    <div class="bhk-option-sqft">1200 – 1550 sq.ft</div>
+                  </div>
+                  <div class="bhk-option-btn" data-bhk="4BHK">
+                    <div class="bhk-option-title">4 BHK+</div>
+                    <div class="bhk-option-sqft">1800+ sq.ft / Villa</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2: Spaces to Design -->
+              <div class="estimator-step-block">
+                <div class="estimator-step-label">
+                  <span class="estimator-step-num">2</span>
+                  <span>Choose Spaces &amp; Solutions</span>
+                </div>
+                <div class="spaces-toggle-grid" id="spacesToggleGrid">
+                  <label class="space-toggle-card active">
+                    <input type="checkbox" name="estSpace" value="kitchen" checked>
+                    <span class="space-toggle-icon">🍳</span>
+                    <div>
+                      <div class="space-toggle-name">Modular Kitchen</div>
+                      <div class="space-toggle-spec">BWP 710 marine ply, Blum soft-close, acrylic finish</div>
+                    </div>
+                  </label>
+
+                  <label class="space-toggle-card active">
+                    <input type="checkbox" name="estSpace" value="living" checked>
+                    <span class="space-toggle-icon">📺</span>
+                    <div>
+                      <div class="space-toggle-name">Living Room &amp; TV Wall</div>
+                      <div class="space-toggle-spec">Fluted louvers, Statuario marble laminate, hidden wiring</div>
+                    </div>
+                  </label>
+
+                  <label class="space-toggle-card active">
+                    <input type="checkbox" name="estSpace" value="wardrobe" checked>
+                    <span class="space-toggle-icon">🚪</span>
+                    <div>
+                      <div class="space-toggle-name">Bedrooms &amp; Wardrobes</div>
+                      <div class="space-toggle-spec">Floor-to-ceiling sliding wardrobe, internal sensor LEDs</div>
+                    </div>
+                  </label>
+
+                  <label class="space-toggle-card active">
+                    <input type="checkbox" name="estSpace" value="ceiling" checked>
+                    <span class="space-toggle-icon">✨</span>
+                    <div>
+                      <div class="space-toggle-name">False Ceiling &amp; Coves</div>
+                      <div class="space-toggle-spec">Saint-Gobain Gyproc, 3000K warm ambient LED troughing</div>
+                    </div>
+                  </label>
+
+                  <label class="space-toggle-card active">
+                    <input type="checkbox" name="estSpace" value="electric" checked>
+                    <span class="space-toggle-icon">⚡</span>
+                    <div>
+                      <div class="space-toggle-name">Concealed Electric &amp; DB</div>
+                      <div class="space-toggle-spec">Havells FR copper cables, 3-Phase balancing, RCCB relays</div>
+                    </div>
+                  </label>
+
+                  <label class="space-toggle-card active">
+                    <input type="checkbox" name="estSpace" value="paint" checked>
+                    <span class="space-toggle-icon">🎨</span>
+                    <div>
+                      <div class="space-toggle-name">Putty, Paint &amp; Texture</div>
+                      <div class="space-toggle-spec">3-coat Birla White putty + Asian Paints Royale luxury emulsion</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Step 3: Finish Tier -->
+              <div class="estimator-step-block" style="margin-bottom: 0;">
+                <div class="estimator-step-label">
+                  <span class="estimator-step-num">3</span>
+                  <span>Select Material &amp; Finish Tier</span>
+                </div>
+                <div class="tier-toggle-grid" id="tierSelector">
+                  <div class="tier-option-card" data-tier="essential">
+                    <div class="tier-option-title">Essential</div>
+                    <div class="tier-option-desc">Century/Austin Ply, High-pressure Matte Laminates, ISI Copper Wiring.</div>
+                  </div>
+                  <div class="tier-option-card active" data-tier="premium">
+                    <span class="tier-popular-tag">★ Most Popular</span>
+                    <div class="tier-option-title">Premium</div>
+                    <div class="tier-option-desc">BWP 710 Marine Ply, High-gloss Acrylic, Blum/Hettich, Havells FR Cables.</div>
+                  </div>
+                  <div class="tier-option-card" data-tier="luxe">
+                    <div class="tier-option-title">Luxe Signature</div>
+                    <div class="tier-option-desc">PU Lacquered shutters, Italian marble TV wall, Smart Touch Wi-Fi controls.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Live Results Panel -->
+            <div class="estimator-results-panel">
+              <div>
+                <div class="estimator-price-badge">Estimated Turnkey Investment</div>
+                <div class="estimator-price-range" id="estPriceRange">₹3,85,000 – ₹4,55,000</div>
+                <div class="estimator-price-note">
+                  ✓ Includes design 3D, genuine materials, factory joinery, electrical certification, labor &amp; 10-Yr warranty.
+                </div>
+
+                <div class="estimator-breakdown-list" id="estBreakdownList">
+                  <div class="breakdown-row" id="rowKitchen">
+                    <div class="breakdown-row-name"><span>🍳</span> Modular Kitchen</div>
+                    <div class="breakdown-row-val" id="valKitchen">₹1,30,000</div>
+                  </div>
+                  <div class="breakdown-row" id="rowLiving">
+                    <div class="breakdown-row-name"><span>📺</span> Living Room &amp; TV Unit</div>
+                    <div class="breakdown-row-val" id="valLiving">₹75,000</div>
+                  </div>
+                  <div class="breakdown-row" id="rowWardrobe">
+                    <div class="breakdown-row-name"><span>🚪</span> Bedrooms &amp; Sliding Wardrobes</div>
+                    <div class="breakdown-row-val" id="valWardrobe">₹90,000</div>
+                  </div>
+                  <div class="breakdown-row" id="rowCeiling">
+                    <div class="breakdown-row-name"><span>✨</span> Designer False Ceiling &amp; Coves</div>
+                    <div class="breakdown-row-val" id="valCeiling">₹40,000</div>
+                  </div>
+                  <div class="breakdown-row" id="rowElectric">
+                    <div class="breakdown-row-name"><span>⚡</span> Concealed Electric &amp; Safety DB</div>
+                    <div class="breakdown-row-val" id="valElectric">₹35,000</div>
+                  </div>
+                  <div class="breakdown-row" id="rowPaint">
+                    <div class="breakdown-row-name"><span>🎨</span> Putty &amp; Asian Paints Royale</div>
+                    <div class="breakdown-row-val" id="valPaint">₹20,000</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="estimator-action-group">
+                <button type="button" class="btn btn-whatsapp btn-lg" id="btnEstSendWhatsApp">
+                  Send Estimate to WhatsApp 💬
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" id="btnEstBookSiteSurvey">
+                  Book Free Site Measurement &rarr;
+                </button>
+                <div style="text-align: center; font-size: 0.74rem; color: #94a3b8; margin-top: 4px;">
+                  🔒 100% Free Consultation • Directly by Najmul Mollick
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Services Overview Section -->
     <section class="section section-alt" id="servicesSection">
       <div class="container">
@@ -234,7 +445,7 @@
           <span class="section-subtitle">Our Core Expertise</span>
           <h2 class="section-title">Comprehensive Electrical &amp; Interior Solutions</h2>
           <div class="section-title-line"></div>
-          <p class="section-lead">Every solution is executed in-house by licensed technicians, skilled carpenters, and experienced decorators under the direct supervision of Nasim Mollick.</p>
+          <p class="section-lead">Every solution is executed in-house by licensed technicians, skilled carpenters, and experienced decorators under the direct supervision of Najmul Mollick.</p>
         </div>
 
         <div class="services-grid">
@@ -337,6 +548,83 @@
 
         <div style="text-align: center; margin-top: 40px;">
           <a href="services.html" class="btn btn-secondary">Explore All 10 Services in Detail &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Livspace Room-by-Room Inspiration Explorer -->
+    <section class="livspace-gallery-section" id="roomInspirationSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Livspace-Style Design Library</span>
+          <h2 class="section-title">Explore Designs by Room</h2>
+          <div class="section-title-line"></div>
+          <p class="section-lead">Curated turnkey aesthetics engineered for modern apartments in Kolkata. Pick any design below to customize and book for your flat.</p>
+        </div>
+
+        <div class="filter-tabs" id="roomFilterTabs" role="tablist">
+          <button type="button" class="filter-btn active" data-room-filter="all">All Rooms</button>
+          <button type="button" class="filter-btn" data-room-filter="kitchen">Modular Kitchens</button>
+          <button type="button" class="filter-btn" data-room-filter="living">Living &amp; TV Units</button>
+          <button type="button" class="filter-btn" data-room-filter="wardrobe">Bedrooms &amp; Wardrobes</button>
+          <button type="button" class="filter-btn" data-room-filter="ceiling">False Ceilings</button>
+          <button type="button" class="filter-btn" data-room-filter="mandir">CNC Mandirs</button>
+        </div>
+
+        <div class="livspace-room-grid" id="roomGalleryGrid">
+          <!-- Room Designs dynamically loaded from Admin Panel via MollickDB -->
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <button type="button" class="btn btn-primary btn-lg" id="btnExploreConsult">
+            Schedule Free 3D Design Consultation &rarr;
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 4-Step Turnkey Journey (The Livspace Experience) -->
+    <section class="process-section" id="processSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">How We Deliver Turnkey Perfection</span>
+          <h2 class="section-title">The 4-Step Turnkey Journey</h2>
+          <div class="section-title-line"></div>
+          <p class="section-lead">From initial site survey to key handover in 45 days, every phase is personally supervised by Master Contractor Najmul Mollick.</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-step-card">
+            <div class="process-step-number">1</div>
+            <h3 class="process-step-title">Free Site Visit &amp; Floor Survey</h3>
+            <p class="process-step-desc">
+              Najmul Mollick visits your flat in New Town, Salt Lake, Rajarhat or Kolkata. We take laser measurements, inspect electrical main phases, and analyze wall plumbness.
+            </p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="process-step-number">2</div>
+            <h3 class="process-step-title">3D Visualization &amp; BOQ Lock</h3>
+            <p class="process-step-desc">
+              Receive 3D elevation renders and an exhaustive itemized BOQ quotation. Price is locked with zero hidden surprise charges before a single rupee is spent.
+            </p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="process-step-number">3</div>
+            <h3 class="process-step-title">Precision Joinery &amp; In-Wall Wiring</h3>
+            <p class="process-step-desc">
+              Concealed ISI copper conduits are routed with RCCB safety relays while modular plywood carcasses are fabricated with millimeter CNC accuracy and edge-banding.
+            </p>
+          </div>
+
+          <div class="process-step-card">
+            <div class="process-step-number">4</div>
+            <h3 class="process-step-title">45-Day Handover &amp; 10-Yr Warranty</h3>
+            <p class="process-step-desc">
+              We conduct a 146-point quality audit, complete industrial vacuum cleaning, and hand over your keys on the committed date backed by our 10-Year Warranty Card.
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -490,41 +778,152 @@
       </div>
     </section>
 
+    <!-- Livspace Comparison Grid: Mollick vs Local Contractors -->
+    <section class="comparison-section" id="comparisonSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">The Mollick Quality Difference</span>
+          <h2 class="section-title">Why Homeowners Choose Us vs Local Contractors</h2>
+          <div class="section-title-line"></div>
+          <p class="section-lead">Discover how our govt. licensed engineering standards and Livspace-level project transparency protect your home and investment.</p>
+        </div>
+
+        <div class="comparison-table-wrap">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th class="feature-col">Quality &amp; Safety Standard</th>
+                <th class="brand-col">⚡ Mollick Electric &amp; Interior</th>
+                <th class="other-col">⚠️ Typical Local Contractors</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="feature-title">
+                  <strong>Concealed Electrical Safety</strong>
+                  <div class="feature-desc">Wiring gauge, load balancing &amp; safety relays</div>
+                </td>
+                <td class="brand-cell">
+                  <span class="brand-check">✓</span> 100% Havells FR Copper cables, dedicated 30mA RCCB relays &amp; CESC approved earthing. Zero short-circuit risk.
+                </td>
+                <td class="other-cell">
+                  <span class="other-cross">✕</span> Mixed/generic unbranded wires, undersized MCBs, improper earthing leading to frequent appliance burnouts.
+                </td>
+              </tr>
+              <tr>
+                <td class="feature-title">
+                  <strong>Woodwork &amp; Water Defense</strong>
+                  <div class="feature-desc">Plywood grade used in kitchens &amp; vanity units</div>
+                </td>
+                <td class="brand-cell">
+                  <span class="brand-check">✓</span> 100% Certified BWP 710 Marine Plywood (Century/Greenply) with 10-Year Anti-Borer &amp; Swelling Warranty.
+                </td>
+                <td class="other-cell">
+                  <span class="other-cross">✕</span> Cheap commercial MR ply disguised with laminate that swells and delaminates within 2 monsoon seasons.
+                </td>
+              </tr>
+              <tr>
+                <td class="feature-title">
+                  <strong>Timeline &amp; Move-In Handover</strong>
+                  <div class="feature-desc">Guaranteed project turnaround</div>
+                </td>
+                <td class="brand-cell">
+                  <span class="brand-check">✓</span> Committed 45-Day handover with scheduled milestone updates. Guaranteed move-in date.
+                </td>
+                <td class="other-cell">
+                  <span class="other-cross">✕</span> Endless delays of 3 to 6+ months due to labor unreliability and missing on-site supervision.
+                </td>
+              </tr>
+              <tr>
+                <td class="feature-title">
+                  <strong>Pricing Transparency</strong>
+                  <div class="feature-desc">Quotations, hidden bills &amp; variation charges</div>
+                </td>
+                <td class="brand-cell">
+                  <span class="brand-check">✓</span> 100% Transparent, itemized BOQ locked before work begins. 0% unexpected price hikes midway.
+                </td>
+                <td class="other-cell">
+                  <span class="other-cross">✕</span> Artificially low initial quote followed by continuous "extra charges" demanded at every stage.
+                </td>
+              </tr>
+              <tr>
+                <td class="feature-title">
+                  <strong>Supervision &amp; Accountability</strong>
+                  <div class="feature-desc">Who actually inspects your site?</div>
+                </td>
+                <td class="brand-cell">
+                  <span class="brand-check">✓</span> Personally inspected and supervised daily by Govt. Licensed Master Contractor Najmul Mollick.
+                </td>
+                <td class="other-cell">
+                  <span class="other-cross">✕</span> Middlemen brokers subcontracting to random freelance labor with zero accountability.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Livspace Real Kolkata Home Tours & Case Studies (Dynamic from Admin Panel) -->
+    <section class="hometours-section" id="homeToursSection">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Real Home Makeovers</span>
+          <h2 class="section-title">Kolkata Home Tours</h2>
+          <div class="section-title-line"></div>
+          <p class="section-lead">Take a virtual walk through flats delivered on-time and within budget across New Town, Rajarhat, and Salt Lake.</p>
+        </div>
+
+        <!-- Populated dynamically by renderHomeTours() from MollickDB -->
+        <div class="hometours-grid" id="homeToursGrid"></div>
+      </div>
+    </section>
+
     <!-- Master Contractor Spotlight Section -->
     <section class="section" id="contractorSpotlightSection" style="background: #f8fafc; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
       <div class="container">
         <div class="contractor-spotlight" style="margin-top: 0;">
           <div class="contractor-grid">
             <div>
-              <div class="contractor-crest" aria-label="Master Contractor Nasim Mollick Verified Insignia">
-                <div class="contractor-crest-monogram">NM</div>
-                <div class="contractor-crest-title">Nasim Mollick</div>
-                <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">MASTER CONTRACTOR</div>
-                <span class="contractor-crest-badge">★ WB LICENSED ★</span>
+              <div class="contractor-crest" aria-label="Master Contractor Najmul Mollick Verified Insignia" id="contractorSpotlightCrest">
+                <div id="contractorPhotoContainer" class="contractor-photo-container">
+                  <img id="contractorSpotlightImg" class="contractor-spotlight-img" src="https://images.unsplash.com/photo-1541888946425-d0fbb186156f?auto=format&fit=crop&w=600&q=80" alt="Najmul Mollick - Master Contractor">
+                </div>
+                <div class="contractor-crest-monogram" id="contractorSpotlightMonogram" style="display: none;">NM</div>
+                <div class="contractor-crest-title" id="contractorNameEl">Najmul Mollick</div>
+                <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;" id="contractorRoleEl">MASTER CONTRACTOR</div>
+                <span class="contractor-crest-badge" id="contractorLicenseBadge">W. P. No.: WP02/2024/03883</span>
               </div>
             </div>
             <div class="contractor-info">
               <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px;">
-                <h3 style="margin-bottom: 0;">Nasim Mollick</h3>
-                <span style="background: #dcfce7; color: #15803d; font-size: 0.78rem; font-weight: 700; padding: 2px 10px; border-radius: 999px;">Govt. Licensed Supervisor</span>
+                <h3 style="margin-bottom: 0;" id="contractorHeadingName">Najmul Mollick</h3>
+                <span style="background: #dcfce7; color: #15803d; font-size: 0.78rem; font-weight: 700; padding: 2px 10px; border-radius: 999px;">GOVERNMENT OF WEST BENGAL Electrical Workman's Permit</span>
               </div>
-              <div class="contractor-role">Founder &amp; Principal On-Site Master Contractor</div>
-              <p class="contractor-bio">
+              <div class="contractor-role" id="contractorSubRole">Founder &amp; Principal On-Site Master Contractor</div>
+              <div style="display: inline-flex; align-items: center; gap: 10px; margin: 6px 0 12px; font-size: 0.8rem; font-weight: 700; color: #1e293b; background: #ffffff; padding: 6px 14px; border-radius: 8px; border: 1px solid var(--border-light); flex-wrap: wrap;">
+                <span class="permit-authority" style="color: #047857;">GOVERNMENT OF WEST BENGAL Electrical Workman's Permit</span>
+                <span style="color: #cbd5e1;">•</span>
+                <span class="permit-wp-no">W. P. No.: WP02/2024/03883</span>
+                <span style="color: #cbd5e1;">•</span>
+                <span class="permit-gstin">GSTIN: 19ECKPM3966B1ZB</span>
+              </div>
+              <p class="contractor-bio" id="contractorBioEl">
                 "When you hire Mollick Electric &amp; Interior, you do not deal with call center agents or third-party brokers. I personally inspect your site, calculate the exact electrical load, check the wall alignments, and supervise my experienced Bengali carpenter and electrician team daily. We guarantee clean work, zero fire risk, and turnkey delivery on agreed time."
               </p>
               <div class="contractor-badges">
                 <span class="contractor-badge">⚡ 12+ Years Hands-on Experience</span>
                 <span class="contractor-badge">🏆 850+ Projects in Kolkata</span>
                 <span class="contractor-badge">📍 Rajarhat, New Town &amp; Salt Lake Specialist</span>
-                <span class="contractor-badge">🛡️ 5-Year Craftsmanship Warranty</span>
+                <span class="contractor-badge">🛡️ 10-Yr Woodwork &amp; 5-Yr Electric Warranty</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-          <a href="contact.html" class="btn btn-primary btn-lg">Book Free On-Site Inspection</a>
-          <a href="https://wa.me/916290858744" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">Chat with Nasim on WhatsApp</a>
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; align-items: center;">
+          <button type="button" class="btn btn-primary btn-lg" id="btnContractorConsult">Book Free On-Site Inspection</button>
+          <a href="https://wa.me/916290858744" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">Chat with Najmul on WhatsApp</a>
         </div>
       </div>
     </section>
@@ -550,7 +949,7 @@
             <div>
               <h3 style="font-family: var(--font-heading); font-size: 1.25rem; color: var(--primary-navy); margin-bottom: 8px;">Our Uncompromising Quality Promise</h3>
               <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
-                Every wire is insulated according to national electrical standards, every board is leveled, and every cabinet is tested for seamless smooth operation. If you ever have questions, Nasim Mollick is directly accessible to resolve them.
+                Every wire is insulated according to national electrical standards, every board is leveled, and every cabinet is tested for seamless smooth operation. If you ever have questions, Najmul Mollick is directly accessible to resolve them.
               </p>
               <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                 <span style="font-size: 0.85rem; background: #e0f2fe; color: #0369a1; padding: 4px 12px; border-radius: 999px; font-weight: 600;">⚡ 100% Shock-Proof Certification</span>
@@ -562,56 +961,7 @@
 
         <!-- Dynamic Reviews Grid -->
         <div class="reviews-grid" id="reviewsContainer">
-          <!-- Populated by JavaScript with localStorage support -->
-        </div>
-
-        <!-- Interactive Customer Feedback Form -->
-        <div class="feedback-form-box" id="reviewFormSection">
-          <h3 class="feedback-form-title">Have You Worked With Us? Submit Your Feedback</h3>
-          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 16px;">
-            Your feedback helps us continuously elevate our services. Your review will be published instantly on our website.
-          </p>
-
-          <form id="customerFeedbackForm" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="feedbackName" class="form-label">Your Name <span class="required">*</span></label>
-                <input type="text" id="feedbackName" class="form-control" placeholder="e.g. Subir Karmakar" required>
-              </div>
-              <div class="form-group">
-                <label for="feedbackService" class="form-label">Service Rendered</label>
-                <select id="feedbackService" class="form-control">
-                  <option value="Electric Concealed Wiring">Electric Concealed Wiring</option>
-                  <option value="False Ceiling &amp; Cove Lights">False Ceiling &amp; Cove Lights</option>
-                  <option value="Modular Kitchen &amp; Storage">Modular Kitchen &amp; Storage</option>
-                  <option value="TV Wall Unit &amp; Acoustic Slats">TV Wall Unit &amp; Acoustic Slats</option>
-                  <option value="Sliding Wardrobe">Sliding Wardrobe</option>
-                  <option value="Custom CNC Mandir">Custom CNC Mandir</option>
-                  <option value="Putty, Paint &amp; Wallpaper">Putty, Paint &amp; Wallpaper</option>
-                  <option value="Tiles &amp; Marble Work">Tiles &amp; Marble Work</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Rate Your Experience <span class="required">*</span></label>
-              <div class="star-rating-select" id="starRatingSelect">
-                <button type="button" class="star-btn is-active" data-value="1" title="1 Star">★</button>
-                <button type="button" class="star-btn is-active" data-value="2" title="2 Stars">★</button>
-                <button type="button" class="star-btn is-active" data-value="3" title="3 Stars">★</button>
-                <button type="button" class="star-btn is-active" data-value="4" title="4 Stars">★</button>
-                <button type="button" class="star-btn is-active" data-value="5" title="5 Stars">★</button>
-                <input type="hidden" id="selectedRating" value="5">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="feedbackComment" class="form-label">Your Review &amp; Comments <span class="required">*</span></label>
-              <textarea id="feedbackComment" class="form-control" style="min-height: 90px;" placeholder="Tell us about the punctuality, electrical safety, woodwork finish, or overall satisfaction..." required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit My Review &rarr;</button>
-          </form>
+          <!-- Populated by JavaScript from MollickDB -->
         </div>
 
       </div>
@@ -644,7 +994,7 @@
               <span class="faq-icon">+</span>
             </button>
             <div class="faq-answer">
-              <p>Yes! Nasim Mollick or a senior technician visits your site to measure the floor plan, inspect the electrical mains, understand your interior vision, and provide a transparent, itemized estimate with zero hidden costs.</p>
+              <p>Yes! Najmul Mollick or a senior technician visits your site to measure the floor plan, inspect the electrical mains, understand your interior vision, and provide a transparent, itemized estimate with zero hidden costs.</p>
             </div>
           </div>
 
@@ -676,10 +1026,10 @@
       <div class="container">
         <div class="cta-banner-content">
           <h2 class="cta-banner-title">Ready to Upgrade Your Living Space?</h2>
-          <p class="cta-banner-desc">Get in touch with Nasim Mollick for certified electrical work, luxury ceilings, and turnkey interior design.</p>
+          <p class="cta-banner-desc">Get in touch with Najmul Mollick for certified electrical work, luxury ceilings, and turnkey interior design.</p>
           <div class="cta-banner-actions">
             <a href="tel:6290858744" class="btn btn-primary btn-lg">Call Now: 6290858744</a>
-            <a href="https://wa.me/916290858744?text=Hello%20Nasim%20Bhai%2C%20I%20need%20a%20quote%20for%20my%20home" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">WhatsApp Us</a>
+            <a href="https://wa.me/916290858744?text=Hello%20Najmul%20Bhai%2C%20I%20need%20a%20quote%20for%20my%20home" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">WhatsApp Us</a>
             <a href="contact.html" class="btn btn-outline-gold btn-lg">Request Quotation</a>
           </div>
         </div>
@@ -749,7 +1099,6 @@
             <li><a href="projects.html" class="footer-link">Project Portfolio</a></li>
             <li><a href="gallery.html" class="footer-link">Visual Gallery</a></li>
             <li><a href="contact.html" class="footer-link">Contact &amp; Reviews</a></li>
-            <li><a href="admin/index.html" class="footer-link" style="color: var(--accent-gold);">⚡ Admin Portal</a></li>
           </ul>
         </div>
 
@@ -798,10 +1147,69 @@
 
       <div class="footer-bottom">
         <p>&copy; 2026 Mollick Electric &amp; Interior. All Rights Reserved. Crafted with pure HTML5, CSS3 &amp; Vanilla JavaScript.</p>
-        <p>Founder &amp; Master Contractor: <strong>Nasim Mollick</strong></p>
+        <p>Founder &amp; Master Contractor: <strong>Najmul Mollick</strong></p>
       </div>
     </div>
   </footer>
+
+  <!-- Livspace 3D Design & Consultation Booking Modal -->
+  <div class="modal-overlay" id="livspaceConsultModal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="consultModalTitle">
+    <div class="modal-dialog" style="max-width: 540px; background: #ffffff; border-radius: 16px; padding: 28px; position: relative; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 1px solid var(--border-light); margin: 30px auto;">
+      <button type="button" class="modal-close" id="btnCloseConsultModal" aria-label="Close modal" style="position: absolute; top: 16px; right: 16px; background: #f1f5f9; border: none; font-size: 1.25rem; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #475569;">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div style="display: inline-flex; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; font-size: 0.76rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; margin-bottom: 8px;">
+          <span>★</span> Livspace Quality Standard • Kolkata
+        </div>
+        <h3 id="consultModalTitle" style="font-size: 1.35rem; font-weight: 800; color: var(--navy-dark); margin: 0 0 6px;">Book Free 3D Design &amp; Site Survey</h3>
+        <p style="font-size: 0.86rem; color: #64748b; margin: 0;">Direct on-site visit &amp; laser measurement by Master Contractor Najmul Mollick.</p>
+      </div>
+
+      <form id="livspaceConsultForm" novalidate>
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="consultName" class="form-label" style="font-size: 0.82rem; font-weight: 700;">Full Name <span class="required">*</span></label>
+          <input type="text" id="consultName" class="form-control" placeholder="e.g. Anirban Roy" required>
+        </div>
+
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="consultPhone" class="form-label" style="font-size: 0.82rem; font-weight: 700;">Phone / WhatsApp <span class="required">*</span></label>
+            <input type="tel" id="consultPhone" class="form-control" placeholder="10-digit number" required>
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label for="consultBhk" class="form-label" style="font-size: 0.82rem; font-weight: 700;">Flat Type</label>
+            <select id="consultBhk" class="form-control">
+              <option value="1 BHK">1 BHK</option>
+              <option value="2 BHK" selected>2 BHK</option>
+              <option value="3 BHK">3 BHK</option>
+              <option value="4 BHK / Villa">4 BHK / Villa</option>
+              <option value="Commercial">Commercial / Office</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 12px;">
+          <label for="consultInterest" class="form-label" style="font-size: 0.82rem; font-weight: 700;">Interested Service / Package</label>
+          <input type="text" id="consultInterest" class="form-control" value="Full Turnkey Interior & Electrical" placeholder="e.g. Modular Kitchen, Full Turnkey, Wardrobes">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label for="consultLocation" class="form-label" style="font-size: 0.82rem; font-weight: 700;">Site / Project Location</label>
+          <input type="text" id="consultLocation" class="form-control" placeholder="e.g. Elita Garden Vista, New Town AA-III">
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; font-weight: 800;">
+          Confirm Booking &amp; Open WhatsApp &rarr;
+        </button>
+      </form>
+
+      <div style="margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 16px; font-size: 0.74rem; color: #94a3b8;">
+        <span>🛡️ 10-Yr Woodwork Warranty</span>
+        <span>⚡ 100% Shock-Safe CESC</span>
+        <span>⏱️ 45-Day Handover</span>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

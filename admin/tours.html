@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Home Makeovers &amp; Kolkata Home Tours | Mollick Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .tours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+    .tour-admin-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid var(--admin-border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: all 0.2s ease;
+    }
+    .tour-admin-card:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transform: translateY(-2px);
+    }
+    .tour-admin-photo {
+      height: 200px;
+      background: #0b1320;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tour-admin-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .tour-admin-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+      font-size: 0.85rem;
+      gap: 6px;
+    }
+    .tour-admin-bhk {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(11, 19, 32, 0.85);
+      color: #fbbf24;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      backdrop-filter: blur(4px);
+    }
+    .tour-admin-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 12px;
+    }
+    .tour-admin-loc {
+      font-size: 0.78rem;
+      color: #0284c7;
+      font-weight: 600;
+    }
+    .tour-admin-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+    }
+    .tour-admin-scope {
+      font-size: 0.84rem;
+      color: #475569;
+      line-height: 1.5;
+      margin: 0;
+      flex: 1;
+    }
+    .tour-admin-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .tour-stat-val {
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: #0f172a;
+    }
+    .tour-stat-lbl {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+    .tour-admin-quote {
+      font-size: 0.8rem;
+      color: #334155;
+      font-style: italic;
+      background: #f0fdf4;
+      padding: 10px 12px;
+      border-left: 3px solid #16a34a;
+      border-radius: 4px;
+      margin: 0;
+    }
+    .tour-admin-quote-author {
+      font-weight: 700;
+      font-style: normal;
+      color: #15803d;
+      margin-top: 4px;
+      font-size: 0.75rem;
+    }
+    .tour-admin-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="tours.html" class="nav-link active">
+          <span class="nav-icon">🏡</span>
+          <span>Home Tours</span>
+        </a>
+        <a href="designs.html" class="nav-link">
+          <span class="nav-icon">🎨</span>
+          <span>Room Designs</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="reviews.html" class="nav-link">
+          <span class="nav-icon">⭐</span>
+          <span>Customer Reviews</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name">Najmul Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-sidebar-toggle" id="btnToggleMobileSidebar" aria-label="Toggle Navigation">☰</button>
+          <div class="topbar-title-wrap">
+            <h1 class="topbar-page-title">Real Home Makeovers &amp; Kolkata Home Tours</h1>
+            <p class="topbar-page-subtitle">Upload and manage delivered flat makeovers displayed on the homepage</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button type="button" class="btn btn-primary btn-sm" id="btnAddNewTour">
+            <span>+</span> Add Home Makeover
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Container -->
+      <div class="admin-content">
+
+        <!-- Info Notification -->
+        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="font-size: 1.5rem;">🏡</span>
+            <div>
+              <div style="font-weight: 700; color: #166534; font-size: 0.92rem;">Direct Makeover Uploads Active</div>
+              <div style="font-size: 0.82rem; color: #15803d;">Every flat makeover and tour you add or update here syncs immediately to the homepage "Real Home Makeovers / Kolkata Home Tours" section.</div>
+            </div>
+          </div>
+          <a href="../index.html#homeToursSection" target="_blank" class="btn btn-secondary btn-sm" style="white-space: nowrap;">Preview On Website ↗</a>
+        </div>
+
+        <!-- Tours Grid -->
+        <div class="tours-grid" id="toursContainer">
+          <!-- Rendered via JavaScript -->
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Add / Edit Makeover Modal -->
+  <div class="modal-overlay" id="tourModal">
+    <div class="modal-dialog" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="tourModalTitle">Add Real Home Makeover</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseTourModal">&times;</button>
+      </div>
+      <form id="tourForm">
+        <div class="modal-body" style="max-height: 75vh; overflow-y: auto;">
+          <input type="hidden" id="tourId">
+
+          <!-- Photo Upload -->
+          <div class="form-group">
+            <label class="form-label">Flat / Site Photo (Upload Image)</label>
+            <div class="dropzone" id="tourPhotoDropzone">
+              <span class="dropzone-icon">📷</span>
+              <div class="dropzone-text">Click or drag &amp; drop apartment photo here</div>
+              <div class="dropzone-sub">Supports JPG, PNG, WEBP (auto compressed for performance)</div>
+              <input type="file" id="tourPhotoFileInput" accept="image/*" style="display: none;">
+            </div>
+
+            <!-- Preview Wrap -->
+            <div id="tourPhotoPreviewWrap" style="display: none; align-items: center; gap: 16px; margin-top: 10px; padding: 10px; background: #f8fafc; border: 1px solid var(--admin-border); border-radius: 8px;">
+              <div style="width: 100px; height: 75px; border-radius: 6px; overflow: hidden; background: #000; display: flex; align-items: center; justify-content: center;">
+                <img id="tourPhotoPreviewImg" src="" alt="Preview" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div style="flex: 1;">
+                <div style="font-size: 0.85rem; font-weight: 600; color: #166534;">✓ Photo Ready</div>
+                <div style="font-size: 0.78rem; color: #64748b;">Optimized and compressed</div>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnRemoveTourPhoto" style="color: #ef4444;">Remove</button>
+            </div>
+            <input type="hidden" id="tourImage">
+          </div>
+
+          <!-- Basic Info -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="tourTitle" class="form-label">Makeover Title <span class="required">*</span></label>
+              <input type="text" id="tourTitle" class="form-control" placeholder="e.g. Modern Minimalist Turnkey 3 BHK" required>
+            </div>
+            <div class="form-group">
+              <label for="tourBhk" class="form-label">Layout &amp; Size <span class="required">*</span></label>
+              <input type="text" id="tourBhk" class="form-control" placeholder="e.g. 3 BHK • 1,450 sq.ft" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="tourLocation" class="form-label">Location / Apartment Name <span class="required">*</span></label>
+            <input type="text" id="tourLocation" class="form-control" placeholder="e.g. 📍 Elita Garden Vista, Action Area III, New Town" required>
+          </div>
+
+          <div class="form-group">
+            <label for="tourScope" class="form-label">Work Scope &amp; Details <span class="required">*</span></label>
+            <textarea id="tourScope" class="form-control" rows="3" placeholder="e.g. Complete modular kitchen with quartz counter, 3 bedrooms with sliding wardrobes, Gyproc false ceiling..." required></textarea>
+          </div>
+
+          <!-- Stats -->
+          <div class="form-row" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="form-group">
+              <label for="tourBudget" class="form-label">Turnkey Budget <span class="required">*</span></label>
+              <input type="text" id="tourBudget" class="form-control" placeholder="e.g. ₹5.8 Lakhs" required>
+            </div>
+            <div class="form-group">
+              <label for="tourHandover" class="form-label">Handover Time <span class="required">*</span></label>
+              <input type="text" id="tourHandover" class="form-control" placeholder="e.g. 42 Days" required>
+            </div>
+            <div class="form-group">
+              <label for="tourBadge" class="form-label">Key Feature Badge</label>
+              <input type="text" id="tourBadge" class="form-control" placeholder="e.g. 100% CESC Certified / 10-Yr Ply">
+            </div>
+          </div>
+
+          <!-- Client Testimonial -->
+          <div class="form-row">
+            <div class="form-group" style="flex: 2;">
+              <label for="tourClientQuote" class="form-label">Client Quote / Testimonial</label>
+              <textarea id="tourClientQuote" class="form-control" rows="2" placeholder="e.g. Najmul Da delivered our home 3 days before our Gruhapravesham puja..."></textarea>
+            </div>
+            <div class="form-group" style="flex: 1;">
+              <label for="tourClientAuthor" class="form-label">Client Name</label>
+              <input type="text" id="tourClientAuthor" class="form-control" placeholder="e.g. — Anirban &amp; Payel Sengupta">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.88rem; font-weight: 600;">
+              <input type="checkbox" id="tourActive" checked style="width: 18px; height: 18px; accent-color: #e11d24;">
+              <span>Display on Homepage Kolkata Home Tours</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancelTourModal">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveTour">Save Makeover</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml, handleImageUpload } from './js/admin.js';
+
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    const toursContainer = document.querySelector('#toursContainer');
+    const modal = document.querySelector('#tourModal');
+    const modalTitle = document.querySelector('#tourModalTitle');
+    const tourForm = document.querySelector('#tourForm');
+
+    const tourId = document.querySelector('#tourId');
+    const tourTitle = document.querySelector('#tourTitle');
+    const tourBhk = document.querySelector('#tourBhk');
+    const tourLocation = document.querySelector('#tourLocation');
+    const tourScope = document.querySelector('#tourScope');
+    const tourBudget = document.querySelector('#tourBudget');
+    const tourHandover = document.querySelector('#tourHandover');
+    const tourBadge = document.querySelector('#tourBadge');
+    const tourClientQuote = document.querySelector('#tourClientQuote');
+    const tourClientAuthor = document.querySelector('#tourClientAuthor');
+    const tourActive = document.querySelector('#tourActive');
+    const tourImage = document.querySelector('#tourImage');
+
+    const photoDropzone = document.querySelector('#tourPhotoDropzone');
+    const photoFileInput = document.querySelector('#tourPhotoFileInput');
+    const photoPreviewWrap = document.querySelector('#tourPhotoPreviewWrap');
+    const photoPreviewImg = document.querySelector('#tourPhotoPreviewImg');
+    const btnRemovePhoto = document.querySelector('#btnRemoveTourPhoto');
+
+    function updatePhotoPreview(imgSrc) {
+      if (imgSrc && (imgSrc.startsWith('data:') || imgSrc.startsWith('http') || imgSrc.startsWith('assets/'))) {
+        photoPreviewImg.src = imgSrc;
+        photoPreviewWrap.style.display = 'flex';
+        photoDropzone.style.display = 'none';
+      } else {
+        photoPreviewImg.src = '';
+        photoPreviewWrap.style.display = 'none';
+        photoDropzone.style.display = 'flex';
+      }
+    }
+
+    // Photo Dropzone
+    photoDropzone.addEventListener('click', () => photoFileInput.click());
+    photoDropzone.addEventListener('dragover', (e) => { e.preventDefault(); photoDropzone.classList.add('dragover'); });
+    photoDropzone.addEventListener('dragleave', () => photoDropzone.classList.remove('dragover'));
+    photoDropzone.addEventListener('drop', async (e) => {
+      e.preventDefault();
+      photoDropzone.classList.remove('dragover');
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        processFile(e.dataTransfer.files[0]);
+      }
+    });
+
+    photoFileInput.addEventListener('change', () => {
+      if (photoFileInput.files && photoFileInput.files[0]) {
+        processFile(photoFileInput.files[0]);
+      }
+    });
+
+    async function processFile(file) {
+      try {
+        const compressed = await handleImageUpload(file, 1200, 900, 0.85);
+        tourImage.value = compressed;
+        updatePhotoPreview(compressed);
+        showToast('✓ Makeover photo uploaded successfully!', 'success');
+      } catch (err) {
+        showToast(err.message || 'Error processing image', 'error');
+      }
+    }
+
+    btnRemovePhoto.addEventListener('click', () => {
+      tourImage.value = '';
+      photoFileInput.value = '';
+      updatePhotoPreview(null);
+    });
+
+    function openModal(tour = null) {
+      tourForm.reset();
+      if (tour) {
+        modalTitle.textContent = 'Edit Home Makeover';
+        tourId.value = tour.id;
+        tourTitle.value = tour.title || '';
+        tourBhk.value = tour.bhk || '';
+        tourLocation.value = tour.location || '';
+        tourScope.value = tour.scope || '';
+        tourBudget.value = tour.budget || '';
+        tourHandover.value = tour.handoverDays || '';
+        tourBadge.value = tour.featureBadge || '';
+        tourClientQuote.value = tour.clientQuote || '';
+        tourClientAuthor.value = tour.clientAuthor || '';
+        tourActive.checked = tour.active !== false;
+        tourImage.value = tour.image || '';
+        updatePhotoPreview(tour.image);
+      } else {
+        modalTitle.textContent = 'Add Real Home Makeover';
+        tourId.value = '';
+        tourBhk.value = '3 BHK • 1,450 sq.ft';
+        tourBudget.value = '₹5.5 Lakhs';
+        tourHandover.value = '40 Days';
+        tourBadge.value = '100% CESC Certified';
+        tourActive.checked = true;
+        tourImage.value = '';
+        updatePhotoPreview(null);
+      }
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    document.querySelector('#btnAddNewTour').addEventListener('click', () => openModal());
+    document.querySelector('#btnCloseTourModal').addEventListener('click', closeModal);
+    document.querySelector('#btnCancelTourModal').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+    tourForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const tourData = {
+        id: tourId.value || undefined,
+        title: tourTitle.value.trim(),
+        bhk: tourBhk.value.trim(),
+        location: tourLocation.value.trim(),
+        scope: tourScope.value.trim(),
+        budget: tourBudget.value.trim(),
+        handoverDays: tourHandover.value.trim(),
+        featureBadge: tourBadge.value.trim(),
+        clientQuote: tourClientQuote.value.trim(),
+        clientAuthor: tourClientAuthor.value.trim(),
+        active: tourActive.checked,
+        image: tourImage.value.trim()
+      };
+
+      MollickDB.saveTour(tourData);
+      closeModal();
+      showToast(tourId.value ? 'Home makeover updated successfully!' : 'New home makeover added!', 'success');
+      renderTours();
+    });
+
+    function renderTours() {
+      const tours = MollickDB.getTours();
+      if (!tours || tours.length === 0) {
+        toursContainer.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #64748b;">No home makeovers added yet. Click "+ Add Home Makeover" above to upload your first project.</div>`;
+        return;
+      }
+
+      toursContainer.innerHTML = tours.map(t => {
+        const hasPhoto = t.image && (t.image.startsWith('data:') || t.image.startsWith('http'));
+        return `
+          <div class="tour-admin-card" id="tour-card-${t.id}">
+            <div class="tour-admin-photo">
+              ${hasPhoto ? `<img src="${t.image}" alt="${escapeHtml(t.title)}">` : `
+                <div class="tour-admin-placeholder">
+                  <span style="font-size: 2rem;">🏡</span>
+                  <span>Photo Ready for Upload</span>
+                </div>
+              `}
+              <span class="tour-admin-bhk">${escapeHtml(t.bhk || 'Turnkey Project')}</span>
+            </div>
+            <div class="tour-admin-body">
+              <div class="tour-admin-loc">${escapeHtml(t.location || 'Kolkata')}</div>
+              <h3 class="tour-admin-title">${escapeHtml(t.title)}</h3>
+              <p class="tour-admin-scope">${escapeHtml(t.scope || '')}</p>
+              
+              <div class="tour-admin-stats">
+                <div>
+                  <div class="tour-stat-val">${escapeHtml(t.budget || 'N/A')}</div>
+                  <div class="tour-stat-lbl">Budget</div>
+                </div>
+                <div>
+                  <div class="tour-stat-val">${escapeHtml(t.handoverDays || 'N/A')}</div>
+                  <div class="tour-stat-lbl">Handover</div>
+                </div>
+                <div>
+                  <div class="tour-stat-val" style="font-size:0.75rem;">${escapeHtml(t.featureBadge || 'Certified')}</div>
+                  <div class="tour-stat-lbl">Standard</div>
+                </div>
+              </div>
+
+              ${t.clientQuote ? `
+                <div class="tour-admin-quote">
+                  "${escapeHtml(t.clientQuote)}"
+                  ${t.clientAuthor ? `<div class="tour-admin-quote-author">${escapeHtml(t.clientAuthor)}</div>` : ''}
+                </div>
+              ` : ''}
+
+              <div class="tour-admin-footer">
+                <button type="button" class="badge ${t.active ? 'badge-success' : 'badge-gray'} btn-toggle-tour" data-id="${t.id}" style="border:none; cursor:pointer;">
+                  ${t.active ? '● Active on Site' : '○ Hidden'}
+                </button>
+                <div class="action-buttons">
+                  <button type="button" class="btn-icon btn-edit-tour" data-id="${t.id}" title="Edit Makeover">✏️</button>
+                  <button type="button" class="btn-icon btn-icon-danger btn-delete-tour" data-id="${t.id}" title="Delete Makeover">🗑️</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Bind actions
+      document.querySelectorAll('.btn-edit-tour').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const t = MollickDB.getTours().find(x => x.id === id);
+          if (t) openModal(t);
+        });
+      });
+
+      document.querySelectorAll('.btn-delete-tour').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          showConfirmModal('Delete Makeover', 'Are you sure you want to remove this home makeover?', () => {
+            MollickDB.deleteTour(id);
+            renderTours();
+            showToast('Makeover removed.', 'success');
+          });
+        });
+      });
+
+      document.querySelectorAll('.btn-toggle-tour').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          MollickDB.toggleTour(id);
+          renderTours();
+          showToast('Status updated.', 'success');
+        });
+      });
+    }
+
+    renderTours();
+    window.addEventListener('mollick_db_updated', (e) => {
+      if (e.detail?.type === 'tours') renderTours();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Designs Management | Mollick Electric &amp; Interior Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .design-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .design-card {
+      background: var(--admin-card-bg, #ffffff);
+      border: 1px solid var(--admin-border, #e2e8f0);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .design-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .design-card-media {
+      position: relative;
+      height: 200px;
+      background: #0f172a;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .design-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .design-card-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      text-align: center;
+      color: #94a3b8;
+    }
+    .design-card-placeholder-icon {
+      font-size: 38px;
+      opacity: 0.85;
+    }
+    .design-card-placeholder-text {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      font-weight: 500;
+    }
+    .design-card-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(11, 19, 32, 0.85);
+      color: #ffffff;
+      backdrop-filter: blur(4px);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .design-card-price-tag {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: #e11d24;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(225,29,36,0.4);
+    }
+    .design-card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 10px;
+    }
+    .design-card-title {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 0;
+      line-height: 1.35;
+    }
+    .design-card-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #0284c7;
+      background: #f0f9ff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      align-self: flex-start;
+    }
+    .design-card-desc {
+      font-size: 0.85rem;
+      color: #475569;
+      line-height: 1.5;
+      margin: 0;
+      flex: 1;
+    }
+    .design-card-materials {
+      font-size: 0.78rem;
+      color: #64748b;
+      background: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border-left: 3px solid #e11d24;
+      font-family: inherit;
+    }
+    .design-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #f1f5f9;
+      margin-top: auto;
+    }
+    .design-status-pill {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      background: #dcfce7;
+      color: #166534;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="admin-layout">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="sidebar-brand">
+          <div class="sidebar-brand-icon">⚡</div>
+          <div>
+            <div class="sidebar-brand-text">Mollick Admin</div>
+            <div class="sidebar-brand-sub">Contractor Panel</div>
+          </div>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-category">Main Menu</div>
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="services.html" class="nav-link">
+          <span class="nav-icon">🛠️</span>
+          <span>Services</span>
+        </a>
+        <a href="projects.html" class="nav-link">
+          <span class="nav-icon">📁</span>
+          <span>Projects</span>
+        </a>
+        <a href="tours.html" class="nav-link">
+          <span class="nav-icon">🏡</span>
+          <span>Home Tours</span>
+        </a>
+        <a href="designs.html" class="nav-link active">
+          <span class="nav-icon">🎨</span>
+          <span>Room Designs</span>
+        </a>
+        <a href="gallery.html" class="nav-link">
+          <span class="nav-icon">🖼️</span>
+          <span>Gallery</span>
+        </a>
+        <a href="reviews.html" class="nav-link">
+          <span class="nav-icon">⭐</span>
+          <span>Customer Reviews</span>
+        </a>
+        <a href="messages.html" class="nav-link">
+          <span class="nav-icon">💬</span>
+          <span>Messages</span>
+          <span class="nav-badge unread-messages-count" style="display: none;">0</span>
+        </a>
+        <a href="staff.html" class="nav-link">
+          <span class="nav-icon">🪪</span>
+          <span>Staff ID Cards</span>
+        </a>
+
+        <div class="nav-category">System</div>
+        <a href="settings.html" class="nav-link">
+          <span class="nav-icon">⚙️</span>
+          <span>Website Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="user-avatar">NM</div>
+          <div class="user-meta">
+            <div class="user-name">Najmul Mollick</div>
+            <div class="user-role">Master Contractor</div>
+          </div>
+        </div>
+        <button type="button" class="btn-sidebar-logout btn-logout-action" title="Sign Out" aria-label="Sign Out">
+          🚪
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="admin-main">
+      
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="topbar-left">
+          <button type="button" class="btn-mobile-sidebar" id="btnToggleMobileSidebar" aria-label="Toggle Menu">
+            ☰
+          </button>
+          <h1 class="topbar-title">Livspace-Style Design Library Manager</h1>
+        </div>
+        <div class="topbar-right">
+          <a href="../index.html#roomGallerySection" target="_blank" class="topbar-btn topbar-btn-website" title="View Public Design Library">
+            <span>🌐 View Public Design Library</span>
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm btn-logout-action">
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="admin-content">
+        
+        <div class="page-header">
+          <div>
+            <h2 class="page-title">Livspace-Style Room Designs &amp; Lookbook</h2>
+            <p class="page-subtitle">Upload your own room photographs, customize starting prices, and select room categories displayed on the public "Explore Designs by Room" showcase.</p>
+          </div>
+          <div class="page-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btnAddNewDesign">
+              <span>+ Add Room Design</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Bar Card -->
+        <div class="admin-card" style="margin-bottom: 24px;">
+          <div class="table-filter-bar">
+            <div class="search-input-wrap">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="designSearchInput" placeholder="Search designs by title, room, or materials...">
+            </div>
+            <div class="filter-group">
+              <select id="designRoomFilter" class="filter-select">
+                <option value="all">All Room Categories</option>
+                <option value="kitchen">Modular Kitchen</option>
+                <option value="living">Living Room &amp; TV Wall</option>
+                <option value="wardrobe">Bedroom &amp; Wardrobe</option>
+                <option value="ceiling">False Ceiling &amp; Cove</option>
+                <option value="mandir">Sacred Pooja Mandir</option>
+                <option value="bathroom">Bath &amp; Vanity</option>
+                <option value="other">Other Spaces</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room Designs Grid -->
+        <div class="design-card-grid" id="designGridContainer">
+          <!-- Populated by JS -->
+        </div>
+
+      </main>
+    </div>
+
+  </div>
+
+  <!-- Add/Edit Design Modal -->
+  <div class="modal-overlay" id="designModal">
+    <div class="modal-dialog" style="max-width: 620px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="designModalTitle">Add Room Design</h3>
+        <button type="button" class="modal-close-btn" id="btnCloseDesignModal">&times;</button>
+      </div>
+      <form id="designForm">
+        <div class="modal-body">
+          <input type="hidden" id="designItemId">
+
+          <div class="form-group">
+            <label for="designTitle" class="form-label">Design Name / Look Title <span class="required">*</span></label>
+            <input type="text" id="designTitle" class="form-control" placeholder="e.g. Emerald & Gold Acrylic Kitchen" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="designRoom" class="form-label">Room Category <span class="required">*</span></label>
+              <select id="designRoom" class="form-control" required>
+                <option value="kitchen">Modular Kitchen</option>
+                <option value="living">Living Room &amp; TV Wall</option>
+                <option value="wardrobe">Bedroom &amp; Wardrobe</option>
+                <option value="ceiling">False Ceiling &amp; Cove</option>
+                <option value="mandir">Sacred Pooja Mandir</option>
+                <option value="bathroom">Bath &amp; Vanity</option>
+                <option value="other">Other Space</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="designPrice" class="form-label">Starting Price Display <span class="required">*</span></label>
+              <input type="text" id="designPrice" class="form-control" placeholder="e.g. From ₹1.25 Lakhs or From ₹65,000" required>
+              <small class="form-hint">Displayed prominently on the design card.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="designWarranty" class="form-label">Warranty / Quality Badge</label>
+            <input type="text" id="designWarranty" class="form-control" placeholder="e.g. 🛡️ 10-Yr Marine Ply or ⚡ Zero-Wire Concealed">
+          </div>
+
+          <!-- Photo Upload Option -->
+          <div class="form-group">
+            <label class="form-label">📸 Design Room Photograph <span class="form-hint">(Upload your own site photo)</span></label>
+            <input type="file" id="designPhotoFileInput" accept="image/*" style="display: none;">
+            
+            <div class="photo-upload-dropzone" id="designPhotoDropzone">
+              <div class="photo-upload-icon">📷</div>
+              <div class="photo-upload-title">Click to Select or Drag &amp; Drop Room Photo</div>
+              <div class="photo-upload-hint">Upload finished room photographs (JPG, PNG, WEBP). Compressed automatically for fast client loading.</div>
+            </div>
+
+            <div class="photo-preview-card" id="designPhotoPreviewWrap" style="display: none; margin-top: 10px;">
+              <img id="designPhotoPreviewImg" src="" alt="Room Photo Preview" style="max-height: 180px; object-fit: cover; border-radius: 8px; width: 100%;">
+              <div style="display: flex; gap: 8px; margin-top: 8px;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btnChangeDesignPhoto">🔄 Change Photo</button>
+                <button type="button" class="btn-remove-photo-badge" id="btnRemoveDesignPhoto">✕ Remove Photo</button>
+              </div>
+            </div>
+
+            <div style="margin-top: 8px;">
+              <input type="text" id="designImageUrl" class="form-control" placeholder="Or enter direct image URL / asset path">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="designSpecs" class="form-label">Design Description / Specifications</label>
+            <textarea id="designSpecs" class="form-control" rows="2" placeholder="e.g. Parallel layout with Blum soft-close tandem boxes, scratch-resistant acrylic, and Quartz stone slab."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="designMaterials" class="form-label">Key Materials &amp; Electrical Features</label>
+            <input type="text" id="designMaterials" class="form-control" placeholder="e.g. ⚡ BWP 710 Marine Ply • Gola Profiles • Profile LEDs">
+          </div>
+
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" id="designActive" checked>
+              <span>Publish this room design to the public <strong>Design Library</strong></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCancelDesignModal">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btnSaveDesignItem">Save Room Design</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminToastContainer" class="toast-container"></div>
+
+  <script type="module">
+    import { MollickDB, AdminAuth, initAdminShell, showToast, showConfirmModal, escapeHtml, handleImageUpload, setupDropzone } from './js/admin.js';
+
+    AdminAuth.checkAuth();
+    initAdminShell();
+
+    const gridContainer = document.querySelector('#designGridContainer');
+    const searchInput = document.querySelector('#designSearchInput');
+    const roomFilter = document.querySelector('#designRoomFilter');
+
+    // Modal elements
+    const modal = document.querySelector('#designModal');
+    const modalTitle = document.querySelector('#designModalTitle');
+    const designForm = document.querySelector('#designForm');
+    const designItemId = document.querySelector('#designItemId');
+    const designTitle = document.querySelector('#designTitle');
+    const designRoom = document.querySelector('#designRoom');
+    const designPrice = document.querySelector('#designPrice');
+    const designWarranty = document.querySelector('#designWarranty');
+    const designSpecs = document.querySelector('#designSpecs');
+    const designMaterials = document.querySelector('#designMaterials');
+    const designImageUrl = document.querySelector('#designImageUrl');
+    const designActive = document.querySelector('#designActive');
+
+    // Photo Upload Elements
+    const photoFileInput = document.querySelector('#designPhotoFileInput');
+    const photoDropzone = document.querySelector('#designPhotoDropzone');
+    const photoPreviewWrap = document.querySelector('#designPhotoPreviewWrap');
+    const photoPreviewImg = document.querySelector('#designPhotoPreviewImg');
+    const btnRemovePhoto = document.querySelector('#btnRemoveDesignPhoto');
+    const btnChangePhoto = document.querySelector('#btnChangeDesignPhoto');
+
+    let currentPhotoBase64 = '';
+
+    function updatePhotoPreview(imgSrc) {
+      if (imgSrc && (imgSrc.startsWith('data:') || imgSrc.startsWith('http') || imgSrc.startsWith('assets/'))) {
+        photoPreviewImg.src = imgSrc.startsWith('data:') || imgSrc.startsWith('http') ? imgSrc : `../${imgSrc}`;
+        photoPreviewWrap.style.display = 'block';
+        photoDropzone.style.display = 'none';
+        currentPhotoBase64 = imgSrc;
+      } else {
+        photoPreviewImg.src = '';
+        photoPreviewWrap.style.display = 'none';
+        photoDropzone.style.display = 'flex';
+        currentPhotoBase64 = '';
+      }
+    }
+
+    async function processDesignFile(file) {
+      if (!file || !file.type.startsWith('image/')) {
+        showToast('Please select a valid image file (JPG, PNG, WEBP).', 'error');
+        return;
+      }
+      try {
+        const compressed = await handleImageUpload(file, 1200, 900, 0.85);
+        currentPhotoBase64 = compressed;
+        designImageUrl.value = '';
+        updatePhotoPreview(compressed);
+        showToast('✓ Photo loaded successfully! Save to apply.', 'success');
+      } catch (err) {
+        showToast(err.message || 'Failed to process image file.', 'error');
+      }
+    }
+
+    btnChangePhoto.addEventListener('click', () => photoFileInput.click());
+    btnRemovePhoto.addEventListener('click', () => {
+      photoFileInput.value = '';
+      designImageUrl.value = '';
+      updatePhotoPreview('');
+      showToast('Photo removed. Clean icon card will be displayed.', 'info');
+    });
+
+    designImageUrl.addEventListener('input', () => {
+      const val = designImageUrl.value.trim();
+      if (val) updatePhotoPreview(val);
+    });
+
+    setupDropzone(photoDropzone, photoFileInput, (file) => processDesignFile(file));
+
+    // Room category name mapper
+    function getRoomCategoryName(roomKey) {
+      const map = {
+        'kitchen': 'Modular Kitchen',
+        'living': 'Living Room & TV Wall',
+        'wardrobe': 'Bedroom & Wardrobe',
+        'ceiling': 'False Ceiling & Cove',
+        'mandir': 'Sacred Pooja Mandir',
+        'bathroom': 'Bath & Vanity',
+        'other': 'Interior Space'
+      };
+      return map[roomKey] || 'Room Design';
+    }
+
+    function getRoomIcon(roomKey) {
+      const map = {
+        'kitchen': '🍳',
+        'living': '📺',
+        'wardrobe': '🚪',
+        'ceiling': '✨',
+        'mandir': '🛕',
+        'bathroom': '🚿',
+        'other': '🏡'
+      };
+      return map[roomKey] || '🎨';
+    }
+
+    // Render Designs Grid
+    function renderDesigns() {
+      const allDesigns = MollickDB.getDesigns();
+      const query = (searchInput.value || '').trim().toLowerCase();
+      const selectedRoom = roomFilter.value;
+
+      let filtered = allDesigns;
+
+      if (selectedRoom !== 'all') {
+        filtered = filtered.filter(d => (d.room || '').toLowerCase() === selectedRoom.toLowerCase());
+      }
+
+      if (query) {
+        filtered = filtered.filter(d => 
+          (d.title || '').toLowerCase().includes(query) ||
+          (d.specs || '').toLowerCase().includes(query) ||
+          (d.materials || '').toLowerCase().includes(query) ||
+          (d.price || '').toLowerCase().includes(query)
+        );
+      }
+
+      if (filtered.length === 0) {
+        gridContainer.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1; padding: 48px; text-align: center; background: #fff; border-radius: 12px; border: 1px dashed #cbd5e1;">
+            <div style="font-size: 40px; margin-bottom: 12px;">🎨</div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 6px;">No Room Designs Found</h3>
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 16px;">You can upload your own room pictures and set custom prices right here.</p>
+            <button type="button" class="btn btn-primary btn-sm" id="btnEmptyAdd">
+              <span>+ Add First Room Design</span>
+            </button>
+          </div>
+        `;
+        const btnEmptyAdd = document.querySelector('#btnEmptyAdd');
+        if (btnEmptyAdd) btnEmptyAdd.addEventListener('click', openAddModal);
+        return;
+      }
+
+      gridContainer.innerHTML = filtered.map(item => {
+        const hasPhoto = item.image && item.image.trim() !== '';
+        const roomCat = item.categoryName || getRoomCategoryName(item.room);
+        const roomIcon = getRoomIcon(item.room);
+        const imgSrc = item.image && (item.image.startsWith('data:') || item.image.startsWith('http')) ? item.image : `../${item.image}`;
+
+        return `
+          <div class="design-card" data-id="${escapeHtml(item.id)}">
+            <div class="design-card-media">
+              ${hasPhoto ? `
+                <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(item.title)}" class="design-card-img" loading="lazy">
+              ` : `
+                <div class="design-card-placeholder">
+                  <div class="design-card-placeholder-icon">${roomIcon}</div>
+                  <div class="design-card-placeholder-text">Photo Deleted / Not Uploaded Yet</div>
+                  <button type="button" class="btn btn-outline btn-sm btn-quick-upload" data-id="${escapeHtml(item.id)}" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); font-size: 0.72rem; padding: 3px 8px;">
+                    📷 Upload Photo
+                  </button>
+                </div>
+              `}
+              <div class="design-card-badge">${escapeHtml(roomCat)}</div>
+              <div class="design-card-price-tag">${escapeHtml(item.price || 'Custom Quote')}</div>
+            </div>
+
+            <div class="design-card-body">
+              <h3 class="design-card-title">${escapeHtml(item.title)}</h3>
+              
+              ${item.warrantyBadge ? `
+                <div class="design-card-tagline">${escapeHtml(item.warrantyBadge)}</div>
+              ` : ''}
+
+              <p class="design-card-desc">${escapeHtml(item.specs || 'Custom fabricated interior solution.')}</p>
+
+              ${item.materials ? `
+                <div class="design-card-materials">${escapeHtml(item.materials)}</div>
+              ` : ''}
+
+              <div class="design-card-footer">
+                <span class="design-status-pill ${item.active !== false ? '' : 'style="background:#f1f5f9;color:#64748b;"'}">
+                  ${item.active !== false ? '● Live on Site' : '○ Draft'}
+                </span>
+                <div style="display: flex; gap: 6px;">
+                  <button type="button" class="btn btn-secondary btn-sm btn-edit-design" data-id="${escapeHtml(item.id)}" title="Edit Design &amp; Price">
+                    ✏️ Edit
+                  </button>
+                  <button type="button" class="btn btn-outline btn-sm btn-delete-design" data-id="${escapeHtml(item.id)}" title="Delete Design" style="color: #dc2626; border-color: #fecaca;">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Attach event listeners
+      document.querySelectorAll('.btn-edit-design').forEach(btn => {
+        btn.addEventListener('click', () => openEditModal(btn.dataset.id));
+      });
+
+      document.querySelectorAll('.btn-quick-upload').forEach(btn => {
+        btn.addEventListener('click', () => openEditModal(btn.dataset.id));
+      });
+
+      document.querySelectorAll('.btn-delete-design').forEach(btn => {
+        btn.addEventListener('click', () => handleDeleteDesign(btn.dataset.id));
+      });
+    }
+
+    function openAddModal() {
+      modalTitle.textContent = 'Add Room Design';
+      designForm.reset();
+      designItemId.value = '';
+      currentPhotoBase64 = '';
+      updatePhotoPreview('');
+      designActive.checked = true;
+      modal.classList.add('active');
+    }
+
+    function openEditModal(id) {
+      const item = MollickDB.getDesignById(id);
+      if (!item) return;
+
+      modalTitle.textContent = 'Edit Room Design & Price';
+      designItemId.value = item.id;
+      designTitle.value = item.title || '';
+      designRoom.value = item.room || 'kitchen';
+      designPrice.value = item.price || '';
+      designWarranty.value = item.warrantyBadge || '';
+      designSpecs.value = item.specs || '';
+      designMaterials.value = item.materials || '';
+      designActive.checked = item.active !== false;
+
+      currentPhotoBase64 = item.image || '';
+      designImageUrl.value = (!item.image || item.image.startsWith('data:')) ? '' : item.image;
+      updatePhotoPreview(item.image || '');
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    // Modal buttons
+    document.querySelector('#btnAddNewDesign').addEventListener('click', openAddModal);
+    document.querySelector('#btnCloseDesignModal').addEventListener('click', closeModal);
+    document.querySelector('#btnCancelDesignModal').addEventListener('click', closeModal);
+
+    // Save Design
+    designForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const id = designItemId.value.trim();
+      const title = designTitle.value.trim();
+      const room = designRoom.value;
+      const price = designPrice.value.trim();
+
+      if (!title || !price) {
+        showToast('Please provide both design title and starting price.', 'error');
+        return;
+      }
+
+      const photoVal = currentPhotoBase64 || designImageUrl.value.trim() || '';
+
+      const designData = {
+        title,
+        room,
+        categoryName: getRoomCategoryName(room),
+        price,
+        warrantyBadge: designWarranty.value.trim(),
+        specs: designSpecs.value.trim(),
+        materials: designMaterials.value.trim(),
+        image: photoVal,
+        active: designActive.checked
+      };
+
+      if (id) designData.id = id;
+
+      MollickDB.saveDesign(designData);
+      closeModal();
+      renderDesigns();
+      showToast(id ? '✓ Room design updated! Public website synced.' : '✓ New room design added with custom price!', 'success');
+    });
+
+    // Delete Design
+    function handleDeleteDesign(id) {
+      showConfirmModal('Delete Room Design', 'Are you sure you want to delete this room design from the Livspace showcase?', () => {
+        MollickDB.deleteDesign(id);
+        renderDesigns();
+        showToast('Room design deleted.', 'info');
+      });
+    }
+
+    // Filter and search
+    searchInput.addEventListener('input', renderDesigns);
+    roomFilter.addEventListener('change', renderDesigns);
+
+    // Cross-tab sync
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'mollick_db_designs') renderDesigns();
+    });
+    window.addEventListener('mollick_db_updated', (e) => {
+      if (!e.detail || e.detail.type === 'designs') renderDesigns();
+    });
+
+    // Initial render
+    renderDesigns();
+  </script>
+</body>
+</html>

@@ -15,9 +15,88 @@ const DB_KEYS = {
   MESSAGES: 'mollick_db_messages',
   SETTINGS: 'mollick_db_settings',
   STAFF: 'mollick_db_staff',
+  DESIGNS: 'mollick_db_designs',
+  TOURS: 'mollick_db_tours',
+  REVIEWS: 'mollick_customer_reviews',
   AUTH: 'mollick_db_auth',
   SESSION: 'mollick_admin_session'
 };
+
+// Initial Room Designs (Hardcoded Unsplash photos removed per user request, ready for admin uploads)
+const INITIAL_DESIGNS = [
+  {
+    id: 'dsg-1',
+    title: 'Emerald & Gold Acrylic Kitchen',
+    room: 'kitchen',
+    categoryName: 'Modular Kitchen',
+    warrantyBadge: '🛡️ 10-Yr Marine Ply',
+    specs: 'Parallel layout with Blum soft-close tandem boxes, scratch-resistant acrylic, and Quartz stone slab.',
+    materials: '⚡ BWP 710 Marine Ply • Gola Profiles • Profile LEDs',
+    price: 'From ₹1.25 Lakhs',
+    image: '',
+    active: true
+  },
+  {
+    id: 'dsg-2',
+    title: 'Statuario & Charcoal Louver TV Wall',
+    room: 'living',
+    categoryName: 'Living & TV Wall',
+    warrantyBadge: '⚡ Zero-Wire Concealed',
+    specs: 'Italian Statuario marble laminate backboard with acoustic charcoal louvers and floating soundbar drawer console.',
+    materials: '⚡ 3000K Perimeter Aura • Hidden HDMI/Power Channels',
+    price: 'From ₹65,000',
+    image: '',
+    active: true
+  },
+  {
+    id: 'dsg-3',
+    title: 'Tinted Fluted Glass Sliding Wardrobe',
+    room: 'wardrobe',
+    categoryName: 'Sliding Wardrobe',
+    warrantyBadge: '🛡️ Heavy Aluminum Gliders',
+    specs: 'Floor-to-ceiling space-optimizing wardrobe with black aluminum frame, anti-dust felt, and auto-sensor LED hanger rods.',
+    materials: '⚡ Toughened Fluted Glass • Soft-Close Gliders • Velvet Trays',
+    price: 'From ₹85,000',
+    image: '',
+    active: true
+  },
+  {
+    id: 'dsg-4',
+    title: 'Multi-Tier Gyproc Cove & Magnetic Track',
+    room: 'ceiling',
+    categoryName: 'False Ceiling',
+    warrantyBadge: '✨ Saint-Gobain Certified',
+    specs: 'Saint-Gobain gypsum boards framed on anti-crack heavy GI channel grid with seamless indirect 3000K warm LED troughing.',
+    materials: '⚡ Magnetic Spotlights • Anti-Sag GI Grid • Zero Cracks',
+    price: 'From ₹115 / sq.ft',
+    image: '',
+    active: true
+  },
+  {
+    id: 'dsg-5',
+    title: 'Backlit CNC Jaali Pooja Mandir',
+    room: 'mandir',
+    categoryName: 'Sacred Mandir',
+    warrantyBadge: '🛕 Handcrafted Teak',
+    specs: 'Custom laser-cut acrylic backlit om jaali with teak wood pillar accents, solid brass hanging bells, and pullout diya tray.',
+    materials: '⚡ Solid Brass Temple Bells • Pullout Diya Platform',
+    price: 'From ₹45,000',
+    image: '',
+    active: true
+  },
+  {
+    id: 'dsg-6',
+    title: 'Minimalist Japandi Master Suite',
+    room: 'wardrobe',
+    categoryName: 'Bedroom Suite',
+    warrantyBadge: '🛡️ Full Turnkey Suite',
+    specs: 'Natural fluted oak bed back wall, concealed dual USB bedside master switches, floating nightstands, and Royale matte finish.',
+    materials: '⚡ Concealed Master Touch • Warm LED Reading Sconces',
+    price: 'From ₹1.45 Lakhs',
+    image: '',
+    active: true
+  }
+];
 
 // Initial Seed Data (Verified Kolkata Business Data)
 const INITIAL_SERVICES = [
@@ -200,6 +279,82 @@ const INITIAL_GALLERY = [
   { id: 'gal-11', title: 'Turnkey 3BHK Master Bedroom & False Ceiling', category: 'Turnkey', image: 'assets/icons/bed.svg', featured: true }
 ];
 
+const INITIAL_TOURS = [
+  {
+    id: 'tour-1',
+    title: 'Modern Minimalist Turnkey 3 BHK',
+    bhk: '3 BHK • 1,450 sq.ft',
+    location: '📍 Elita Garden Vista, Action Area III, New Town',
+    scope: 'Complete modular kitchen with quartz counter, 3 bedrooms with sliding wardrobes, Gyproc false ceiling, and dedicated 3-phase electrical upgrade.',
+    budget: '₹5.8 Lakhs',
+    handoverDays: '42 Days',
+    featureBadge: '100% CESC Certified',
+    clientQuote: 'Najmul Da delivered our home 3 days before our Gruhapravesham puja. The concealed wiring is completely shock-safe and the kitchen finishes are immaculate!',
+    clientAuthor: '— Anirban & Payel Sengupta',
+    image: '',
+    active: true
+  },
+  {
+    id: 'tour-2',
+    title: 'Space-Optimized Urban 2 BHK',
+    bhk: '2 BHK • 980 sq.ft',
+    location: '📍 Siddha Town, Rajarhat Main Road',
+    scope: 'Compact acrylic modular kitchen, fluted charcoal TV feature wall, tinted glass bedroom wardrobe, and warm indirect ceiling cove lighting.',
+    budget: '₹3.9 Lakhs',
+    handoverDays: '36 Days',
+    featureBadge: '10-Yr Ply Warranty',
+    clientQuote: 'Transparent quotation with zero extra bills. The team was punctual, respectful, and left the flat spotlessly clean after hand-over.',
+    clientAuthor: '— Subhashish & Rupa Banerjee',
+    image: '',
+    active: true
+  },
+  {
+    id: 'tour-3',
+    title: 'Luxury Penthouse & Smart Ambience',
+    bhk: '4 BHK • 2,300 sq.ft',
+    location: '📍 Sector V / Karunamoyee, Salt Lake',
+    scope: 'PU lacquered kitchen with breakfast island, Italian Statuario marble accent wall, smart touch Wi-Fi switchboards, and laser-engraved teak mandir.',
+    budget: '₹9.4 Lakhs',
+    handoverDays: '48 Days',
+    featureBadge: 'Smart Wi-Fi Control',
+    clientQuote: 'Having an electrical supervisor who is also an interior specialist saved us endless coordination headaches. Outstanding craftsmanship!',
+    clientAuthor: '— Dr. Pritam Mukherjee',
+    image: '',
+    active: true
+  }
+];
+
+const INITIAL_REVIEWS = [
+  {
+    name: 'Anirban Banerjee (New Town, Action Area IIB)',
+    service: 'Complete 3BHK Concealed Wiring & Gyproc False Ceiling',
+    rating: 5,
+    date: 'August 28, 2026',
+    comment: 'Najmul Bhai is a thorough professional. He personally inspected our flat, re-routed all main circuits with Havells 4 sq.mm flame-retardant wires, and installed Siemens RCCB breakers. The cove false ceiling in our living room was completed in just 8 days with zero dust mess.'
+  },
+  {
+    name: 'Somenath & Debolina Dutta (Salt Lake, Sector 2)',
+    service: 'BWP 710 Acrylic Modular Kitchen & Countertop',
+    rating: 5,
+    date: 'August 14, 2026',
+    comment: 'Finding a reliable carpenter-electrician team in Salt Lake who don’t overcharge is tough. Najmul Mollick gave us an honest itemized estimate with genuine Greenply 710 marine plywood and Blum soft-close fittings. Completed strictly within budget.'
+  },
+  {
+    name: 'Priya & Souvik Das (Avishikta 2, EM Bypass)',
+    service: 'Designer TV Wall Unit with Acoustic Louvers & Wardrobe',
+    rating: 5,
+    date: 'July 30, 2026',
+    comment: 'Our living room TV unit with marble sheet and warm ambient profile backlighting came out better than the 3D render. All TV, setup box, and gaming console wires are 100% hidden inside the conduit. Very satisfied!'
+  },
+  {
+    name: 'Dr. A. K. Mondal (Behala Chowrasta)',
+    service: 'Custom Teakwood Backlit CNC Jaali Pooja Mandir',
+    rating: 5,
+    date: 'July 11, 2026',
+    comment: 'The handcrafted backlit CNC jaali mandir they built for our ancestral home has become the focal point of our apartment. Beautiful brass bells, warm illumination, and clean craftsmanship. Highly recommended!'
+  }
+];
+
 const INITIAL_MESSAGES = [
   {
     id: 'msg-1',
@@ -207,7 +362,7 @@ const INITIAL_MESSAGES = [
     phone: '9830124455',
     email: 'suman.chatterjee@gmail.com',
     subject: 'Complete 3BHK Electrical & False Ceiling in New Town',
-    message: 'Hello Nasim Bhai, we just received handover of our 3BHK flat in Action Area I. Need complete false ceiling with cove lighting and concealed wiring inspection. Can you visit this Sunday?',
+    message: 'Hello Najmul Bhai, we just received handover of our 3BHK flat in Action Area I. Need complete false ceiling with cove lighting and concealed wiring inspection. Can you visit this Sunday?',
     date: '2026-09-10 11:30 AM',
     status: 'unread'
   },
@@ -231,22 +386,44 @@ const INITIAL_SETTINGS = {
   logoType: 'dynamic',
   logoImageUrl: '',
   logoDisplayMode: 'emblem',
-  contractorName: 'Nasim Mollick',
+  contractorName: 'Najmul Mollick',
   contractorRole: 'Founder & Licensed Master Contractor',
-  contractorLicense: 'Govt. Electrical Contractor Lic #WB/KOL/2014-9982',
+  contractorLicense: "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit | W. P. No.: WP02/2024/03883 | GSTIN: 19ECKPM3966B1ZB",
+  permitAuthority: "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit",
+  wpNo: 'WP02/2024/03883',
+  gstin: '19ECKPM3966B1ZB',
+  contractorPhoto: 'https://images.unsplash.com/photo-1541888946425-d0fbb186156f?auto=format&fit=crop&w=600&q=80',
+  contractorPhotoPosition: 'center 20%',
+  contractorBio: 'When you hire Mollick Electric & Interior, you do not deal with call center agents or third-party brokers. I personally inspect your site, calculate the exact electrical load, check the wall alignments, and supervise my experienced Bengali carpenter and electrician team daily. We guarantee clean work, zero fire risk, and turnkey delivery on agreed time.',
   phone: '6290858744',
   altPhone: '8777688287',
   email: 'mollicknasim810@gmail.com',
   address: 'Rajarhat Main Road, Near Chinar Park, Kolkata, West Bengal 700136',
   serviceAreas: 'New Town, Salt Lake, Rajarhat, EM Bypass, Lake Town, Behala, Kolkata',
   workingHours: 'Monday – Sunday: 8:00 AM – 9:00 PM',
-  heroTitle: 'Powering Spaces, Defining Lifestyles',
-  heroDescription: 'Kolkata’s premier electrical engineering & turnkey interior craftsmanship. Directly supervised on-site by Govt. Licensed Master Contractor Nasim Mollick.',
-  ctaText: 'Get Free Site Inspection',
+  heroBadge: 'Govt. Licensed Electrical Contractor & Turnkey Interior Specialist',
+  heroTitle: 'Complete Home Interiors & Precision Electrical Mastery',
+  heroDescription: 'From 100% waterproof BWP 710 modular kitchens and false ceilings to short-circuit-safe concealed copper wiring. Directly surveyed and supervised on-site by Govt. Licensed Master Contractor Najmul Mollick with 12+ years experience across Kolkata.',
+  heroImage: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=80',
+  ctaText: 'Calculate Interior Cost',
   emergencyText: '24/7 Rapid Emergency Response: 6290858744',
   experienceYears: '12+',
   completedProjects: '850+',
-  guaranteeYears: '5-Year Workmanship Warranty',
+  guaranteeYears: '10-Year Modular Woodwork & 5-Year Electrical Warranty',
+  estimator1Bhk: '220000',
+  estimator2Bhk: '385000',
+  estimator3Bhk: '560000',
+  estimator4Bhk: '820000',
+  estSpaceKitchen: '32',
+  estSpaceLiving: '18',
+  estSpaceWardrobe: '24',
+  estSpaceCeiling: '10',
+  estSpaceElectric: '9',
+  estSpacePaint: '7',
+  estTierEssential: '85',
+  estTierPremium: '100',
+  estTierLuxe: '138',
+  estMarginHigh: '18',
   facebookUrl: 'https://facebook.com',
   instagramUrl: 'https://instagram.com',
   whatsappNumber: '916290858744',
@@ -259,14 +436,14 @@ const INITIAL_STAFF = [
   {
     id: 'stf-1',
     staffId: 'MEI-0101',
-    name: 'Nasim Mollick',
+    name: 'Najmul Mollick',
     role: 'Master Contractor & Chief Engineer',
     department: 'Electrical & Turnkey Management',
     phone: '6290858744',
     bloodGroup: 'B+',
     joiningDate: '2014-04-10',
     validThru: '2028-12-31',
-    licenseRef: 'WB-ELE-88421',
+    licenseRef: 'WP02/2024/03883',
     emergencyContact: '8777688287 (Head Office)',
     workZone: 'New Town & Kolkata Central',
     avatarIcon: '⚡',
@@ -396,6 +573,72 @@ export const MollickDB = {
 
     if (!localStorage.getItem(DB_KEYS.STAFF)) {
       localStorage.setItem(DB_KEYS.STAFF, JSON.stringify(INITIAL_STAFF));
+    } else {
+      try {
+        const staffList = JSON.parse(localStorage.getItem(DB_KEYS.STAFF) || '[]');
+        let staffMod = false;
+        staffList.forEach(st => {
+          if (st.name === 'Nasim Mollick') {
+            st.name = 'Najmul Mollick';
+            st.licenseRef = 'WP02/2024/03883';
+            staffMod = true;
+          }
+        });
+        if (staffMod) localStorage.setItem(DB_KEYS.STAFF, JSON.stringify(staffList));
+      } catch (e) {}
+    }
+
+    if (!localStorage.getItem(DB_KEYS.TOURS)) {
+      localStorage.setItem(DB_KEYS.TOURS, JSON.stringify(INITIAL_TOURS));
+    } else {
+      try {
+        const tours = JSON.parse(localStorage.getItem(DB_KEYS.TOURS) || '[]');
+        let tMod = false;
+        tours.forEach(t => {
+          if (t.clientQuote && t.clientQuote.includes('Nasim')) {
+            t.clientQuote = t.clientQuote.replace(/Nasim/g, 'Najmul');
+            tMod = true;
+          }
+          if (t.image && t.image.includes('images.unsplash.com')) {
+            t.image = '';
+            tMod = true;
+          }
+        });
+        if (tMod) localStorage.setItem(DB_KEYS.TOURS, JSON.stringify(tours));
+      } catch (e) {}
+    }
+
+    if (!localStorage.getItem(DB_KEYS.REVIEWS)) {
+      localStorage.setItem(DB_KEYS.REVIEWS, JSON.stringify(INITIAL_REVIEWS));
+    } else {
+      try {
+        const revs = JSON.parse(localStorage.getItem(DB_KEYS.REVIEWS) || '[]');
+        let rMod = false;
+        revs.forEach(r => {
+          if (r.comment && r.comment.includes('Nasim')) {
+            r.comment = r.comment.replace(/Nasim/g, 'Najmul');
+            rMod = true;
+          }
+        });
+        if (rMod) localStorage.setItem(DB_KEYS.REVIEWS, JSON.stringify(revs));
+      } catch (e) {}
+    }
+
+    if (!localStorage.getItem(DB_KEYS.DESIGNS)) {
+      localStorage.setItem(DB_KEYS.DESIGNS, JSON.stringify(INITIAL_DESIGNS));
+    } else {
+      try {
+        const d = JSON.parse(localStorage.getItem(DB_KEYS.DESIGNS) || '[]');
+        let modified = false;
+        d.forEach(item => {
+          // If item contains hardcoded unsplash photo, clear it as requested by user
+          if (item.image && item.image.includes('images.unsplash.com')) {
+            item.image = '';
+            modified = true;
+          }
+        });
+        if (modified) localStorage.setItem(DB_KEYS.DESIGNS, JSON.stringify(d));
+      } catch (e) {}
     }
 
     if (!localStorage.getItem(DB_KEYS.SETTINGS)) {
@@ -403,6 +646,25 @@ export const MollickDB = {
     } else {
       try {
         const curr = JSON.parse(localStorage.getItem(DB_KEYS.SETTINGS) || '{}');
+        if (curr.contractorName === 'Nasim Mollick') {
+          curr.contractorName = 'Najmul Mollick';
+        }
+        curr.contractorLicense = "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit | W. P. No.: WP02/2024/03883 | GSTIN: 19ECKPM3966B1ZB";
+        curr.permitAuthority = "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit";
+        curr.wpNo = 'WP02/2024/03883';
+        curr.gstin = '19ECKPM3966B1ZB';
+        if (curr.heroDescription && curr.heroDescription.includes('Nasim Mollick')) {
+          curr.heroDescription = curr.heroDescription.replace(/Nasim Mollick/g, 'Najmul Mollick');
+        }
+        if (!curr.heroImage) {
+          curr.heroImage = INITIAL_SETTINGS.heroImage;
+        }
+        if (!curr.contractorPhoto) {
+          curr.contractorPhoto = INITIAL_SETTINGS.contractorPhoto;
+        }
+        if (!curr.contractorPhotoPosition) {
+          curr.contractorPhotoPosition = INITIAL_SETTINGS.contractorPhotoPosition;
+        }
         const updated = { ...INITIAL_SETTINGS, ...curr };
         localStorage.setItem(DB_KEYS.SETTINGS, JSON.stringify(updated));
       } catch (e) {}
@@ -534,6 +796,46 @@ export const MollickDB = {
     return true;
   },
 
+  // Room Designs (Livspace-Style Design Library)
+  getDesigns() {
+    this.init();
+    return JSON.parse(localStorage.getItem(DB_KEYS.DESIGNS) || '[]');
+  },
+
+  getDesignById(id) {
+    const list = this.getDesigns();
+    return list.find(d => d.id === id) || null;
+  },
+
+  saveDesign(designData) {
+    const list = this.getDesigns();
+    if (designData.id) {
+      const idx = list.findIndex(d => d.id === designData.id);
+      if (idx !== -1) {
+        list[idx] = { ...list[idx], ...designData };
+      }
+    } else {
+      const newD = {
+        id: 'dsg-' + Date.now(),
+        active: true,
+        image: '',
+        ...designData
+      };
+      list.unshift(newD);
+    }
+    localStorage.setItem(DB_KEYS.DESIGNS, JSON.stringify(list));
+    this.dispatchChangeEvent('designs');
+    return true;
+  },
+
+  deleteDesign(id) {
+    let list = this.getDesigns();
+    list = list.filter(d => d.id !== id);
+    localStorage.setItem(DB_KEYS.DESIGNS, JSON.stringify(list));
+    this.dispatchChangeEvent('designs');
+    return true;
+  },
+
   // Messages
   getMessages() {
     this.init();
@@ -616,6 +918,82 @@ export const MollickDB = {
     return true;
   },
 
+  // Kolkata Home Tours / Real Home Makeovers
+  getTours() {
+    this.init();
+    return JSON.parse(localStorage.getItem(DB_KEYS.TOURS) || '[]');
+  },
+
+  saveTour(tourData) {
+    const tours = this.getTours();
+    if (tourData.id) {
+      const idx = tours.findIndex(t => t.id === tourData.id);
+      if (idx !== -1) {
+        tours[idx] = { ...tours[idx], ...tourData };
+      }
+    } else {
+      const newTour = {
+        id: 'tour-' + Date.now(),
+        active: true,
+        ...tourData
+      };
+      tours.unshift(newTour);
+    }
+    localStorage.setItem(DB_KEYS.TOURS, JSON.stringify(tours));
+    this.dispatchChangeEvent('tours');
+    return true;
+  },
+
+  deleteTour(id) {
+    let tours = this.getTours();
+    tours = tours.filter(t => t.id !== id);
+    localStorage.setItem(DB_KEYS.TOURS, JSON.stringify(tours));
+    this.dispatchChangeEvent('tours');
+    return true;
+  },
+
+  toggleTour(id) {
+    const tours = this.getTours();
+    const t = tours.find(x => x.id === id);
+    if (t) {
+      t.active = !t.active;
+      localStorage.setItem(DB_KEYS.TOURS, JSON.stringify(tours));
+      this.dispatchChangeEvent('tours');
+    }
+    return true;
+  },
+
+  // Customer Reviews & Feedback
+  getReviews() {
+    this.init();
+    return JSON.parse(localStorage.getItem(DB_KEYS.REVIEWS) || '[]');
+  },
+
+  saveReview(reviewData) {
+    const revs = this.getReviews();
+    const newRev = {
+      name: reviewData.name || 'Verified Homeowner',
+      service: reviewData.service || 'Turnkey Electrical & Interior',
+      rating: parseInt(reviewData.rating, 10) || 5,
+      date: reviewData.date || new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      comment: reviewData.comment || ''
+    };
+    revs.unshift(newRev);
+    localStorage.setItem(DB_KEYS.REVIEWS, JSON.stringify(revs));
+    this.dispatchChangeEvent('reviews');
+    return true;
+  },
+
+  deleteReview(index) {
+    const revs = this.getReviews();
+    if (index >= 0 && index < revs.length) {
+      revs.splice(index, 1);
+      localStorage.setItem(DB_KEYS.REVIEWS, JSON.stringify(revs));
+      this.dispatchChangeEvent('reviews');
+    }
+    return true;
+  },
+
   // Settings
   getSettings() {
     this.init();
@@ -644,6 +1022,9 @@ export const MollickDB = {
     const gallery = this.getGallery();
     const messages = this.getMessages();
     const staff = this.getStaff();
+    const designs = this.getDesigns();
+    const tours = this.getTours();
+    const reviews = this.getReviews();
     const unread = messages.filter(m => m.status === 'unread').length;
 
     return {
@@ -651,6 +1032,10 @@ export const MollickDB = {
       activeServices: services.filter(s => s.active).length,
       totalProjects: projects.length,
       totalGallery: gallery.length,
+      totalDesigns: designs.length,
+      totalTours: tours.length,
+      activeTours: tours.filter(t => t.active).length,
+      totalReviews: reviews.length,
       totalMessages: messages.length,
       unreadMessages: unread,
       totalStaff: staff.length,
@@ -690,12 +1075,41 @@ export const AdminAuth = {
       const defaultHash = await sha256('mollick@admin2026');
       const authData = {
         email: 'admin@mollick.com',
-        username: 'nasim.mollick',
+        username: 'najmul.mollick',
         passwordHash: defaultHash,
-        name: 'Nasim Mollick',
+        name: 'Najmul Mollick',
         role: 'Master Admin'
       };
       localStorage.setItem(DB_KEYS.AUTH, JSON.stringify(authData));
+    } else {
+      try {
+        const authData = JSON.parse(storedAuth);
+        if (authData.name === 'Nasim Mollick' || authData.username === 'nasim.mollick') {
+          authData.name = 'Najmul Mollick';
+          authData.username = 'najmul.mollick';
+          localStorage.setItem(DB_KEYS.AUTH, JSON.stringify(authData));
+        }
+      } catch (e) {}
+    }
+  },
+
+  async getCredentials() {
+    await this.init();
+    try {
+      const authData = JSON.parse(localStorage.getItem(DB_KEYS.AUTH) || '{}');
+      return {
+        email: authData.email || 'admin@mollick.com',
+        username: authData.username || 'najmul.mollick',
+        name: authData.name || 'Najmul Mollick',
+        role: authData.role || 'Master Admin'
+      };
+    } catch {
+      return {
+        email: 'admin@mollick.com',
+        username: 'najmul.mollick',
+        name: 'Najmul Mollick',
+        role: 'Master Admin'
+      };
     }
   },
 
@@ -705,7 +1119,15 @@ export const AdminAuth = {
     const inputHash = await sha256(password.trim());
 
     const cleanInput = identifier.trim().toLowerCase();
-    const isUserMatch = (cleanInput === authData.email.toLowerCase() || cleanInput === authData.username.toLowerCase());
+    const currentEmail = (authData.email || '').toLowerCase();
+    const currentUsername = (authData.username || '').toLowerCase();
+    const isUserMatch = (
+      cleanInput === currentEmail ||
+      cleanInput === currentUsername ||
+      cleanInput === 'admin' ||
+      cleanInput === 'admin@mollick.com' ||
+      cleanInput === 'najmul.mollick'
+    );
 
     if (isUserMatch && inputHash === authData.passwordHash) {
       const session = {
@@ -757,6 +1179,50 @@ export const AdminAuth = {
     window.location.replace('index.html');
   },
 
+  async updateEmail(newEmail, newUsername, currentPassword) {
+    await this.init();
+    const authData = JSON.parse(localStorage.getItem(DB_KEYS.AUTH) || '{}');
+    const oldHash = await sha256(currentPassword.trim());
+
+    if (oldHash !== authData.passwordHash) {
+      return { success: false, message: 'Current password does not match. Please enter your valid current password to confirm.' };
+    }
+
+    const cleanEmail = (newEmail || '').trim().toLowerCase();
+    const cleanUsername = (newUsername || '').trim().toLowerCase();
+
+    if (!cleanEmail || !cleanEmail.includes('@') || !cleanEmail.includes('.')) {
+      return { success: false, message: 'Please enter a valid email address.' };
+    }
+
+    if (!cleanUsername || cleanUsername.length < 3) {
+      return { success: false, message: 'Username must be at least 3 characters long.' };
+    }
+
+    authData.email = cleanEmail;
+    authData.username = cleanUsername;
+    localStorage.setItem(DB_KEYS.AUTH, JSON.stringify(authData));
+
+    // Update session email
+    const session = this.getSession();
+    if (session) {
+      session.email = cleanEmail;
+      if (localStorage.getItem(DB_KEYS.SESSION)) {
+        localStorage.setItem(DB_KEYS.SESSION, JSON.stringify(session));
+      }
+      if (sessionStorage.getItem(DB_KEYS.SESSION)) {
+        sessionStorage.setItem(DB_KEYS.SESSION, JSON.stringify(session));
+      }
+    }
+
+    return { 
+      success: true, 
+      message: '✓ Admin login email & username updated successfully! You can now use this email to log in.',
+      email: cleanEmail,
+      username: cleanUsername
+    };
+  },
+
   async changePassword(oldPassword, newPassword) {
     await this.init();
     const authData = JSON.parse(localStorage.getItem(DB_KEYS.AUTH) || '{}');
@@ -772,7 +1238,7 @@ export const AdminAuth = {
 
     authData.passwordHash = await sha256(newPassword.trim());
     localStorage.setItem(DB_KEYS.AUTH, JSON.stringify(authData));
-    return { success: true, message: 'Password updated successfully!' };
+    return { success: true, message: '✓ Admin password successfully updated! Please remember your new password.' };
   }
 };
 
@@ -932,10 +1398,16 @@ export function initAdminShell() {
     if (adminNameEl && settings.contractorName) {
       adminNameEl.textContent = settings.contractorName;
     }
-    if (adminAvatarEl && settings.contractorName) {
-      const initials = settings.contractorName.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    document.querySelectorAll('.user-name').forEach(el => {
+      if (settings.contractorName) el.textContent = settings.contractorName;
+    });
+    const initials = settings.contractorName ? settings.contractorName.split(' ').filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'NM';
+    if (adminAvatarEl) {
       adminAvatarEl.textContent = initials || 'NM';
     }
+    document.querySelectorAll('.user-avatar').forEach(el => {
+      el.textContent = initials || 'NM';
+    });
   }
 
   updateBadges();
@@ -994,11 +1466,28 @@ export function handleImageUpload(file, maxWidth = 1200, maxHeight = 900, qualit
  * Connects drag-and-drop & manual file selection dropzone
  */
 export function setupDropzone(dropzoneEl, fileInputEl, onFileSelected) {
-  if (!dropzoneEl || !fileInputEl) return;
+  if (!dropzoneEl) return;
 
-  dropzoneEl.addEventListener('click', () => {
-    fileInputEl.click();
-  });
+  // Handle case where caller passes (dropzoneEl, onFileSelected)
+  if (typeof fileInputEl === 'function') {
+    onFileSelected = fileInputEl;
+    fileInputEl = dropzoneEl.querySelector('input[type="file"]');
+  }
+
+  if (typeof onFileSelected !== 'function') return;
+
+  if (fileInputEl && typeof fileInputEl.addEventListener === 'function') {
+    dropzoneEl.addEventListener('click', () => {
+      fileInputEl.click();
+    });
+
+    fileInputEl.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        onFileSelected(files[0]);
+      }
+    });
+  }
 
   ['dragenter', 'dragover'].forEach(eventName => {
     dropzoneEl.addEventListener(eventName, (e) => {
@@ -1018,13 +1507,6 @@ export function setupDropzone(dropzoneEl, fileInputEl, onFileSelected) {
 
   dropzoneEl.addEventListener('drop', (e) => {
     const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      onFileSelected(files[0]);
-    }
-  });
-
-  fileInputEl.addEventListener('change', (e) => {
-    const files = e.target.files;
     if (files && files.length > 0) {
       onFileSelected(files[0]);
     }
