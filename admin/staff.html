@@ -187,26 +187,50 @@
 
   </div>
 
-  <!-- Interactive 2-Sided Staff ID Card Preview Modal -->
+  <!-- Interactive 2-Sided Staff ID Card Preview Modal - Standard CR80 Size: 3.375″ × 2.125″ (85.6 mm × 54 mm) -->
   <div class="modal-overlay" id="staffIdCardModal">
-    <div class="modal-dialog" style="max-width: 440px;">
-      <div class="modal-header no-print">
-        <h4 class="modal-title">Official Staff ID Badge</h4>
+    <div class="modal-dialog" style="max-width: 580px;">
+      <div class="modal-header no-print" style="align-items: flex-start;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px;">
+            <h4 class="modal-title" style="margin: 0; font-size: 1.15rem;">Official Staff ID Card</h4>
+            <span class="badge" style="background: #0f172a; color: #fbbf24; font-size: 0.72rem; padding: 3px 8px; border: 1px solid rgba(245, 158, 11, 0.4); font-weight: 700;">CR80 Standard</span>
+          </div>
+          <div style="font-size: 0.78rem; color: var(--admin-text-muted);">
+            Standard ID-1 / CR80: <strong>3.375″ × 2.125″ (85.6 mm × 54 mm)</strong> • 300 DPI Print Ready
+          </div>
+        </div>
         <button type="button" class="modal-close-btn" id="closeIdCardModal">&times;</button>
       </div>
       
-      <div class="modal-body" style="padding: 10px 20px;">
+      <div class="modal-body" style="padding: 12px 20px;">
         
-        <div style="text-align: center; margin-bottom: 12px;" class="no-print">
-          <span style="font-size: 0.85rem; color: var(--admin-text-muted);">
-            Click <strong>Flip Badge</strong> or click directly on the card to inspect Front / Back.
-          </span>
+        <!-- CR80 Control Bar: Orientation & Flip -->
+        <div class="no-print" style="background: #f8fafc; border: 1px solid var(--admin-border); border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--admin-navy);">Layout:</span>
+            <div style="display: inline-flex; border-radius: 6px; overflow: hidden; border: 1px solid var(--admin-border);">
+              <button type="button" class="btn btn-sm" id="btnOrientPortrait" style="border-radius: 0; padding: 4px 10px; font-size: 0.78rem; background: var(--admin-navy); color: #ffffff; border: none;">
+                📱 Portrait (54 × 85.6 mm)
+              </button>
+              <button type="button" class="btn btn-sm" id="btnOrientLandscape" style="border-radius: 0; padding: 4px 10px; font-size: 0.78rem; background: #ffffff; color: var(--admin-navy); border: none;">
+                💳 Landscape (85.6 × 54 mm)
+              </button>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 0.75rem; color: #64748b;" id="activeCardSideLabel">Side: <strong>Front Face</strong></span>
+            <button type="button" class="btn btn-sm btn-secondary card-flip-btn" id="btnFlipCard" style="padding: 4px 10px; font-size: 0.78rem;">
+              🔄 Flip Badge
+            </button>
+          </div>
         </div>
 
-        <!-- Print-friendly ID Card Container -->
+        <!-- Print & Canvas Stage Container -->
         <div class="id-card-print-container" id="idCardPrintArea">
           
-          <div class="id-card-flipper-wrap">
+          <div class="id-card-flipper-wrap" id="cardFlipperWrap">
             <div class="id-card-flipper" id="cardFlipper">
               
               <!-- FRONT OF BADGE -->
@@ -221,43 +245,47 @@
                 </div>
 
                 <div class="badge-body">
-                  <div class="badge-avatar-container">
-                    <span id="badgeAvatarIcon">⚡</span>
-                    <span class="badge-verified-check" title="Verified Workforce">✓</span>
-                  </div>
-
-                  <div class="badge-name" id="badgeStaffName">Najmul Mollick</div>
-                  <div class="badge-designation" id="badgeStaffRole">Master Contractor &amp; Chief Engineer</div>
-
-                  <div class="badge-id-box">
-                    <span>ID: </span><span id="badgeStaffId">MEI-0101</span>
-                  </div>
-
-                  <div class="badge-spec-table">
-                    <div class="badge-spec-row">
-                      <span style="color: #64748b;">Department:</span>
-                      <span style="font-weight: 600;" id="badgeStaffDept">Electrical Works</span>
+                  <div class="badge-front-left">
+                    <div class="badge-avatar-container">
+                      <span id="badgeAvatarIcon">⚡</span>
+                      <span class="badge-verified-check" title="Verified Workforce">✓</span>
                     </div>
-                    <div class="badge-spec-row">
-                      <span style="color: #64748b;">Phone:</span>
-                      <span style="font-weight: 600;" id="badgeStaffPhone">+91 6290858744</span>
-                    </div>
-                    <div class="badge-spec-row">
-                      <span style="color: #64748b;">Blood Group:</span>
-                      <span class="blood-badge" id="badgeStaffBlood">B+</span>
-                    </div>
-                    <div class="badge-spec-row">
-                      <span style="color: #64748b;">Valid Thru:</span>
-                      <span style="font-weight: 600;" id="badgeStaffValid">2028-12-31</span>
+
+                    <div class="badge-name" id="badgeStaffName">Najmul Mollick</div>
+                    <div class="badge-designation" id="badgeStaffRole">Master Contractor &amp; Chief Engineer</div>
+
+                    <div class="badge-id-box">
+                      <span>ID: </span><span id="badgeStaffId">MEI-0101</span>
                     </div>
                   </div>
 
-                  <div class="badge-footer-security">
-                    <div class="badge-seal-graphic">
-                      <span class="badge-seal-icon">🛡️</span>
-                      <span>GOVT. LICENSED CONTRACTOR</span>
+                  <div class="badge-front-right">
+                    <div class="badge-spec-table">
+                      <div class="badge-spec-row">
+                        <span style="color: #64748b;">Department:</span>
+                        <span style="font-weight: 600;" id="badgeStaffDept">Electrical Works</span>
+                      </div>
+                      <div class="badge-spec-row">
+                        <span style="color: #64748b;">Phone:</span>
+                        <span style="font-weight: 600;" id="badgeStaffPhone">+91 6290858744</span>
+                      </div>
+                      <div class="badge-spec-row">
+                        <span style="color: #64748b;">Blood Group:</span>
+                        <span class="blood-badge" id="badgeStaffBlood">B+</span>
+                      </div>
+                      <div class="badge-spec-row">
+                        <span style="color: #64748b;">Valid Thru:</span>
+                        <span style="font-weight: 600;" id="badgeStaffValid">2028-12-31</span>
+                      </div>
                     </div>
-                    <span class="badge badge-success" style="font-size: 0.65rem;">ACTIVE VERIFIED</span>
+
+                    <div class="badge-footer-security">
+                      <div class="badge-seal-graphic">
+                        <span class="badge-seal-icon">🛡️</span>
+                        <span>GOVT. LICENSED CONTRACTOR</span>
+                      </div>
+                      <span class="badge badge-success" style="font-size: 0.65rem;">ACTIVE VERIFIED</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -271,46 +299,49 @@
                 </div>
 
                 <div class="badge-back-body">
-                  <div style="font-size: 0.72rem; color: #1e293b; margin-bottom: 8px;">
-                    <strong>Office Address:</strong><br>
-                    <span id="badgeBackAddress">Rajarhat Main Rd, Near Chinar Park, Kolkata, WB 700136</span>
+                  <div class="badge-back-left">
+                    <div style="font-size: 0.72rem; color: #1e293b; margin-bottom: 6px;">
+                      <strong>Office Address:</strong><br>
+                      <span id="badgeBackAddress">Rajarhat Main Rd, Near Chinar Park, Kolkata, WB 700136</span>
+                    </div>
+
+                    <div style="font-size: 0.72rem; color: #1e293b; margin-bottom: 6px;">
+                      <strong>Emergency Helpline:</strong> <span id="badgeBackEmergency">8777688287 (Head Office)</span><br>
+                      <strong>Assigned Zone:</strong> <span id="badgeBackZone">New Town &amp; Kolkata</span>
+                    </div>
+
+                    <div class="badge-back-rules">
+                      This certified cardholder is authorized to conduct concealed 3-phase wiring, false ceiling installations, and modular interior works under safety protocols. If found, please return to the registered office or call 6290858744.
+                    </div>
                   </div>
 
-                  <div style="font-size: 0.72rem; color: #1e293b; margin-bottom: 8px;">
-                    <strong>Emergency Helpline:</strong> <span id="badgeBackEmergency">8777688287 (Head Office)</span><br>
-                    <strong>Assigned Zone:</strong> <span id="badgeBackZone">New Town &amp; Kolkata</span>
-                  </div>
+                  <div class="badge-back-right">
+                    <div class="badge-qr-box">
+                      <svg class="badge-qr-svg" viewBox="0 0 100 100" fill="#071529">
+                        <rect width="100" height="100" fill="#ffffff"/>
+                        <path d="M10,10 h24 v24 h-24 z M14,14 v16 h16 v-16 z M18,18 h8 v8 h-8 z" fill="#071529"/>
+                        <path d="M66,10 h24 v24 h-24 z M70,14 v16 h16 v-16 z M74,18 h8 v8 h-8 z" fill="#071529"/>
+                        <path d="M10,66 h24 v24 h-24 z M14,70 v16 h16 v-16 z M18,74 h8 v8 h-8 z" fill="#071529"/>
+                        <rect x="42" y="10" width="16" height="4" fill="#071529"/>
+                        <rect x="42" y="20" width="8" height="14" fill="#071529"/>
+                        <rect x="54" y="24" width="8" height="10" fill="#071529"/>
+                        <rect x="10" y="42" width="14" height="6" fill="#071529"/>
+                        <rect x="30" y="42" width="8" height="8" fill="#071529"/>
+                        <rect x="44" y="42" width="12" height="12" fill="#071529"/>
+                        <rect x="62" y="42" width="28" height="6" fill="#071529"/>
+                        <rect x="42" y="60" width="10" height="18" fill="#071529"/>
+                        <rect x="58" y="54" width="16" height="12" fill="#071529"/>
+                        <rect x="78" y="54" width="12" height="18" fill="#071529"/>
+                        <rect x="42" y="82" width="22" height="8" fill="#071529"/>
+                        <rect x="70" y="76" width="20" height="14" fill="#071529"/>
+                      </svg>
+                      <span style="font-size: 0.62rem; color: #64748b; font-weight: 700;">SCAN TO VERIFY</span>
+                    </div>
 
-                  <div class="badge-back-rules">
-                    This certified cardholder is authorized to conduct concealed 3-phase wiring, false ceiling installations, and modular interior works under safety protocols. If found, please return to the registered office or call 6290858744.
-                  </div>
-
-                  <div class="badge-qr-box">
-                    <svg class="badge-qr-svg" viewBox="0 0 100 100" fill="#071529">
-                      <!-- Simulated high-density verification QR code SVG -->
-                      <rect width="100" height="100" fill="#ffffff"/>
-                      <path d="M10,10 h24 v24 h-24 z M14,14 v16 h16 v-16 z M18,18 h8 v8 h-8 z" fill="#071529"/>
-                      <path d="M66,10 h24 v24 h-24 z M70,14 v16 h16 v-16 z M74,18 h8 v8 h-8 z" fill="#071529"/>
-                      <path d="M10,66 h24 v24 h-24 z M14,70 v16 h16 v-16 z M18,74 h8 v8 h-8 z" fill="#071529"/>
-                      <rect x="42" y="10" width="16" height="4" fill="#071529"/>
-                      <rect x="42" y="20" width="8" height="14" fill="#071529"/>
-                      <rect x="54" y="24" width="8" height="10" fill="#071529"/>
-                      <rect x="10" y="42" width="14" height="6" fill="#071529"/>
-                      <rect x="30" y="42" width="8" height="8" fill="#071529"/>
-                      <rect x="44" y="42" width="12" height="12" fill="#071529"/>
-                      <rect x="62" y="42" width="28" height="6" fill="#071529"/>
-                      <rect x="42" y="60" width="10" height="18" fill="#071529"/>
-                      <rect x="58" y="54" width="16" height="12" fill="#071529"/>
-                      <rect x="78" y="54" width="12" height="18" fill="#071529"/>
-                      <rect x="42" y="82" width="22" height="8" fill="#071529"/>
-                      <rect x="70" y="76" width="20" height="14" fill="#071529"/>
-                    </svg>
-                    <span style="font-size: 0.62rem; color: #64748b; font-weight: 700;">SCAN TO VERIFY CERTIFICATION</span>
-                  </div>
-
-                  <div class="badge-sign-box">
-                    <div class="badge-signature-text" id="badgeBackSignature">Najmul Mollick</div>
-                    <div class="badge-signatory-title">Authorized Master Contractor Signatory</div>
+                    <div class="badge-sign-box">
+                      <div class="badge-signature-text" id="badgeBackSignature">Najmul Mollick</div>
+                      <div class="badge-signatory-title">Authorized Signatory</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -320,18 +351,39 @@
 
         </div>
 
+        <!-- Download & Print Action Toolbar -->
+        <div class="no-print" style="margin-top: 14px; background: #ffffff; border: 1px solid var(--admin-border); border-radius: 8px; padding: 12px 14px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-weight: 700; font-size: 0.82rem; color: var(--admin-navy); display: flex; align-items: center; gap: 6px;">
+              <span>📥 Download &amp; Print CR80 Badge</span>
+              <span style="font-size: 0.68rem; color: #059669; background: #ecfdf5; padding: 2px 6px; border-radius: 4px; border: 1px solid #a7f3d0; font-weight: 700;">300 DPI HD</span>
+            </div>
+            <span style="font-size: 0.72rem; color: #64748b;">3.375″ × 2.125″ (85.6 mm × 54 mm)</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btnDownloadFront" title="Download Front side at 300 DPI" style="padding: 7px 6px; font-size: 0.76rem; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <span>📥 Front PNG</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnDownloadBack" title="Download Back side at 300 DPI" style="padding: 7px 6px; font-size: 0.76rem; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <span>📥 Back PNG</span>
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="btnDownloadBoth" title="Download dual-sided CR80 sheet for PVC printer" style="padding: 7px 6px; font-size: 0.76rem; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <span>📦 Both Sides (Sheet)</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnPrintCard" title="Print true-scale CR80 or Save as PDF" style="padding: 7px 6px; font-size: 0.76rem; display: flex; align-items: center; justify-content: center; gap: 4px;">
+              <span>🖨️ Print / PDF</span>
+            </button>
+          </div>
+        </div>
+
       </div>
 
       <div class="modal-footer no-print" style="justify-content: space-between;">
-        <button type="button" class="btn btn-secondary card-flip-btn" id="btnFlipCard">
-          <span>🔄 Flip Badge (Front / Back)</span>
-        </button>
-        <div style="display: flex; gap: 8px;">
-          <button type="button" class="btn btn-secondary" id="btnCloseCardModal">Close</button>
-          <button type="button" class="btn btn-primary" id="btnPrintCard">
-            <span>🖨️ Print Badge</span>
-          </button>
-        </div>
+        <button type="button" class="btn btn-secondary" id="btnCloseCardModal">Close</button>
+        <span style="font-size: 0.75rem; color: var(--admin-text-muted);">
+          ISO/IEC 7810 ID-1 Standard PVC Badge
+        </span>
       </div>
     </div>
   </div>
@@ -339,12 +391,12 @@
   <!-- Add / Edit Staff Modal -->
   <div class="modal-overlay" id="staffFormModal">
     <div class="modal-dialog" style="max-width: 580px;">
-      <div class="modal-header">
-        <h4 class="modal-title" id="staffModalTitle">Add New Staff Member</h4>
-        <button type="button" class="modal-close-btn" id="closeStaffFormModal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="staffForm">
+      <form id="staffForm">
+        <div class="modal-header">
+          <h4 class="modal-title" id="staffModalTitle">Add New Staff Member</h4>
+          <button type="button" class="modal-close-btn" id="closeStaffFormModal">&times;</button>
+        </div>
+        <div class="modal-body">
           <input type="hidden" id="staffFormId">
           
           <div class="form-row">
@@ -455,15 +507,15 @@
               </select>
             </div>
           </div>
+        </div>
 
-          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px;">
-            <button type="button" class="btn btn-secondary" id="btnCancelStaffForm">Cancel</button>
-            <button type="submit" class="btn btn-primary" id="btnSaveStaff">
-              <span>Save Staff Member</span>
-            </button>
-          </div>
-        </form>
-      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancelStaffForm">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveStaff" style="font-weight: 700;">
+            <span>💾 Save Staff Member</span>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -491,6 +543,14 @@
     const btnCloseCardModal = document.querySelector('#btnCloseCardModal');
     const btnFlipCard = document.querySelector('#btnFlipCard');
     const cardFlipper = document.querySelector('#cardFlipper');
+    const cardFlipperWrap = document.querySelector('#cardFlipperWrap');
+    const idCardPrintArea = document.querySelector('#idCardPrintArea');
+    const activeCardSideLabel = document.querySelector('#activeCardSideLabel');
+    const btnOrientPortrait = document.querySelector('#btnOrientPortrait');
+    const btnOrientLandscape = document.querySelector('#btnOrientLandscape');
+    const btnDownloadFront = document.querySelector('#btnDownloadFront');
+    const btnDownloadBack = document.querySelector('#btnDownloadBack');
+    const btnDownloadBoth = document.querySelector('#btnDownloadBoth');
     const btnPrintCard = document.querySelector('#btnPrintCard');
     const btnBatchPrint = document.querySelector('#btnBatchPrint');
 
@@ -618,7 +678,7 @@
 
           <div class="staff-card-actions">
             <button type="button" class="btn btn-primary btn-sm btn-view-id" data-id="${staff.id}" style="flex: 1;">
-              <span>🪪 View ID Card</span>
+              <span>🪪 ID Card &amp; Download</span>
             </button>
             <button type="button" class="btn btn-secondary btn-sm btn-edit-staff" data-id="${staff.id}" title="Edit Staff">
               <span>✏️</span>
@@ -643,6 +703,43 @@
       staffContainer.querySelectorAll('.btn-delete-staff').forEach(btn => {
         btn.addEventListener('click', () => deleteStaffRecord(btn.getAttribute('data-id')));
       });
+    }
+
+    // CR80 Orientation & State
+    let currentCardOrientation = 'portrait';
+
+    function setCardOrientation(orientation) {
+      currentCardOrientation = orientation;
+      if (orientation === 'landscape') {
+        if (cardFlipperWrap) cardFlipperWrap.classList.add('landscape');
+        if (idCardPrintArea) idCardPrintArea.classList.add('landscape');
+        if (btnOrientLandscape) {
+          btnOrientLandscape.style.background = 'var(--admin-navy)';
+          btnOrientLandscape.style.color = '#ffffff';
+        }
+        if (btnOrientPortrait) {
+          btnOrientPortrait.style.background = '#ffffff';
+          btnOrientPortrait.style.color = 'var(--admin-navy)';
+        }
+      } else {
+        if (cardFlipperWrap) cardFlipperWrap.classList.remove('landscape');
+        if (idCardPrintArea) idCardPrintArea.classList.remove('landscape');
+        if (btnOrientPortrait) {
+          btnOrientPortrait.style.background = 'var(--admin-navy)';
+          btnOrientPortrait.style.color = '#ffffff';
+        }
+        if (btnOrientLandscape) {
+          btnOrientLandscape.style.background = '#ffffff';
+          btnOrientLandscape.style.color = 'var(--admin-navy)';
+        }
+      }
+    }
+
+    if (btnOrientPortrait) {
+      btnOrientPortrait.addEventListener('click', () => setCardOrientation('portrait'));
+    }
+    if (btnOrientLandscape) {
+      btnOrientLandscape.addEventListener('click', () => setCardOrientation('landscape'));
     }
 
     // Open Interactive ID Card Viewer
@@ -686,6 +783,12 @@
 
       // Reset flipper to front
       cardFlipper.classList.remove('flipped');
+      if (activeCardSideLabel) {
+        activeCardSideLabel.innerHTML = 'Side: <strong>Front Face</strong>';
+      }
+
+      // Default to portrait
+      setCardOrientation('portrait');
 
       idCardModal.classList.add('active');
     }
@@ -693,10 +796,693 @@
     // Flip Card Toggle
     function toggleFlipCard() {
       cardFlipper.classList.toggle('flipped');
+      const isFlipped = cardFlipper.classList.contains('flipped');
+      if (activeCardSideLabel) {
+        activeCardSideLabel.innerHTML = `Side: <strong>${isFlipped ? 'Back Face' : 'Front Face'}</strong>`;
+      }
     }
 
-    btnFlipCard.addEventListener('click', toggleFlipCard);
-    cardFlipper.addEventListener('click', toggleFlipCard);
+    if (btnFlipCard) btnFlipCard.addEventListener('click', toggleFlipCard);
+    if (cardFlipper) cardFlipper.addEventListener('click', toggleFlipCard);
+
+    // =========================================================================
+    // CR80 HIGH-RESOLUTION (300 DPI) CANVAS DOWNLOAD ENGINE
+    // Standard ISO/IEC 7810 ID-1 (CR80): 85.6 mm × 54.0 mm (3.375″ × 2.125″)
+    // Corner Radius: 3.18 mm (1/8″). Resolution at 300 DPI: ~1012 px × ~638 px
+    // =========================================================================
+
+    function loadImageAsync(src) {
+      return new Promise((resolve) => {
+        if (!src) return resolve(null);
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
+      });
+    }
+
+    function drawCanvasRoundedRect(ctx, x, y, width, height, radius, fillStyle, strokeStyle, strokeWidth = 1) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      if (fillStyle) {
+        ctx.fillStyle = fillStyle;
+        ctx.fill();
+      }
+      if (strokeStyle) {
+        ctx.strokeStyle = strokeStyle;
+        ctx.lineWidth = strokeWidth;
+        ctx.stroke();
+      }
+    }
+
+    function drawCanvasQR(ctx, x, y, size) {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x, y, size, size);
+      ctx.strokeStyle = '#cbd5e1';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x, y, size, size);
+
+      ctx.fillStyle = '#071529';
+      const u = size / 21;
+
+      function drawFinder(fx, fy) {
+        ctx.fillStyle = '#071529';
+        ctx.fillRect(x + fx * u, y + fy * u, 7 * u, 7 * u);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(x + (fx + 1) * u, y + (fy + 1) * u, 5 * u, 5 * u);
+        ctx.fillStyle = '#071529';
+        ctx.fillRect(x + (fx + 2) * u, y + (fy + 2) * u, 3 * u, 3 * u);
+      }
+
+      drawFinder(0, 0);
+      drawFinder(14, 0);
+      drawFinder(0, 14);
+
+      // Timing tracks
+      for (let i = 8; i < 13; i += 2) {
+        ctx.fillRect(x + i * u, y + 6 * u, u, u);
+        ctx.fillRect(x + 6 * u, y + i * u, u, u);
+      }
+
+      // Alignment box
+      ctx.fillRect(x + 14 * u, y + 14 * u, 5 * u, 5 * u);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(x + 15 * u, y + 15 * u, 3 * u, 3 * u);
+      ctx.fillStyle = '#071529';
+      ctx.fillRect(x + 16 * u, y + 16 * u, u, u);
+
+      // Micro data modules
+      const pattern = [
+        [8,2],[8,4],[9,1],[10,3],[11,1],[12,4],[13,2],[8,8],[9,10],[10,8],[11,11],[12,9],
+        [2,8],[4,8],[1,9],[3,10],[1,11],[4,12],[2,13],[8,15],[8,17],[9,16],[10,18],[11,16],
+        [15,8],[17,8],[16,9],[18,10],[16,11],[19,12],[17,13],[20,8],[20,10],[20,12],[20,14],
+        [8,20],[10,20],[12,20],[14,20],[16,20]
+      ];
+      pattern.forEach(([r, c]) => {
+        ctx.fillRect(x + c * u, y + r * u, u, u);
+      });
+    }
+
+    // Render Front Side of CR80 Card
+    function renderCR80Front(ctx, staff, settings, isLandscape, photoImg, logoImg, ox = 0, oy = 0) {
+      const width = isLandscape ? 1012 : 638;
+      const height = isLandscape ? 638 : 1012;
+      const r = 38; // 3.18mm in 300 DPI
+
+      ctx.save();
+      ctx.translate(ox, oy);
+
+      // Card Base Clipping & Background
+      ctx.beginPath();
+      ctx.moveTo(r, 0);
+      ctx.lineTo(width - r, 0);
+      ctx.quadraticCurveTo(width, 0, width, r);
+      ctx.lineTo(width, height - r);
+      ctx.quadraticCurveTo(width, height, width - r, height);
+      ctx.lineTo(r, height);
+      ctx.quadraticCurveTo(0, height, 0, height - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+      ctx.clip();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, width, height);
+
+      if (!isLandscape) {
+        // --- PORTRAIT FRONT (638 x 1012) ---
+        // Lanyard Punch Slot
+        drawCanvasRoundedRect(ctx, 275, 14, 88, 14, 7, '#0f172a', 'rgba(255,255,255,0.4)', 1);
+
+        // Header Background Gradient
+        const headGrad = ctx.createLinearGradient(0, 38, 0, 175);
+        headGrad.addColorStop(0, '#071529');
+        headGrad.addColorStop(1, '#0d274d');
+        ctx.fillStyle = headGrad;
+        ctx.fillRect(0, 38, 638, 137);
+
+        // Gold Accent Line
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillRect(0, 172, 638, 4);
+
+        // Brand Company Name
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 23px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('⚡ ' + (settings.websiteName || 'MOLLICK ELECTRIC & INTERIOR').toUpperCase(), 319, 95);
+
+        // Category Tag
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('OFFICIAL WORKFORCE IDENTITY BADGE', 319, 132);
+
+        // Photo / Avatar Circle
+        const ax = 319, ay = 280, ar = 72;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(ax, ay, ar, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        if (photoImg) {
+          ctx.drawImage(photoImg, ax - ar, ay - ar, ar * 2, ar * 2);
+        } else {
+          ctx.fillStyle = '#071529';
+          ctx.fillRect(ax - ar, ay - ar, ar * 2, ar * 2);
+          ctx.fillStyle = '#f59e0b';
+          ctx.font = 'bold 50px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('⚡', ax, ay + 18);
+        }
+        ctx.restore();
+
+        // Avatar Gold Ring
+        ctx.beginPath();
+        ctx.arc(ax, ay, ar, 0, Math.PI * 2);
+        ctx.strokeStyle = '#d97706';
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        // Verified Checkmark Badge
+        ctx.beginPath();
+        ctx.arc(ax + 48, ay + 48, 16, 0, Math.PI * 2);
+        ctx.fillStyle = '#10b981';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('✓', ax + 48, ay + 54);
+
+        // Staff Name & Role
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#071529';
+        ctx.font = 'bold 27px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(staff.name || 'Staff Member', 319, 395);
+
+        ctx.fillStyle = '#d97706';
+        ctx.font = 'bold 15px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(staff.role || 'Electrical Technician', 319, 426);
+
+        // ID Pill
+        drawCanvasRoundedRect(ctx, 219, 446, 200, 32, 6, '#f8fafc', '#cbd5e1', 1.5);
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 15px monospace';
+        ctx.fillText('ID: ' + (staff.staffId || 'MEI-0101'), 319, 468);
+
+        // Specs Container
+        drawCanvasRoundedRect(ctx, 45, 500, 548, 260, 12, '#ffffff', '#e2e8f0', 2);
+
+        const rows = [
+          { label: 'Department:', val: staff.department || 'Electrical Works' },
+          { label: 'Phone:', val: '+91 ' + (staff.phone || '—') },
+          { label: 'Blood Group:', val: staff.bloodGroup || 'O+', isBlood: true },
+          { label: 'Valid Thru:', val: staff.validThru || '2028-12-31' }
+        ];
+
+        rows.forEach((r, idx) => {
+          const ry = 550 + (idx * 56);
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#64748b';
+          ctx.font = '16px "Plus Jakarta Sans", Arial, sans-serif';
+          ctx.fillText(r.label, 75, ry);
+
+          ctx.textAlign = 'right';
+          if (r.isBlood) {
+            drawCanvasRoundedRect(ctx, 505, ry - 22, 60, 30, 6, '#ef4444');
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(r.val, 535, ry - 1);
+          } else {
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 17px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(r.val, 565, ry);
+          }
+        });
+
+        // Footer Security
+        ctx.beginPath();
+        ctx.moveTo(45, 800);
+        ctx.lineTo(593, 800);
+        ctx.strokeStyle = '#e2e8f0';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#071529';
+        ctx.font = 'bold 15px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('🛡️ GOVT. LICENSED CONTRACTOR', 50, 850);
+
+        drawCanvasRoundedRect(ctx, 435, 830, 155, 30, 6, '#10b981');
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 13px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ACTIVE VERIFIED', 512, 851);
+
+        // Technical Watermark
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('CR80 STANDARD • 3.375″ × 2.125″ (85.6 mm × 54 mm) • ISO/IEC 7810 ID-1', 319, 985);
+
+      } else {
+        // --- LANDSCAPE FRONT (1012 x 638) ---
+        // Header Bar
+        const headGrad = ctx.createLinearGradient(0, 0, 0, 75);
+        headGrad.addColorStop(0, '#071529');
+        headGrad.addColorStop(1, '#0d274d');
+        ctx.fillStyle = headGrad;
+        ctx.fillRect(0, 0, 1012, 75);
+
+        ctx.fillStyle = '#f59e0b';
+        ctx.fillRect(0, 75, 1012, 3);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 22px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('⚡ ' + (settings.websiteName || 'MOLLICK ELECTRIC & INTERIOR').toUpperCase(), 40, 46);
+
+        ctx.fillStyle = '#fbbf24';
+        ctx.font = 'bold 12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText('OFFICIAL WORKFORCE IDENTITY BADGE', 972, 46);
+
+        // Left Column: Avatar, Name, Designation, ID
+        const ax = 175, ay = 195, ar = 65;
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(ax, ay, ar, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.clip();
+        if (photoImg) {
+          ctx.drawImage(photoImg, ax - ar, ay - ar, ar * 2, ar * 2);
+        } else {
+          ctx.fillStyle = '#071529';
+          ctx.fillRect(ax - ar, ay - ar, ar * 2, ar * 2);
+          ctx.fillStyle = '#f59e0b';
+          ctx.font = 'bold 45px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('⚡', ax, ay + 15);
+        }
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(ax, ay, ar, 0, Math.PI * 2);
+        ctx.strokeStyle = '#d97706';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(ax + 44, ay + 44, 15, 0, Math.PI * 2);
+        ctx.fillStyle = '#10b981';
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('✓', ax + 44, ay + 50);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#071529';
+        ctx.font = 'bold 24px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(staff.name || 'Staff Member', ax, 300);
+
+        ctx.fillStyle = '#d97706';
+        ctx.font = 'bold 14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(staff.role || 'Electrical Technician', ax, 330);
+
+        drawCanvasRoundedRect(ctx, ax - 85, 355, 170, 30, 6, '#f8fafc', '#cbd5e1', 1.5);
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 15px monospace';
+        ctx.fillText('ID: ' + (staff.staffId || 'MEI-0101'), ax, 375);
+
+        // Right Column: Specs Container
+        drawCanvasRoundedRect(ctx, 350, 110, 620, 290, 12, '#ffffff', '#e2e8f0', 2);
+
+        const lrows = [
+          { label: 'Department:', val: staff.department || 'Electrical Works' },
+          { label: 'Phone Number:', val: '+91 ' + (staff.phone || '—') },
+          { label: 'Blood Group:', val: staff.bloodGroup || 'O+', isBlood: true },
+          { label: 'Valid Thru:', val: staff.validThru || '2028-12-31' }
+        ];
+
+        lrows.forEach((r, idx) => {
+          const ry = 165 + (idx * 60);
+          ctx.textAlign = 'left';
+          ctx.fillStyle = '#64748b';
+          ctx.font = '16px "Plus Jakarta Sans", Arial, sans-serif';
+          ctx.fillText(r.label, 380, ry);
+
+          ctx.textAlign = 'right';
+          if (r.isBlood) {
+            drawCanvasRoundedRect(ctx, 885, ry - 22, 60, 30, 6, '#ef4444');
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(r.val, 915, ry - 1);
+          } else {
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 17px "Plus Jakarta Sans", Arial, sans-serif';
+            ctx.fillText(r.val, 945, ry);
+          }
+        });
+
+        // Landscape Security Footer
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#071529';
+        ctx.font = 'bold 15px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('🛡️ GOVT. LICENSED CONTRACTOR', 350, 465);
+
+        drawCanvasRoundedRect(ctx, 815, 442, 155, 30, 6, '#10b981');
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 13px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('ACTIVE VERIFIED', 892, 463);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('CR80 STANDARD • 3.375″ × 2.125″ (85.6 mm × 54 mm) • ISO/IEC 7810 ID-1', 506, 615);
+      }
+
+      // Card Edge Gold Outline
+      drawCanvasRoundedRect(ctx, 0, 0, width, height, r, null, '#d97706', 3);
+      ctx.restore();
+    }
+
+    // Render Back Side of CR80 Card
+    function renderCR80Back(ctx, staff, settings, isLandscape, ox = 0, oy = 0) {
+      const width = isLandscape ? 1012 : 638;
+      const height = isLandscape ? 638 : 1012;
+      const r = 38;
+
+      ctx.save();
+      ctx.translate(ox, oy);
+
+      ctx.beginPath();
+      ctx.moveTo(r, 0);
+      ctx.lineTo(width - r, 0);
+      ctx.quadraticCurveTo(width, 0, width, r);
+      ctx.lineTo(width, height - r);
+      ctx.quadraticCurveTo(width, height, width - r, height);
+      ctx.lineTo(r, height);
+      ctx.quadraticCurveTo(0, height, 0, height - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+      ctx.clip();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, width, height);
+
+      if (!isLandscape) {
+        // --- PORTRAIT BACK (638 x 1012) ---
+        drawCanvasRoundedRect(ctx, 275, 14, 88, 14, 7, '#0f172a', 'rgba(255,255,255,0.4)', 1);
+
+        // Header
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 38, 638, 90);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 20px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(settings.websiteName || 'MOLLICK ELECTRIC & INTERIOR', 319, 75);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = 'bold 12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('HEAD OFFICE & VERIFICATION DESK', 319, 102);
+
+        // Details
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Registered Office:', 45, 160);
+        ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(settings.address || 'Rajarhat Main Rd, Near Chinar Park, Kolkata, WB 700136', 45, 185);
+
+        ctx.font = 'bold 14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Emergency Helpline:', 45, 230);
+        ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText((staff.emergencyContact || settings.phone || '6290858744') + ' (24x7 Desk)', 45, 255);
+
+        ctx.font = 'bold 14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Authorized Operating Zone:', 45, 300);
+        ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(staff.workZone || settings.serviceAreas || 'Kolkata Metropolitan Area', 45, 325);
+
+        // Rule protocol box
+        drawCanvasRoundedRect(ctx, 45, 360, 548, 120, 8, '#f8fafc', '#cbd5e1', 1);
+        ctx.fillStyle = '#475569';
+        ctx.font = '13px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('This certified cardholder is authorized to conduct concealed 3-phase wiring,', 60, 395);
+        ctx.fillText('industrial distribution setups, and modular interior installations under state safety', 60, 420);
+        ctx.fillText('protocols. If found, please return to the registered office or call helpline.', 60, 445);
+
+        // High-Density QR Code
+        drawCanvasQR(ctx, 239, 510, 160);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#64748b';
+        ctx.font = 'bold 12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('SCAN TO VERIFY CERTIFICATION & LICENSE', 319, 700);
+
+        // Signatory box
+        ctx.beginPath();
+        ctx.moveTo(180, 810);
+        ctx.lineTo(458, 810);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = '#071529';
+        ctx.font = 'italic bold 28px "Brush Script MT", "Segoe Script", cursive, sans-serif';
+        ctx.fillText(settings.contractorName || 'Najmul Mollick', 319, 795);
+
+        ctx.fillStyle = '#64748b';
+        ctx.font = '13px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Authorized Master Contractor Signatory', 319, 835);
+
+        // Watermark
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px monospace';
+        ctx.fillText('CR80 STANDARD • 3.375″ × 2.125″ (85.6 mm × 54 mm) • ISO/IEC 7810 ID-1', 319, 985);
+
+      } else {
+        // --- LANDSCAPE BACK (1012 x 638) ---
+        ctx.fillStyle = '#0f172a';
+        ctx.fillRect(0, 0, 1012, 60);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 20px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText(settings.websiteName || 'MOLLICK ELECTRIC & INTERIOR', 40, 38);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = 'bold 12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText('HEAD OFFICE & VERIFICATION DESK', 972, 38);
+
+        // Left section
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#1e293b';
+        ctx.font = 'bold 15px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Office Address:', 40, 105);
+        ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(settings.address || 'Rajarhat Main Rd, Near Chinar Park, Kolkata, WB 700136', 40, 130);
+
+        ctx.font = 'bold 15px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Emergency Helpline:', 40, 180);
+        ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText((staff.emergencyContact || settings.phone || '6290858744') + ' (24x7 Helpline)', 40, 205);
+
+        ctx.font = 'bold 15px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Assigned Operating Zone:', 40, 255);
+        ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText(staff.workZone || settings.serviceAreas || 'Kolkata Metropolitan Area', 40, 280);
+
+        drawCanvasRoundedRect(ctx, 40, 320, 560, 110, 8, '#f8fafc', '#cbd5e1', 1);
+        ctx.fillStyle = '#475569';
+        ctx.font = '12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('This certified cardholder is authorized to conduct concealed wiring, industrial power setups,', 55, 355);
+        ctx.fillText('and modular interior works under state safety protocols. If found, please return to office.', 55, 380);
+
+        // Right Section: QR + Signatory
+        drawCanvasQR(ctx, 725, 95, 150);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#64748b';
+        ctx.font = 'bold 12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('SCAN TO VERIFY CERTIFICATION', 800, 270);
+
+        ctx.beginPath();
+        ctx.moveTo(680, 420);
+        ctx.lineTo(920, 420);
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        ctx.fillStyle = '#071529';
+        ctx.font = 'italic bold 26px "Brush Script MT", "Segoe Script", cursive, sans-serif';
+        ctx.fillText(settings.contractorName || 'Najmul Mollick', 800, 405);
+
+        ctx.fillStyle = '#64748b';
+        ctx.font = '12px "Plus Jakarta Sans", Arial, sans-serif';
+        ctx.fillText('Authorized Master Contractor Signatory', 800, 442);
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '11px monospace';
+        ctx.fillText('CR80 STANDARD • 3.375″ × 2.125″ (85.6 mm × 54 mm) • ISO/IEC 7810 ID-1', 506, 615);
+      }
+
+      drawCanvasRoundedRect(ctx, 0, 0, width, height, r, null, '#cbd5e1', 2);
+      ctx.restore();
+    }
+
+    // Trigger Browser Image Download
+    function triggerDownload(canvas, filename) {
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Master Download Function
+    async function downloadCR80Card(staff, side, orientation = 'portrait') {
+      if (!staff) {
+        showToast('No active staff member selected.', 'error');
+        return;
+      }
+
+      showToast(`Generating 300 DPI CR80 ID Card (${side.toUpperCase()})...`, 'info');
+
+      const settings = MollickDB.getSettings();
+      const isLandscape = orientation === 'landscape';
+
+      // Preload images if available
+      const photoImg = staff.photoUrl ? await loadImageAsync(staff.photoUrl) : null;
+      const logoImg = settings.logoImageUrl ? await loadImageAsync(settings.logoImageUrl) : null;
+
+      const cardWidth = isLandscape ? 1012 : 638;
+      const cardHeight = isLandscape ? 638 : 1012;
+      const safeStaffName = (staff.name || 'Staff').replace(/[^a-zA-Z0-9]/g, '_');
+      const staffCode = staff.staffId || 'MEI-Staff';
+
+      if (side === 'front') {
+        const canvas = document.createElement('canvas');
+        canvas.width = cardWidth;
+        canvas.height = cardHeight;
+        const ctx = canvas.getContext('2d');
+        renderCR80Front(ctx, staff, settings, isLandscape, photoImg, logoImg);
+        triggerDownload(canvas, `${staffCode}_${safeStaffName}_CR80_Front_${orientation}.png`);
+        showToast('✓ CR80 ID Card (Front) downloaded at 300 DPI!', 'success');
+
+      } else if (side === 'back') {
+        const canvas = document.createElement('canvas');
+        canvas.width = cardWidth;
+        canvas.height = cardHeight;
+        const ctx = canvas.getContext('2d');
+        renderCR80Back(ctx, staff, settings, isLandscape);
+        triggerDownload(canvas, `${staffCode}_${safeStaffName}_CR80_Back_${orientation}.png`);
+        showToast('✓ CR80 ID Card (Back) downloaded at 300 DPI!', 'success');
+
+      } else if (side === 'both') {
+        // High-Res Print Sheet with Alignment Marks
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        if (!isLandscape) {
+          // Portrait Side-by-Side (1450 x 1200)
+          canvas.width = 1450;
+          canvas.height = 1200;
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          // Technical Header
+          ctx.fillStyle = '#071529';
+          ctx.font = 'bold 22px "Plus Jakarta Sans", Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('MOLLICK ELECTRIC & INTERIOR — CR80 STANDARD PVC ID BADGE', 725, 45);
+
+          ctx.fillStyle = '#64748b';
+          ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+          ctx.fillText(`Staff: ${staff.name} (${staff.staffId}) • Dept: ${staff.department || 'Electrical Works'} • Standard CR80 (3.375″ × 2.125″ / 85.6 mm × 54 mm) • 300 DPI`, 725, 75);
+
+          // Draw Front & Back Cards
+          renderCR80Front(ctx, staff, settings, false, photoImg, logoImg, 60, 110);
+          renderCR80Back(ctx, staff, settings, false, 752, 110);
+
+          // Alignment Labels
+          ctx.fillStyle = '#0f172a';
+          ctx.font = 'bold 14px monospace';
+          ctx.fillText('▲ FRONT FACE (CR80 PVC)', 379, 1150);
+          ctx.fillText('▲ BACK FACE (CR80 PVC)', 1071, 1150);
+
+        } else {
+          // Landscape Stacked (1150 x 1500)
+          canvas.width = 1150;
+          canvas.height = 1500;
+
+          ctx.fillStyle = '#f8fafc';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = '#071529';
+          ctx.font = 'bold 22px "Plus Jakarta Sans", Arial, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('MOLLICK ELECTRIC & INTERIOR — CR80 DUAL-SIDED BADGE SHEET', 575, 45);
+
+          ctx.fillStyle = '#64748b';
+          ctx.font = '14px "Plus Jakarta Sans", Arial, sans-serif';
+          ctx.fillText(`Staff: ${staff.name} (${staff.staffId}) • Standard CR80 (85.6 mm × 54 mm / 3.375″ × 2.125″) • 300 DPI High-Res`, 575, 75);
+
+          renderCR80Front(ctx, staff, settings, true, photoImg, logoImg, 69, 100);
+          renderCR80Back(ctx, staff, settings, true, 69, 780);
+
+          ctx.fillStyle = '#0f172a';
+          ctx.font = 'bold 14px monospace';
+          ctx.fillText('▲ FRONT FACE (LANDSCAPE CR80)', 575, 760);
+          ctx.fillText('▲ BACK FACE (LANDSCAPE CR80)', 575, 1440);
+        }
+
+        triggerDownload(canvas, `${staffCode}_${safeStaffName}_CR80_Complete_Sheet_${orientation}.png`);
+        showToast('✓ CR80 Dual-Sided Print Sheet downloaded at 300 DPI!', 'success');
+      }
+    }
+
+    // Bind Download Buttons
+    if (btnDownloadFront) {
+      btnDownloadFront.addEventListener('click', () => {
+        downloadCR80Card(currentActiveCardStaff, 'front', currentCardOrientation);
+      });
+    }
+
+    if (btnDownloadBack) {
+      btnDownloadBack.addEventListener('click', () => {
+        downloadCR80Card(currentActiveCardStaff, 'back', currentCardOrientation);
+      });
+    }
+
+    if (btnDownloadBoth) {
+      btnDownloadBoth.addEventListener('click', () => {
+        downloadCR80Card(currentActiveCardStaff, 'both', currentCardOrientation);
+      });
+    }
 
     // Print ID Card
     btnPrintCard.addEventListener('click', () => {
@@ -804,6 +1590,16 @@
       closeFormModal();
       renderStaff();
       showToast(`✓ Staff member ${staffData.name} saved successfully!`, 'success');
+    });
+
+    // Keyboard shortcut: Ctrl+S or Cmd+S to submit staff modal if open
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        if (staffFormModal.classList.contains('active')) {
+          e.preventDefault();
+          staffForm.requestSubmit();
+        }
+      }
     });
 
     // Delete Staff Record

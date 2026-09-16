@@ -6,6 +6,118 @@
  * ==============================================================================
  */
 
+/* ------------------------------------------------------------------------------
+   0. ADMIN ACCESS SHORTCUT & HASH ROUTER (#admin)
+   When "#admin" is typed in URL (e.g. site.com/#admin), clicked as link,
+   or typed on the keyboard, immediately open the Admin Panel.
+   ------------------------------------------------------------------------------ */
+(function setupAdminAccess() {
+  function getAdminPath() {
+    if (window.location.pathname.includes('/admin/')) {
+      return 'index.html';
+    }
+    return 'admin/index.html';
+  }
+
+  function handleAdminCheck() {
+    try {
+      const rawHash = window.location.hash || '';
+      const hash = rawHash.trim().toLowerCase();
+      if (
+        hash === '#admin' ||
+        hash === '#adminpanel' ||
+        hash === '#admin-panel' ||
+        hash === '#adminportal' ||
+        hash === '#login' ||
+        hash.startsWith('#admin?') ||
+        hash.startsWith('#admin/')
+      ) {
+        window.location.href = getAdminPath();
+        return true;
+      }
+    } catch (err) {
+      console.warn('Admin hash routing warning:', err);
+    }
+    return false;
+  }
+
+  // Check immediately upon script execution (before DOMContentLoaded)
+  handleAdminCheck();
+
+  // Listen for hash changes (e.g., user types #admin in the URL bar and hits Enter)
+  window.addEventListener('hashchange', handleAdminCheck);
+  window.addEventListener('DOMContentLoaded', handleAdminCheck);
+  window.addEventListener('pageshow', handleAdminCheck);
+
+  // Keyboard detection:
+  // 1. Secret typing sequence: typing "#admin" or "admin" on keyboard
+  // 2. Keyboard shortcut: Ctrl+Shift+A or Alt+A
+  let typedBuffer = '';
+  let resetBufferTimer = null;
+
+  window.addEventListener('keydown', (e) => {
+    // 1. Direct keyboard shortcut (Ctrl+Shift+A or Alt+A)
+    if ((e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) ||
+        (e.altKey && (e.key === 'A' || e.key === 'a'))) {
+      e.preventDefault();
+      window.location.href = getAdminPath();
+      return;
+    }
+
+    const activeEl = document.activeElement;
+    const isInput = activeEl && (
+      activeEl.tagName === 'INPUT' ||
+      activeEl.tagName === 'TEXTAREA' ||
+      activeEl.isContentEditable
+    );
+
+    // If user typed inside an input and pressed Enter, check if value is "#admin"
+    if (isInput) {
+      if (e.key === 'Enter') {
+        const val = (activeEl.value || '').trim().toLowerCase();
+        if (val === '#admin' || val === 'admin' || val === '#adminpanel') {
+          e.preventDefault();
+          window.location.href = getAdminPath();
+          return;
+        }
+      }
+      return;
+    }
+
+    // Capture sequence when typing generally on the page
+    if (e.key && e.key.length === 1) {
+      typedBuffer += e.key.toLowerCase();
+      if (typedBuffer.length > 20) {
+        typedBuffer = typedBuffer.slice(-20);
+      }
+
+      clearTimeout(resetBufferTimer);
+      resetBufferTimer = setTimeout(() => {
+        typedBuffer = '';
+      }, 3500);
+
+      if (
+        typedBuffer.endsWith('#admin') ||
+        typedBuffer.endsWith('admin#') ||
+        typedBuffer.endsWith('#adminpanel') ||
+        typedBuffer.endsWith('#login')
+      ) {
+        typedBuffer = '';
+        window.location.href = getAdminPath();
+      }
+    }
+  });
+
+  // Intercept click on any link with href="#admin"
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href="#admin"], a[href="#adminpanel"], a[href="#login"]');
+    if (link) {
+      e.preventDefault();
+      window.location.href = getAdminPath();
+    }
+  });
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initStickyHeader();
@@ -646,26 +758,47 @@ function initFeedbackSystem() {
         return;
       }
 
+      const cleanName = nameField.value.trim().slice(0, 100);
+      const cleanComment = commentField.value.trim().slice(0, 1000);
+      const cleanService = (serviceField.value || 'General Electric & Interior Service').slice(0, 100);
+
       const newReview = {
-        name: nameField.value.trim(),
-        service: serviceField.value || 'General Electric & Interior Service',
-        rating: rating,
-        date: 'Just now',
-        comment: commentField.value.trim()
+        name: cleanName,
+        service: cleanService,
+        rating: Math.min(5, Math.max(1, rating)),
+        date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        comment: cleanComment
       };
 
-      savedReviews.unshift(newReview);
-      localStorage.setItem('mollick_customer_reviews', JSON.stringify(savedReviews));
+      let customerReviews = [];
+      try {
+        customerReviews = JSON.parse(localStorage.getItem('mollick_customer_reviews') || '[]');
+      } catch (e) {
+        customerReviews = [];
+      }
+      customerReviews.unshift(newReview);
+      localStorage.setItem('mollick_customer_reviews', JSON.stringify(customerReviews));
+
       try {
         const dbRevs = JSON.parse(localStorage.getItem('mollick_db_reviews') || '[]');
         dbRevs.unshift(newReview);
         localStorage.setItem('mollick_db_reviews', JSON.stringify(dbRevs));
       } catch (e) {}
 
+      // Dispatch real-time sync event to other tabs
+      try {
+        if (typeof BroadcastChannel !== 'undefined') {
+          const bc = new BroadcastChannel('mollick_db_channel');
+          bc.postMessage({ type: 'reviews', timestamp: Date.now() });
+          bc.close();
+        }
+      } catch (e) {}
+
       renderReviews();
 
       feedbackForm.reset();
       if (ratingInput) ratingInput.value = '5';
+      showToast('Thank you! Your verified review was published.', 'success');
       starButtons.forEach(b => {
         b.classList.add('is-active');
         b.textContent = '★';
@@ -994,24 +1127,24 @@ function syncPublicSiteWithAdminDB() {
       if (typeof window.recalculateEstimator === 'function') {
         window.recalculateEstimator();
       }
-
-      // 8. Refresh room designs from admin store
-      if (typeof window.renderLivspaceRoomGallery === 'function') {
-        window.renderLivspaceRoomGallery();
-      }
-
-      // 9. Refresh Kolkata Home Tours from admin store
-      if (typeof window.renderHomeTours === 'function') {
-        window.renderHomeTours();
-      }
-
-      // 10. Refresh customer reviews from admin store
-      if (typeof window.renderCustomerReviews === 'function') {
-        window.renderCustomerReviews();
-      }
     }
   } catch (err) {
     console.warn('Could not sync settings from admin store:', err);
+  }
+
+  // Always refresh room designs if section is present
+  if (typeof window.renderLivspaceRoomGallery === 'function') {
+    try { window.renderLivspaceRoomGallery(); } catch (e) { console.warn(e); }
+  }
+
+  // Always refresh Kolkata Home Tours if section is present
+  if (typeof window.renderHomeTours === 'function') {
+    try { window.renderHomeTours(); } catch (e) { console.warn(e); }
+  }
+
+  // Always refresh customer reviews if function available
+  if (typeof window.renderCustomerReviews === 'function') {
+    try { window.renderCustomerReviews(); } catch (e) { console.warn(e); }
   }
 
   // Cross-tab and live event listeners for real-time reactivity
@@ -1025,6 +1158,14 @@ function syncPublicSiteWithAdminDB() {
     window.addEventListener('mollick_db_updated', () => {
       syncPublicSiteWithAdminDB();
     });
+    try {
+      if (typeof BroadcastChannel !== 'undefined') {
+        const bc = new BroadcastChannel('mollick_db_channel');
+        bc.onmessage = () => {
+          syncPublicSiteWithAdminDB();
+        };
+      }
+    } catch (e) {}
   }
 
   // Helper for vector icon matching
@@ -1042,20 +1183,25 @@ function syncPublicSiteWithAdminDB() {
     return 'assets/icons/bed.svg';
   }
 
-  // Sync Projects on projects.html
+  // 1. Sync Projects on projects.html AND on index.html (Featured Projects)
   try {
     const rawProjects = localStorage.getItem('mollick_db_projects');
-    const projectsGrid = document.querySelector('#projectsGrid, .projects-grid');
-    if (rawProjects && projectsGrid && window.location.pathname.includes('projects.html')) {
-      const projects = JSON.parse(rawProjects);
-      if (projects && projects.length > 0) {
-        projectsGrid.innerHTML = projects.map(p => {
-          const isPhoto = p.image && (p.image.startsWith('data:') || p.image.startsWith('http') || p.image.includes('.jpg') || p.image.includes('.png') || p.image.includes('.webp'));
-          const icon = (p.image && !p.image.includes('.jpg')) ? p.image : getSpecIcon(p.category);
+    const isProjectsPage = window.location.pathname.includes('projects.html');
+    const isIndexPage = !isProjectsPage && !window.location.pathname.includes('gallery.html') && !window.location.pathname.includes('admin');
+
+    if (rawProjects) {
+      const allProjects = JSON.parse(rawProjects);
+
+      // On projects.html: render all projects
+      const projectsGrid = document.querySelector('#projectsGrid, .projects-grid');
+      if (isProjectsPage && projectsGrid && allProjects.length > 0) {
+        projectsGrid.innerHTML = allProjects.map(p => {
+          const isPhoto = Boolean(p.image && p.image.trim() !== '' && !p.image.endsWith('.svg'));
+          const icon = (p.image && p.image.endsWith('.svg')) ? p.image : getSpecIcon(p.category);
 
           const visualHeader = isPhoto ? `
             <div style="position: relative; height: 220px; overflow: hidden; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: #071529;">
-              <img src="${p.image}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='assets/icons/ceiling.svg'">
+              <img src="${p.image}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null;this.src='assets/icons/ceiling.svg'">
               <span class="project-badge" style="position: absolute; top: 14px; left: 14px; z-index: 2;">${p.category || 'Engineering'}</span>
               <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(7,21,41,0.9), transparent); padding: 10px 14px; color: #ffffff; font-size: 0.8rem; font-weight: 600;">
                 ⚡ Certified Workmanship • 5-Yr Guarantee
@@ -1087,7 +1233,55 @@ function syncPublicSiteWithAdminDB() {
         `;
         }).join('');
 
-        // Re-initialize filter tabs
+        initProjectFilter();
+      }
+
+      // On index.html: render featured projects into #featuredProjectsGrid
+      const featuredGrid = document.querySelector('#featuredProjectsGrid, #projectsSection .projects-grid');
+      if (isIndexPage && featuredGrid && allProjects.length > 0) {
+        let showcaseProjects = allProjects.filter(p => p.featured);
+        if (showcaseProjects.length === 0) {
+          showcaseProjects = allProjects.slice(0, 6);
+        }
+
+        featuredGrid.innerHTML = showcaseProjects.map(p => {
+          const isPhoto = Boolean(p.image && p.image.trim() !== '' && !p.image.endsWith('.svg'));
+          const icon = (p.image && p.image.endsWith('.svg')) ? p.image : getSpecIcon(p.category);
+
+          const visualHeader = isPhoto ? `
+            <div style="position: relative; height: 220px; overflow: hidden; border-radius: var(--radius-sm) var(--radius-sm) 0 0; background: #071529;">
+              <img src="${p.image}" alt="${p.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null;this.src='assets/icons/ceiling.svg'">
+              <span class="project-badge" style="position: absolute; top: 14px; left: 14px; z-index: 2;">${p.category || 'Engineering'}</span>
+              <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(7,21,41,0.9), transparent); padding: 10px 14px; color: #ffffff; font-size: 0.8rem; font-weight: 600;">
+                ⚡ Certified Workmanship • 5-Yr Guarantee
+              </div>
+            </div>
+          ` : `
+            <div class="project-spec-visual" style="height: 220px; border-radius: var(--radius-sm) var(--radius-sm) 0 0;">
+              <span class="project-badge">${p.category || 'Engineering'}</span>
+              <div class="project-spec-icon-box">
+                <img src="${icon}" alt="${p.title}">
+              </div>
+              <div class="project-spec-tagline">${p.title}</div>
+              <div class="project-spec-materials">⚡ Certified Workmanship • 5-Yr Guarantee</div>
+            </div>
+          `;
+
+          return `
+          <article class="project-card" data-category="${(p.category || 'other').toLowerCase()}">
+            ${visualHeader}
+            <div class="project-info">
+              <h3 class="project-title">${p.title}</h3>
+              <p class="project-desc">${p.description}</p>
+              <div class="project-footer">
+                <span>📍 ${p.location || 'Kolkata'}</span>
+                <span style="color: var(--accent-amber); font-weight: 600;">${p.completionDate || 'Turnkey'}</span>
+              </div>
+            </div>
+          </article>
+        `;
+        }).join('');
+
         initProjectFilter();
       }
     }
@@ -1095,7 +1289,7 @@ function syncPublicSiteWithAdminDB() {
     console.warn('Could not sync projects from admin store:', err);
   }
 
-  // Sync Gallery on gallery.html
+  // 2. Sync Gallery on gallery.html
   try {
     const rawGallery = localStorage.getItem('mollick_db_gallery');
     const galleryGrid = document.querySelector('#galleryGrid, .gallery-grid');
@@ -1103,13 +1297,14 @@ function syncPublicSiteWithAdminDB() {
       const gallery = JSON.parse(rawGallery);
       if (gallery && gallery.length > 0) {
         galleryGrid.innerHTML = gallery.map(item => {
-          const isPhoto = item.image && (item.image.startsWith('data:') || item.image.startsWith('http') || item.image.includes('.jpg') || item.image.includes('.png') || item.image.includes('.webp'));
-          const icon = (item.image && !item.image.includes('.jpg')) ? item.image : getSpecIcon(item.category);
+          const isPhoto = Boolean(item.image && item.image.trim() !== '' && !item.image.endsWith('.svg'));
+          const icon = (item.image && item.image.endsWith('.svg')) ? item.image : getSpecIcon(item.category);
 
           const visualContent = isPhoto ? `
             <div style="position: relative; width: 100%; height: 100%; min-height: 260px; overflow: hidden; background: #071529;">
-              <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.src='assets/icons/ceiling.svg'">
+              <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null;this.src='assets/icons/ceiling.svg'">
               <span class="project-badge" style="position: absolute; top: 14px; left: 14px; z-index: 2;">${item.category || 'Engineering'}</span>
+              ${item.featured ? '<span class="project-badge" style="position: absolute; top: 14px; right: 14px; z-index: 2; background: #e11d24;">★ Featured</span>' : ''}
               <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(7,21,41,0.85), transparent); padding: 12px 16px; color: #ffffff; font-size: 0.82rem; font-weight: 600;">
                 ✨ Direct Site Supervision • Verified Materials
               </div>
@@ -1117,6 +1312,7 @@ function syncPublicSiteWithAdminDB() {
           ` : `
             <div class="project-spec-visual" style="height: 100%; min-height: 260px;">
               <span class="project-badge">${item.category || 'Engineering'}</span>
+              ${item.featured ? '<span class="project-badge" style="position: absolute; top: 14px; right: 14px; z-index: 2; background: #e11d24;">★ Featured</span>' : ''}
               <div class="project-spec-icon-box">
                 <img src="${icon}" alt="${item.title}">
               </div>
@@ -1140,12 +1336,55 @@ function syncPublicSiteWithAdminDB() {
 
         // Re-initialize lightbox & filter
         initGalleryLightbox();
-        initProjectFilter();
+        initGalleryFilter();
       }
     }
   } catch (err) {
     console.warn('Could not sync gallery from admin store:', err);
   }
+
+  // 3. Sync Livspace Room Designs if present on page
+  if (typeof renderLivspaceRoomGallery === 'function') {
+    try {
+      renderLivspaceRoomGallery();
+    } catch (e) {
+      console.warn('Could not re-render room designs:', e);
+    }
+  }
+
+  // 4. Sync Real Home Tours if present on page
+  if (typeof renderHomeTours === 'function') {
+    try {
+      renderHomeTours();
+    } catch (e) {
+      console.warn('Could not re-render home tours:', e);
+    }
+  }
+}
+
+function initGalleryFilter() {
+  const filterTabs = document.querySelector('#galleryFilterTabs');
+  const items = document.querySelectorAll('.gallery-item');
+  if (!filterTabs || !items.length) return;
+
+  const buttons = filterTabs.querySelectorAll('.filter-btn');
+  buttons.forEach(button => {
+    button.onclick = () => {
+      buttons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const filterVal = (button.getAttribute('data-filter') || 'all').toLowerCase();
+      items.forEach(item => {
+        const cat = (item.getAttribute('data-category') || '').toLowerCase();
+        const title = (item.getAttribute('data-title') || '').toLowerCase();
+        if (filterVal === 'all' || cat.includes(filterVal) || title.includes(filterVal)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    };
+  });
 }
 
 /* ------------------------------------------------------------------------------
@@ -1548,13 +1787,11 @@ function renderLivspaceRoomGallery() {
   }
 
   grid.innerHTML = activeDesigns.map(item => {
-    const hasPhoto = item.image && (item.image.startsWith('data:') || item.image.startsWith('http') || item.image.includes('.'));
-    const isUnsplash = hasPhoto && item.image.includes('images.unsplash.com');
-    const validPhoto = hasPhoto && !isUnsplash;
+    const hasPhoto = Boolean(item.image && item.image.trim() !== '');
 
-    const photoWrap = validPhoto ? `
+    const photoWrap = hasPhoto ? `
       <div class="livspace-room-photo-wrap">
-        <img src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy">
+        <img src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'livspace-room-photo-placeholder\\'><div class=\\'livspace-placeholder-icon\\'>${getRoomDesignIcon(item.room)}</div><div class=\\'livspace-placeholder-label\\'>Direct Site Photo</div><span class=\\'livspace-room-category-badge\\'>${escapeHtml(item.categoryName || item.room)}</span><span class=\\'livspace-room-warranty-badge\\'>${escapeHtml(item.warrantyBadge || '⚡ Certified Quality')}</span></div>';">
         <span class="livspace-room-category-badge">${escapeHtml(item.categoryName || item.room)}</span>
         <span class="livspace-room-warranty-badge">${escapeHtml(item.warrantyBadge || '⚡ Certified Quality')}</span>
       </div>
@@ -1724,13 +1961,11 @@ function renderHomeTours() {
   }
 
   grid.innerHTML = activeTours.map(t => {
-    const hasPhoto = t.image && (t.image.startsWith('data:') || t.image.startsWith('http') || t.image.includes('.'));
-    const isUnsplash = hasPhoto && t.image.includes('images.unsplash.com');
-    const validPhoto = hasPhoto && !isUnsplash;
+    const hasPhoto = Boolean(t.image && t.image.trim() !== '');
 
-    const photoHtml = validPhoto ? `
+    const photoHtml = hasPhoto ? `
       <div class="hometour-photo" style="height: 230px; overflow: hidden; position: relative; background: #0f172a;">
-        <img src="${t.image}" alt="${escapeHtml(t.title)}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+        <img src="${t.image}" alt="${escapeHtml(t.title)}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null;this.parentElement.innerHTML='<div style=\\'height:230px;background:linear-gradient(135deg,#071529,#1e293b);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;text-align:center;padding:20px;position:relative;\\'><div style=\\'font-size:2.8rem;margin-bottom:8px;\\'>🏠</div><div style=\\'font-weight:700;font-size:0.95rem;color:#f1f5f9;\\'>Real Flat Makeover</div><span class=\\'hometour-pill\\'>${escapeHtml(t.bhk)}</span></div>';">
         <span class="hometour-pill">${escapeHtml(t.bhk)}</span>
       </div>
     ` : `

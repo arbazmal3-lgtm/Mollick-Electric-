@@ -234,15 +234,20 @@
       <div class="admin-content">
 
         <!-- Info Notification -->
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px 18px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <span style="font-size: 1.5rem;">🏡</span>
+        <div class="realtime-banner">
+          <div class="realtime-banner-content">
+            <div class="realtime-banner-icon">🏡</div>
             <div>
-              <div style="font-weight: 700; color: #166534; font-size: 0.92rem;">Direct Makeover Uploads Active</div>
-              <div style="font-size: 0.82rem; color: #15803d;">Every flat makeover and tour you add or update here syncs immediately to the homepage "Real Home Makeovers / Kolkata Home Tours" section.</div>
+              <div class="realtime-banner-title">
+                <span>Real-Time Home Tours Sync Active</span>
+                <span class="live-sync-indicator"><span class="pulse-dot"></span> Instant Live</span>
+              </div>
+              <div class="realtime-banner-sub">Every flat makeover and tour you add or update here syncs immediately to the homepage "Real Home Makeovers / Kolkata Home Tours" showcase.</div>
             </div>
           </div>
-          <a href="../index.html#homeToursSection" target="_blank" class="btn btn-secondary btn-sm" style="white-space: nowrap;">Preview On Website ↗</a>
+          <div style="display: flex; gap: 8px;">
+            <a href="../index.html#homeToursSection" target="_blank" class="btn btn-secondary btn-sm" style="background: #ffffff; color: #166534; border: 1px solid #bbf7d0; font-weight: 600; white-space: nowrap;">Preview On Website ↗</a>
+          </div>
         </div>
 
         <!-- Tours Grid -->
@@ -348,7 +353,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" id="btnCancelTourModal">Cancel</button>
-          <button type="submit" class="btn btn-primary" id="btnSaveTour">Save Makeover</button>
+          <button type="submit" class="btn btn-primary" id="btnSaveTour" style="font-weight: 700;">💾 Save Makeover</button>
+          <button type="button" class="btn btn-secondary" id="btnSaveAndViewTour" style="background: #0f172a; color: #ffffff;">Save &amp; View on Website ↗</button>
         </div>
       </form>
     </div>
@@ -471,6 +477,15 @@
     document.querySelector('#btnCancelTourModal').addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
+    let shouldNavigateToWebsite = false;
+    const btnSaveAndView = document.querySelector('#btnSaveAndViewTour');
+    if (btnSaveAndView) {
+      btnSaveAndView.addEventListener('click', () => {
+        shouldNavigateToWebsite = true;
+        tourForm.requestSubmit();
+      });
+    }
+
     tourForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const tourData = {
@@ -490,8 +505,23 @@
 
       MollickDB.saveTour(tourData);
       closeModal();
-      showToast(tourId.value ? 'Home makeover updated successfully!' : 'New home makeover added!', 'success');
+      showToast(tourId.value ? '✓ Home makeover updated! Real-time synced to website.' : '✓ New home makeover added! Live on website.', 'success');
       renderTours();
+
+      if (shouldNavigateToWebsite) {
+        shouldNavigateToWebsite = false;
+        window.open('../index.html#homeToursSection', '_blank');
+      }
+    });
+
+    // Keyboard shortcut: Ctrl+S or Cmd+S to submit tour modal if open
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        if (modal.classList.contains('active')) {
+          e.preventDefault();
+          tourForm.requestSubmit();
+        }
+      }
     });
 
     function renderTours() {
@@ -586,9 +616,20 @@
     }
 
     renderTours();
-    window.addEventListener('mollick_db_updated', (e) => {
-      if (e.detail?.type === 'tours') renderTours();
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'mollick_db_tours' || e.key === 'mollick_db_sync_timestamp') renderTours();
     });
+    window.addEventListener('mollick_db_updated', (e) => {
+      if (!e.detail || e.detail.type === 'tours') renderTours();
+    });
+    try {
+      if (typeof BroadcastChannel !== 'undefined') {
+        const bc = new BroadcastChannel('mollick_db_channel');
+        bc.onmessage = (msg) => {
+          if (!msg.data || msg.data.type === 'tours') renderTours();
+        };
+      }
+    } catch (e) {}
   </script>
 </body>
 </html>

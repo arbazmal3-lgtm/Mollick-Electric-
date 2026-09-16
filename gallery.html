@@ -85,7 +85,19 @@
     <section class="section">
       <div class="container">
 
-        <div class="gallery-grid">
+        <!-- Category Filter Tabs -->
+        <div class="filter-tabs" role="tablist" id="galleryFilterTabs" style="margin-bottom: 32px;">
+          <button type="button" class="filter-btn active" data-filter="all">All Photos</button>
+          <button type="button" class="filter-btn" data-filter="kitchen">Modular Kitchen</button>
+          <button type="button" class="filter-btn" data-filter="living">Living &amp; TV</button>
+          <button type="button" class="filter-btn" data-filter="ceiling">False Ceiling</button>
+          <button type="button" class="filter-btn" data-filter="electrical">Electrical</button>
+          <button type="button" class="filter-btn" data-filter="wardrobe">Wardrobes</button>
+          <button type="button" class="filter-btn" data-filter="mandir">Pooja Mandir</button>
+          <button type="button" class="filter-btn" data-filter="turnkey">Turnkey</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
 
           <!-- Item 1: Living & False Ceiling -->
           <div class="gallery-item" data-title="Luxury Modern Living Room &amp; False Ceiling" data-category="Living &amp; False Ceiling">
@@ -358,7 +370,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Mollick Electric &amp; Interior. Master Contractor: Najmul Mollick.</p>
+        <p>&copy; 2026 Mollick Electric &amp; Interior. Master Contractor: Najmul Mollick &bull; <a href="#admin" style="color: inherit; text-decoration: none; opacity: 0.65;" title="Staff Portal (#admin)">Staff Portal</a></p>
       </div>
     </div>
   </footer>

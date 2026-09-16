@@ -239,7 +239,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary btn-sm" id="btnCancelServiceModal">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-sm" id="btnSaveService">Save Service</button>
+          <button type="submit" class="btn btn-primary btn-sm" id="btnSaveService" style="font-weight: 700;">💾 Save Service</button>
         </div>
       </form>
     </div>
@@ -319,6 +319,16 @@
       closeModal();
       showToast(serviceId.value ? 'Service updated successfully!' : 'New service created!', 'success');
       renderServices();
+    });
+
+    // Keyboard shortcut: Ctrl+S or Cmd+S to submit service modal if open
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        if (modal.classList.contains('active')) {
+          e.preventDefault();
+          serviceForm.requestSubmit();
+        }
+      }
     });
 
     // Render Table

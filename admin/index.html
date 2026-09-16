@@ -75,11 +75,16 @@
   <div id="adminToastContainer" class="toast-container"></div>
 
   <script type="module">
-    import { AdminAuth } from './js/admin.js';
+    import { AdminAuth, getSafeRedirectUrl } from './js/admin.js';
 
-    // If already logged in, redirect straight to dashboard
+    // Parse safe redirect target if specified in URL query
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectParam = urlParams.get('redirect');
+    const safeTarget = getSafeRedirectUrl(redirectParam, 'dashboard.html');
+
+    // If already logged in, redirect straight to target
     if (AdminAuth.isAuthenticated()) {
-      window.location.replace('dashboard.html');
+      window.location.replace(safeTarget);
     }
 
     const loginForm = document.querySelector('#adminLoginForm');
@@ -90,6 +95,23 @@
     const alertBox = document.querySelector('#loginAlert');
     const btnSubmit = document.querySelector('#btnLoginSubmit');
     const btnText = document.querySelector('#loginBtnText');
+
+    // Check rate-limit lock on load
+    function checkLockStatus() {
+      const status = AdminAuth.getRateLimitStatus();
+      if (status.locked) {
+        btnSubmit.disabled = true;
+        btnSubmit.style.opacity = '0.6';
+        btnSubmit.style.cursor = 'not-allowed';
+        showAlert(`Account temporarily locked due to multiple failed attempts. Please retry in ${status.remainingSeconds}s.`);
+        setTimeout(checkLockStatus, 1000);
+      } else {
+        btnSubmit.disabled = false;
+        btnSubmit.style.opacity = '';
+        btnSubmit.style.cursor = '';
+      }
+    }
+    checkLockStatus();
 
     // Toggle Password Visibility
     togglePwdBtn.addEventListener('click', () => {
@@ -121,12 +143,13 @@
           btnText.textContent = 'Success! Redirecting...';
           btnSubmit.style.background = 'var(--admin-success)';
           setTimeout(() => {
-            window.location.replace('dashboard.html');
+            window.location.replace(safeTarget);
           }, 400);
         } else {
           btnSubmit.disabled = false;
           btnText.textContent = 'Sign In to Admin Panel →';
           showAlert(result.message || 'Authentication failed.');
+          checkLockStatus();
         }
       } catch (err) {
         btnSubmit.disabled = false;

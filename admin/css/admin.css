@@ -581,6 +581,93 @@ body {
 .badge-info    { background: var(--admin-info-bg);    color: #1e40af; }
 .badge-gray    { background: #e2e8f0;                 color: #334155; }
 
+/* Real-Time Live Sync Indicator */
+.live-sync-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.live-sync-indicator .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  animation: pulseLiveSync 2s infinite;
+  display: inline-block;
+}
+@keyframes pulseLiveSync {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+.topbar-btn-website {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0f172a;
+  color: #ffffff !important;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #1e293b;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.topbar-btn-website:hover {
+  background: #1e293b;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+  transform: translateY(-1px);
+}
+
+.realtime-banner {
+  background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.realtime-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.realtime-banner-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.realtime-banner-title {
+  font-weight: 700;
+  color: #166534;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.realtime-banner-sub {
+  font-size: 0.8rem;
+  color: #15803d;
+  margin-top: 2px;
+}
+
 /* Action Buttons */
 .action-buttons {
   display: flex;
@@ -764,7 +851,8 @@ textarea.form-control {
   background: #fff;
   width: 100%;
   max-width: 600px;
-  max-height: 90vh;
+  max-height: calc(100vh - 40px);
+  height: auto;
   border-radius: var(--admin-radius);
   box-shadow: var(--admin-shadow-lg);
   display: flex;
@@ -772,18 +860,35 @@ textarea.form-control {
   transform: translateY(20px);
   transition: transform 0.2s ease;
   overflow: hidden;
+  position: relative;
+  margin: auto;
 }
 
 .modal-overlay.active .modal-dialog {
   transform: translateY(0);
 }
 
+/* Ensure forms inside modal dialog flex vertically and don't push footer offscreen */
+.modal-dialog > form,
+.modal-dialog form {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 40px);
+  min-height: 0;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+}
+
 .modal-header {
-  padding: 18px 24px;
+  flex-shrink: 0;
+  padding: 16px 22px;
   border-bottom: 1px solid var(--admin-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: #ffffff;
+  z-index: 5;
 }
 
 .modal-title {
@@ -809,18 +914,26 @@ textarea.form-control {
 }
 
 .modal-body {
-  padding: 24px;
+  flex: 1 1 auto;
+  padding: 20px 22px;
   overflow-y: auto;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-footer {
-  padding: 16px 24px;
+  flex-shrink: 0;
+  padding: 14px 22px;
   border-top: 1px solid var(--admin-border);
-  background: #fafafa;
+  background: #f8fafc;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.04);
 }
 
 /* ------------------------------------------------------------------------------
@@ -1221,19 +1334,26 @@ textarea.form-control {
   margin-top: auto;
 }
 
-/* PVC Staff ID Card Graphic Layout */
+/* PVC Staff ID Card Graphic Layout - Standard CR80 Dimensions: 3.375″ × 2.125″ (85.6 mm × 54 mm) */
 .id-card-stage {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 15px 0;
+  gap: 16px;
+  padding: 10px 0;
 }
 
 .id-card-flipper-wrap {
   perspective: 1000px;
-  width: 320px;
-  height: 500px;
+  width: 324px;
+  height: 514px; /* Exact CR80 standard portrait ratio 54mm : 85.6mm (1 : 1.585) */
+  transition: width 0.3s ease, height 0.3s ease;
+  margin: 0 auto;
+}
+
+.id-card-flipper-wrap.landscape {
+  width: 514px; /* Exact CR80 standard landscape ratio 85.6mm : 54mm (1.585 : 1) */
+  height: 324px;
 }
 
 .id-card-flipper {
@@ -1254,17 +1374,131 @@ textarea.form-control {
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 16px;
+  border-radius: 12px; /* Standard CR80 corner radius ~3.18mm (1/8") */
   overflow: hidden;
-  box-shadow: 0 16px 40px rgba(7, 21, 41, 0.25);
+  box-shadow: 0 16px 40px rgba(7, 21, 41, 0.22);
   display: flex;
   flex-direction: column;
   background: #ffffff;
   border: 1.5px solid rgba(217, 119, 6, 0.35);
+  box-sizing: border-box;
 }
 
 .id-badge-back {
   transform: rotateY(180deg);
+}
+
+/* Landscape Specific Layout Tweaks */
+.id-card-flipper-wrap.landscape .badge-header {
+  padding: 8px 14px;
+}
+
+.id-card-flipper-wrap.landscape .lanyard-hole {
+  width: 44px;
+  height: 6px;
+  margin: 6px auto 2px auto;
+}
+
+.id-card-flipper-wrap.landscape .badge-body {
+  padding: 10px 14px;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.id-card-flipper-wrap.landscape .badge-front-left {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.id-card-flipper-wrap.landscape .badge-avatar-container {
+  width: 72px;
+  height: 72px;
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.id-card-flipper-wrap.landscape .badge-name {
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+
+.id-card-flipper-wrap.landscape .badge-designation {
+  font-size: 0.72rem;
+  margin-bottom: 6px;
+}
+
+.id-card-flipper-wrap.landscape .badge-id-box {
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  margin-bottom: 0;
+}
+
+.id-card-flipper-wrap.landscape .badge-front-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.id-card-flipper-wrap.landscape .badge-spec-table {
+  margin-bottom: 6px;
+  padding: 6px 10px;
+  font-size: 0.72rem;
+  gap: 4px;
+}
+
+.id-card-flipper-wrap.landscape .badge-back-body {
+  padding: 10px 14px;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.id-card-flipper-wrap.landscape .badge-back-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 0.72rem;
+}
+
+.id-card-flipper-wrap.landscape .badge-back-rules {
+  font-size: 0.65rem;
+  padding: 6px;
+  margin-bottom: 6px;
+  line-height: 1.35;
+}
+
+.id-card-flipper-wrap.landscape .badge-back-right {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.id-card-flipper-wrap.landscape .badge-qr-svg {
+  width: 74px;
+  height: 74px;
+  margin-bottom: 2px;
+}
+
+.id-card-flipper-wrap.landscape .badge-sign-box {
+  margin-top: 0;
+  padding-top: 4px;
+  width: 100%;
+}
+
+.id-card-flipper-wrap.landscape .badge-signature-text {
+  font-size: 1.05rem;
 }
 
 /* Lanyard punch hole */
@@ -1624,22 +1858,32 @@ textarea.form-control {
   .id-card-print-container {
     display: flex !important;
     flex-direction: row !important;
-    gap: 20px !important;
+    gap: 12mm !important;
     justify-content: center !important;
-    padding: 20px !important;
+    align-items: center !important;
+    padding: 10mm !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
+  /* Exact ISO/IEC 7810 ID-1 CR80 dimensions: 54 mm × 85.6 mm (2.125″ × 3.375″) */
   .id-badge-face {
     box-shadow: none !important;
-    border: 1px solid #000000 !important;
+    border: 1px solid #cbd5e1 !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-    width: 320px !important;
-    height: 500px !important;
+    width: 54mm !important;
+    height: 85.6mm !important;
+    border-radius: 3.18mm !important; /* Standard CR80 1/8" corner radius */
     position: relative !important;
     transform: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .id-card-print-container.landscape .id-badge-face {
+    width: 85.6mm !important;
+    height: 54mm !important;
+    border-radius: 3.18mm !important;
   }
 
   .id-badge-back {
@@ -1753,4 +1997,62 @@ textarea.form-control {
   object-fit: cover;
   border-radius: 10px;
 }
+
+/* ------------------------------------------------------------------------------
+   Sticky Floating Quick Save Bar for Settings
+   ------------------------------------------------------------------------------ */
+.settings-floating-save-bar {
+  position: fixed;
+  bottom: 0;
+  left: 260px;
+  right: 0;
+  background: rgba(11, 19, 32, 0.95);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  z-index: 990;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s ease;
+}
+
+@media (max-width: 992px) {
+  .settings-floating-save-bar {
+    left: 0;
+    padding: 12px 16px;
+  }
+}
+
+.settings-floating-save-bar-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #f1f5f9;
+  font-size: 0.88rem;
+}
+
+.settings-floating-save-bar-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.settings-floating-save-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 

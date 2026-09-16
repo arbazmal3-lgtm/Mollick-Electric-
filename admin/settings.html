@@ -98,6 +98,9 @@
           <h1 class="topbar-title">Website Settings &amp; Brand Customizer</h1>
         </div>
         <div class="topbar-right">
+          <button type="button" class="btn btn-primary btn-sm" id="btnTopSaveAllSettings" style="background: #16a34a; border-color: #15803d; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(22, 163, 74, 0.35);">
+            <span>💾 Save All Settings</span>
+          </button>
           <a href="../index.html" target="_blank" class="topbar-btn topbar-btn-website" title="Open Public Website">
             <span>🌐 View Public Site</span>
           </a>
@@ -108,13 +111,16 @@
       </header>
 
       <!-- Page Content -->
-      <main class="admin-content">
+      <main class="admin-content" style="padding-bottom: 90px;">
         
-        <div class="page-header">
+        <div class="page-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
           <div>
             <h2 class="page-title">Logo, Brand &amp; Website Identity</h2>
             <p class="page-subtitle">Customize company name, logo mark, master contractor credentials, contact details, hero messaging, and security settings.</p>
           </div>
+          <button type="button" class="btn btn-primary" id="btnPageHeaderSave" style="background: #16a34a; border-color: #15803d; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);">
+            <span>💾 Save All Settings</span>
+          </button>
         </div>
 
         <!-- Quick Section Jumper Pills -->
@@ -921,11 +927,11 @@
                   <div class="form-group">
                     <label for="newPassword" class="form-label">New Password <span class="required">*</span></label>
                     <div class="password-input-wrap">
-                      <input type="password" id="newPassword" class="form-control" placeholder="Minimum 6 characters" required autocomplete="new-password">
+                      <input type="password" id="newPassword" class="form-control" placeholder="Minimum 8 characters" required autocomplete="new-password">
                       <button type="button" class="btn-toggle-pwd" data-target="newPassword" title="Toggle password visibility">👁️</button>
                     </div>
                     <small style="display: block; font-size: 0.74rem; color: var(--admin-text-muted); margin-top: 4px;">
-                      Must contain at least 6 characters (recommended: mix of letters, numbers &amp; symbols).
+                      Must contain at least 8 characters (recommended: mix of letters, numbers &amp; symbols).
                     </small>
                   </div>
 
@@ -978,6 +984,22 @@
         </div>
 
       </main>
+
+      <!-- Sticky Floating Quick Save Bar -->
+      <div id="settingsStickySaveBar" class="settings-floating-save-bar">
+        <div class="settings-floating-save-bar-info">
+          <span class="settings-floating-save-bar-dot"></span>
+          <span><strong>Quick Save:</strong> Save brand, contractor details, rates &amp; sync instantly to website</span>
+        </div>
+        <div class="settings-floating-save-actions">
+          <a href="../index.html" target="_blank" class="btn btn-secondary btn-sm" style="color: #ffffff; border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.1);">
+            <span>🌐 View Website</span>
+          </a>
+          <button type="button" class="btn btn-primary btn-sm" id="btnStickySaveAll" style="background: #16a34a; border-color: #15803d; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 8px rgba(22, 163, 74, 0.4);">
+            <span>💾 Save All Settings</span>
+          </button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -1804,6 +1826,127 @@
       });
     }
 
+    // -------------------------------------------------------------------------
+    // MASTER SAVE ALL SETTINGS HANDLER
+    // Saves Brand, Contractor, Contact, Hero, and Estimator Rates in one action
+    // -------------------------------------------------------------------------
+    function saveAllSettings() {
+      const brandData = {
+        logoText: setLogoText ? setLogoText.value.trim().toUpperCase() : 'MOLLICK',
+        logoTagline: setLogoTagline ? setLogoTagline.value.trim().toUpperCase() : 'ELECTRIC & INTERIOR',
+        websiteName: setWebsiteName ? setWebsiteName.value.trim() : 'Mollick Electric & Interior',
+        logoIcon: (setCustomIcon && setCustomIcon.value.trim()) || (setLogoIcon ? setLogoIcon.value : '⚡'),
+        logoImageUrl: (setLogoImageUrl && setLogoImageUrl.value) || '',
+        logoDisplayMode: (modeStandalone && modeStandalone.checked) ? 'standalone' : 'emblem',
+        primaryColor: setPrimaryColor ? setPrimaryColor.value : '#0b1320',
+        accentColor: setAccentColor ? setAccentColor.value : '#e11d24'
+      };
+
+      const wp = setWpNo ? setWpNo.value.trim() : 'WP02/2024/03883';
+      const gst = setGstin ? setGstin.value.trim() : '19ECKPM3966B1ZB';
+      const contractorData = {
+        contractorName: setContractorName ? setContractorName.value.trim() : 'Najmul Mollick',
+        contractorRole: setContractorRole ? setContractorRole.value.trim() : 'Founder & Licensed Master Contractor',
+        permitAuthority: setPermitAuthority ? setPermitAuthority.value.trim() : "GOVERNMENT OF WEST BENGAL Electrical Workman's Permit",
+        wpNo: wp,
+        gstin: gst,
+        contractorLicense: (setContractorLicense && setContractorLicense.value.trim()) || `GOVERNMENT OF WEST BENGAL Electrical Workman's Permit | W. P. No.: ${wp} | GSTIN: ${gst}`,
+        guaranteeYears: setWarranty ? setWarranty.value.trim() : '10-Year Modular Woodwork & 5-Year Electrical Warranty',
+        experienceYears: setExpYears ? setExpYears.value.trim() : '12+',
+        completedProjects: setProjectsDone ? setProjectsDone.value.trim() : '850+',
+        contractorBio: setContractorBio ? setContractorBio.value.trim() : '',
+        contractorPhoto: (setContractorPhotoUrl && setContractorPhotoUrl.value) || '',
+        contractorPhotoPosition: (setContractorPhotoPosition && setContractorPhotoPosition.value) || 'center 20%'
+      };
+
+      const contactData = {
+        phone: setPhone ? setPhone.value.trim() : '6290858744',
+        altPhone: setAltPhone ? setAltPhone.value.trim() : '8777688287',
+        whatsappNumber: setWhatsapp ? setWhatsapp.value.trim() : '916290858744',
+        email: setEmail ? setEmail.value.trim() : 'mollicknasim810@gmail.com',
+        workingHours: setWorkingHours ? setWorkingHours.value.trim() : 'Monday – Sunday: 8:00 AM – 9:00 PM',
+        address: setAddress ? setAddress.value.trim() : 'Rajarhat Main Road, Near Chinar Park, Kolkata, West Bengal 700136',
+        serviceAreas: setServiceAreas ? setServiceAreas.value.trim() : 'New Town, Salt Lake, Rajarhat, EM Bypass, Lake Town, Behala, Kolkata'
+      };
+
+      const heroData = {
+        heroBadge: setHeroBadge ? setHeroBadge.value.trim() : '',
+        heroTitle: setHeroTitle ? setHeroTitle.value.trim() : '',
+        heroDescription: setHeroDesc ? setHeroDesc.value.trim() : '',
+        heroImage: (setHeroImageUrl && setHeroImageUrl.value) || '',
+        ctaText: setCtaText ? setCtaText.value.trim() : 'Calculate Interior Cost',
+        emergencyText: setEmergencyText ? setEmergencyText.value.trim() : '24/7 Rapid Emergency Response: 6290858744',
+        facebookUrl: setFacebook ? setFacebook.value.trim() : '',
+        instagramUrl: setInstagram ? setInstagram.value.trim() : ''
+      };
+
+      const estimatorData = {
+        estimator1Bhk: setEst1Bhk ? setEst1Bhk.value.trim() : '220000',
+        estimator2Bhk: setEst2Bhk ? setEst2Bhk.value.trim() : '385000',
+        estimator3Bhk: setEst3Bhk ? setEst3Bhk.value.trim() : '560000',
+        estimator4Bhk: setEst4Bhk ? setEst4Bhk.value.trim() : '820000',
+        estSpaceKitchen: setEstSpaceKitchen ? setEstSpaceKitchen.value.trim() : '32',
+        estSpaceLiving: setEstSpaceLiving ? setEstSpaceLiving.value.trim() : '18',
+        estSpaceWardrobe: setEstSpaceWardrobe ? setEstSpaceWardrobe.value.trim() : '24',
+        estSpaceCeiling: setEstSpaceCeiling ? setEstSpaceCeiling.value.trim() : '10',
+        estSpaceElectric: setEstSpaceElectric ? setEstSpaceElectric.value.trim() : '9',
+        estSpacePaint: setEstSpacePaint ? setEstSpacePaint.value.trim() : '7',
+        estTierEssential: setEstTierEssential ? setEstTierEssential.value.trim() : '85',
+        estTierPremium: setEstTierPremium ? setEstTierPremium.value.trim() : '100',
+        estTierLuxe: setEstTierLuxe ? setEstTierLuxe.value.trim() : '138',
+        estMarginHigh: setEstMarginHigh ? setEstMarginHigh.value.trim() : '18'
+      };
+
+      const allMerged = {
+        ...brandData,
+        ...contractorData,
+        ...contactData,
+        ...heroData,
+        ...estimatorData
+      };
+
+      MollickDB.saveSettings(allMerged);
+
+      // Flash button feedback
+      const saveButtons = [
+        document.querySelector('#btnTopSaveAllSettings'),
+        document.querySelector('#btnPageHeaderSave'),
+        document.querySelector('#btnStickySaveAll')
+      ];
+
+      saveButtons.forEach(btn => {
+        if (btn) {
+          const origText = btn.innerHTML;
+          btn.innerHTML = '<span>✓ Saved All Settings!</span>';
+          btn.style.background = '#15803d';
+          setTimeout(() => {
+            btn.innerHTML = origText;
+            btn.style.background = '#16a34a';
+          }, 2500);
+        }
+      });
+
+      showToast('✓ All website settings, brand identity & estimator rates saved and synced to public website!', 'success');
+    }
+
+    // Connect Master Save Triggers
+    const btnTopSave = document.querySelector('#btnTopSaveAllSettings');
+    if (btnTopSave) btnTopSave.addEventListener('click', saveAllSettings);
+
+    const btnHeaderSave = document.querySelector('#btnPageHeaderSave');
+    if (btnHeaderSave) btnHeaderSave.addEventListener('click', saveAllSettings);
+
+    const btnStickySave = document.querySelector('#btnStickySaveAll');
+    if (btnStickySave) btnStickySave.addEventListener('click', saveAllSettings);
+
+    // Keyboard shortcut Ctrl+S or Cmd+S to save all settings instantly
+    window.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveAllSettings();
+      }
+    });
+
     // Toggle Password Visibility for all eye buttons in settings
     document.querySelectorAll('.btn-toggle-pwd').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1863,8 +2006,8 @@
         const newPwd = document.querySelector('#newPassword').value;
         const confirmPwd = document.querySelector('#confirmNewPassword').value;
 
-        if (newPwd.length < 6) {
-          showToast('New password must be at least 6 characters long.', 'error');
+        if (newPwd.length < 8) {
+          showToast('New password must be at least 8 characters long.', 'error');
           return;
         }
 

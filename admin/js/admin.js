@@ -796,6 +796,18 @@ export const MollickDB = {
     return true;
   },
 
+  toggleFeaturedGallery(id) {
+    const gallery = this.getGallery();
+    const item = gallery.find(g => g.id === id);
+    if (item) {
+      item.featured = !item.featured;
+      localStorage.setItem(DB_KEYS.GALLERY, JSON.stringify(gallery));
+      this.dispatchChangeEvent('gallery');
+      return item.featured;
+    }
+    return false;
+  },
+
   // Room Designs (Livspace-Style Design Library)
   getDesigns() {
     this.init();
@@ -834,6 +846,18 @@ export const MollickDB = {
     localStorage.setItem(DB_KEYS.DESIGNS, JSON.stringify(list));
     this.dispatchChangeEvent('designs');
     return true;
+  },
+
+  toggleDesignActive(id) {
+    const list = this.getDesigns();
+    const item = list.find(d => d.id === id);
+    if (item) {
+      item.active = item.active === false ? true : false;
+      localStorage.setItem(DB_KEYS.DESIGNS, JSON.stringify(list));
+      this.dispatchChangeEvent('designs');
+      return item.active;
+    }
+    return false;
   },
 
   // Messages
@@ -1046,7 +1070,37 @@ export const MollickDB = {
   },
 
   dispatchChangeEvent(type) {
-    window.dispatchEvent(new CustomEvent('mollick_db_updated', { detail: { type } }));
+    const timestamp = Date.now();
+    const detail = { type, timestamp };
+
+    // 1. Local window CustomEvent
+    try {
+      window.dispatchEvent(new CustomEvent('mollick_db_updated', { detail }));
+    } catch (e) {}
+
+    // 2. BroadcastChannel for instant cross-tab / window sync
+    try {
+      if (typeof BroadcastChannel !== 'undefined') {
+        const bc = new BroadcastChannel('mollick_db_channel');
+        bc.postMessage(detail);
+        bc.close();
+      }
+    } catch (e) {}
+
+    // 3. Parent / opener window sync (for iframes or popups)
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.dispatchEvent(new CustomEvent('mollick_db_updated', { detail }));
+      }
+      if (window.opener && !window.opener.closed) {
+        window.opener.dispatchEvent(new CustomEvent('mollick_db_updated', { detail }));
+      }
+    } catch (e) {}
+
+    // 4. Force browser storage event trigger for external tabs
+    try {
+      localStorage.setItem('mollick_db_sync_timestamp', timestamp.toString());
+    } catch (e) {}
   }
 };
 
@@ -1066,16 +1120,84 @@ async function sha256(str) {
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+// Salted cryptographic hash
+async function hashPassword(password, salt = '') {
+  if (!salt) return sha256(password);
+  const enc = new TextEncoder().encode(salt + '::' + password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', enc);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function generateSalt() {
+  const arr = new Uint8Array(16);
+  crypto.getRandomValues(arr);
+  return Array.from(arr).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 export const AdminAuth = {
+  _RATE_LIMIT_KEY: 'mollick_auth_rate_limit',
+
+  getRateLimitStatus() {
+    try {
+      const raw = localStorage.getItem(this._RATE_LIMIT_KEY);
+      if (!raw) return { locked: false, remainingSeconds: 0, attempts: 0 };
+      const data = JSON.parse(raw);
+      const now = Date.now();
+      if (data.lockUntil && data.lockUntil > now) {
+        return {
+          locked: true,
+          remainingSeconds: Math.ceil((data.lockUntil - now) / 1000),
+          attempts: data.attempts || 5
+        };
+      }
+      if (data.lockUntil && data.lockUntil <= now) {
+        localStorage.removeItem(this._RATE_LIMIT_KEY);
+        return { locked: false, remainingSeconds: 0, attempts: 0 };
+      }
+      return { locked: false, remainingSeconds: 0, attempts: data.attempts || 0 };
+    } catch {
+      return { locked: false, remainingSeconds: 0, attempts: 0 };
+    }
+  },
+
+  recordFailedAttempt() {
+    try {
+      const status = this.getRateLimitStatus();
+      const attempts = (status.attempts || 0) + 1;
+      const MAX_ATTEMPTS = 5;
+      const LOCK_DURATION = 300 * 1000; // 5-minute lockout after 5 consecutive failed attempts
+      if (attempts >= MAX_ATTEMPTS) {
+        localStorage.setItem(this._RATE_LIMIT_KEY, JSON.stringify({
+          attempts,
+          lockUntil: Date.now() + LOCK_DURATION
+        }));
+      } else {
+        localStorage.setItem(this._RATE_LIMIT_KEY, JSON.stringify({
+          attempts,
+          lastAttempt: Date.now()
+        }));
+      }
+    } catch {}
+  },
+
+  resetFailedAttempts() {
+    try {
+      localStorage.removeItem(this._RATE_LIMIT_KEY);
+    } catch {}
+  },
+
   // Initialize default admin credentials if not set
   async init() {
     const storedAuth = localStorage.getItem(DB_KEYS.AUTH);
     if (!storedAuth) {
       // Default: admin@mollick.com / mollick@admin2026
-      const defaultHash = await sha256('mollick@admin2026');
+      const salt = generateSalt();
+      const defaultHash = await hashPassword('mollick@admin2026', salt);
       const authData = {
         email: 'admin@mollick.com',
         username: 'najmul.mollick',
+        salt: salt,
         passwordHash: defaultHash,
         name: 'Najmul Mollick',
         role: 'Master Admin'
@@ -1084,9 +1206,16 @@ export const AdminAuth = {
     } else {
       try {
         const authData = JSON.parse(storedAuth);
+        let modified = false;
         if (authData.name === 'Nasim Mollick' || authData.username === 'nasim.mollick') {
           authData.name = 'Najmul Mollick';
           authData.username = 'najmul.mollick';
+          modified = true;
+        }
+        if (!authData.salt) {
+          authData.salt = ''; // backwards compatible with plain SHA-256
+        }
+        if (modified) {
           localStorage.setItem(DB_KEYS.AUTH, JSON.stringify(authData));
         }
       } catch (e) {}
@@ -1114,9 +1243,27 @@ export const AdminAuth = {
   },
 
   async login(identifier, password, rememberMe = false) {
+    // 1. Rate-limit check to prevent brute-force attacks
+    const rateLimit = this.getRateLimitStatus();
+    if (rateLimit.locked) {
+      return {
+        success: false,
+        message: `Account temporarily locked due to multiple failed attempts. Please retry in ${rateLimit.remainingSeconds} seconds.`
+      };
+    }
+
     await this.init();
     const authData = JSON.parse(localStorage.getItem(DB_KEYS.AUTH) || '{}');
-    const inputHash = await sha256(password.trim());
+    
+    // Check password against salted or legacy hash
+    let isPasswordCorrect = false;
+    if (authData.salt) {
+      const saltedHash = await hashPassword(password.trim(), authData.salt);
+      isPasswordCorrect = (saltedHash === authData.passwordHash);
+    } else {
+      const legacyHash = await sha256(password.trim());
+      isPasswordCorrect = (legacyHash === authData.passwordHash);
+    }
 
     const cleanInput = identifier.trim().toLowerCase();
     const currentEmail = (authData.email || '').toLowerCase();
@@ -1129,13 +1276,18 @@ export const AdminAuth = {
       cleanInput === 'najmul.mollick'
     );
 
-    if (isUserMatch && inputHash === authData.passwordHash) {
+    if (isUserMatch && isPasswordCorrect) {
+      // Reset failed attempts on success
+      this.resetFailedAttempts();
+
+      const nowIso = new Date().toISOString();
       const session = {
         token: 'token_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9),
         email: authData.email,
         name: authData.name,
         role: authData.role,
-        loginTime: new Date().toISOString()
+        createdAt: nowIso,
+        lastActivity: nowIso
       };
 
       if (rememberMe) {
@@ -1145,7 +1297,13 @@ export const AdminAuth = {
       }
       return { success: true };
     } else {
-      return { success: false, message: 'Invalid admin username/email or password.' };
+      this.recordFailedAttempt();
+      const updatedStatus = this.getRateLimitStatus();
+      const remaining = 5 - (updatedStatus.attempts || 0);
+      const warning = remaining > 0 
+        ? `Invalid credentials. (${remaining} attempts remaining before temporary lockout).`
+        : 'Too many failed login attempts. Account temporarily locked for 5 minutes.';
+      return { success: false, message: warning };
     }
   },
 
@@ -1153,7 +1311,27 @@ export const AdminAuth = {
     const sessionStr = sessionStorage.getItem(DB_KEYS.SESSION) || localStorage.getItem(DB_KEYS.SESSION);
     if (!sessionStr) return null;
     try {
-      return JSON.parse(sessionStr);
+      const session = JSON.parse(sessionStr);
+      const now = Date.now();
+      const MAX_AGE = 24 * 60 * 60 * 1000; // 24 hours max session
+      const INACTIVITY_TIMEOUT = 2 * 60 * 60 * 1000; // 2 hours inactivity
+
+      const created = session.createdAt ? new Date(session.createdAt).getTime() : 0;
+      const lastActive = session.lastActivity ? new Date(session.lastActivity).getTime() : created;
+
+      if ((created && now - created > MAX_AGE) || (lastActive && now - lastActive > INACTIVITY_TIMEOUT)) {
+        this.logout(false);
+        return null;
+      }
+
+      // Refresh activity timestamp
+      session.lastActivity = new Date().toISOString();
+      if (sessionStorage.getItem(DB_KEYS.SESSION)) {
+        sessionStorage.setItem(DB_KEYS.SESSION, JSON.stringify(session));
+      } else if (localStorage.getItem(DB_KEYS.SESSION)) {
+        localStorage.setItem(DB_KEYS.SESSION, JSON.stringify(session));
+      }
+      return session;
     } catch {
       return null;
     }
@@ -1173,18 +1351,27 @@ export const AdminAuth = {
     return true;
   },
 
-  logout() {
+  logout(redirect = true) {
     sessionStorage.removeItem(DB_KEYS.SESSION);
     localStorage.removeItem(DB_KEYS.SESSION);
-    window.location.replace('index.html');
+    if (redirect) {
+      window.location.replace('index.html');
+    }
   },
 
   async updateEmail(newEmail, newUsername, currentPassword) {
     await this.init();
     const authData = JSON.parse(localStorage.getItem(DB_KEYS.AUTH) || '{}');
-    const oldHash = await sha256(currentPassword.trim());
+    let isCurrentPasswordCorrect = false;
+    if (authData.salt) {
+      const saltedHash = await hashPassword(currentPassword.trim(), authData.salt);
+      isCurrentPasswordCorrect = (saltedHash === authData.passwordHash);
+    } else {
+      const oldHash = await sha256(currentPassword.trim());
+      isCurrentPasswordCorrect = (oldHash === authData.passwordHash);
+    }
 
-    if (oldHash !== authData.passwordHash) {
+    if (!isCurrentPasswordCorrect) {
       return { success: false, message: 'Current password does not match. Please enter your valid current password to confirm.' };
     }
 
@@ -1226,19 +1413,28 @@ export const AdminAuth = {
   async changePassword(oldPassword, newPassword) {
     await this.init();
     const authData = JSON.parse(localStorage.getItem(DB_KEYS.AUTH) || '{}');
-    const oldHash = await sha256(oldPassword.trim());
+    let isCurrentPasswordCorrect = false;
+    if (authData.salt) {
+      const saltedHash = await hashPassword(oldPassword.trim(), authData.salt);
+      isCurrentPasswordCorrect = (saltedHash === authData.passwordHash);
+    } else {
+      const oldHash = await sha256(oldPassword.trim());
+      isCurrentPasswordCorrect = (oldHash === authData.passwordHash);
+    }
 
-    if (oldHash !== authData.passwordHash) {
+    if (!isCurrentPasswordCorrect) {
       return { success: false, message: 'Current password does not match.' };
     }
 
-    if (newPassword.length < 6) {
-      return { success: false, message: 'New password must be at least 6 characters long.' };
+    if (newPassword.length < 8) {
+      return { success: false, message: 'New password must be at least 8 characters long for strong security.' };
     }
 
-    authData.passwordHash = await sha256(newPassword.trim());
+    const newSalt = generateSalt();
+    authData.salt = newSalt;
+    authData.passwordHash = await hashPassword(newPassword.trim(), newSalt);
     localStorage.setItem(DB_KEYS.AUTH, JSON.stringify(authData));
-    return { success: true, message: '✓ Admin password successfully updated! Please remember your new password.' };
+    return { success: true, message: '✓ Admin password successfully updated with cryptographic salting! Please remember your new password.' };
   }
 };
 
@@ -1323,7 +1519,8 @@ export function showConfirmModal(title, message, onConfirm) {
 }
 
 export function escapeHtml(str) {
-  if (typeof str !== 'string') return '';
+  if (str === null || str === undefined) return '';
+  if (typeof str !== 'string') str = String(str);
   return str.replace(/[&<>"']/g, m => ({
     '&': '&amp;',
     '<': '&lt;',
@@ -1331,6 +1528,52 @@ export function escapeHtml(str) {
     '"': '&quot;',
     "'": '&#039;'
   })[m]);
+}
+
+/**
+ * Validates and sanitizes URLs to prevent javascript: or malicious protocol injection
+ */
+export function sanitizeUrl(url) {
+  if (typeof url !== 'string') return '';
+  const trimmed = url.trim();
+  // Strictly prevent dangerous schemes
+  if (/^(javascript|vbscript|data:(?!image\/(png|jpeg|jpg|webp|gif|svg\+xml)))/i.test(trimmed)) {
+    return '';
+  }
+  // Allow safe relative paths, assets, safe http/https, and safe image data URIs
+  if (
+    trimmed.startsWith('/') ||
+    trimmed.startsWith('./') ||
+    trimmed.startsWith('../') ||
+    trimmed.startsWith('assets/') ||
+    /^https?:\/\//i.test(trimmed) ||
+    /^data:image\/(png|jpeg|jpg|webp|gif|svg\+xml);base64,/i.test(trimmed)
+  ) {
+    return trimmed;
+  }
+  return '';
+}
+
+/**
+ * Validates safe internal redirect destinations to prevent Open Redirects
+ */
+export function getSafeRedirectUrl(target, fallback = 'dashboard.html') {
+  if (!target || typeof target !== 'string') return fallback;
+  const t = target.trim();
+  // Reject protocol-relative "//attacker.com" and arbitrary schemes
+  if (t.startsWith('//') || /^[a-zA-Z][a-zA-Z0-9+-.]*:/.test(t)) {
+    return fallback;
+  }
+  const allowed = [
+    'dashboard.html', 'services.html', 'projects.html', 'tours.html',
+    'designs.html', 'gallery.html', 'reviews.html', 'messages.html',
+    'staff.html', 'settings.html'
+  ];
+  const cleanTarget = t.split('?')[0].split('#')[0].replace(/^\.?\//, '');
+  if (allowed.includes(cleanTarget)) {
+    return t;
+  }
+  return fallback;
 }
 
 // Setup common page behaviors: Mobile sidebar, unread badge, logout
